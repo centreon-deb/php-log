@@ -1,8 +1,6 @@
 <?php
-// $Id: Log.php,v 1.23 2003/04/08 17:07:28 jon Exp $
+// $Id: Log.php,v 1.24 2003/05/15 23:13:34 jon Exp $
 // $Horde: horde/lib/Log.php,v 1.15 2000/06/29 23:39:45 jon Exp $
-
-require_once 'PEAR.php';
 
 define('PEAR_LOG_EMERG',    0);                                                
 define('PEAR_LOG_ALERT',    1);                                                
@@ -19,7 +17,7 @@ define('PEAR_LOG_DEBUG',    7);
  *
  * @author  Chuck Hagenbuch <chuck@horde.org>
  * @author  Jon Parise <jon@php.net>
- * @version $Revision: 1.23 $
+ * @version $Revision: 1.24 $
  * @since   Horde 1.3
  * @package Log
  */
