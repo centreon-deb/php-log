@@ -12,17 +12,58 @@
     </maintainer>
   </maintainers>
   <release>
-    <version>1.6.1</version>
-    <date>2003-04-02</date>
+    <version>1.6.2</version>
+    <date>2003-04-06</date>
     <license>PHP 2.02</license>
     <state>stable</state>
-    <notes>- Fix a typo that broke the Log_Observer class.</notes>
+    <notes>In the Log_observer class, operate directly on the reference to the Log instance (instead of on a copy of the object).</notes>
     <deps>
       <dep type="pkg" rel="has">DB</dep>
     </deps>
+    <provides type="class" name="Log" />
+    <provides type="function" name="Log::factory" />
+    <provides type="function" name="Log::singleton" />
+    <provides type="function" name="Log::close" />
+    <provides type="function" name="Log::priorityToString" />
+    <provides type="function" name="Log::attach" />
+    <provides type="function" name="Log::detach" />
+    <provides type="function" name="Log::notifyAll" />
+    <provides type="function" name="Log::isComposite" />
+    <provides type="class" name="Log_composite" />
+    <provides type="function" name="Log_composite::open" />
+    <provides type="function" name="Log_composite::close" />
+    <provides type="function" name="Log_composite::log" />
+    <provides type="function" name="Log_composite::isComposite" />
+    <provides type="function" name="Log_composite::addChild" />
+    <provides type="function" name="Log_composite::removeChild" />
+    <provides type="class" name="Log_console" />
+    <provides type="function" name="Log_console::log" />
+    <provides type="class" name="Log_file" />
+    <provides type="function" name="Log_file::log" />
+    <provides type="function" name="Log_file::dontLog" />
+    <provides type="function" name="Log_file::writeOut" />
+    <provides type="class" name="Log_mail" />
+    <provides type="function" name="Log_mail::open" />
+    <provides type="function" name="Log_mail::close" />
+    <provides type="function" name="Log_mail::log" />
+    <provides type="class" name="Log_mcal" />
+    <provides type="function" name="Log_mcal::open" />
+    <provides type="function" name="Log_mcal::close" />
+    <provides type="function" name="Log_mcal::log" />
+    <provides type="class" name="Log_observer" />
+    <provides type="function" name="Log_observer::factory" />
+    <provides type="function" name="Log_observer::notify" />
+    <provides type="class" name="Log_sql" />
+    <provides type="function" name="Log_sql::open" />
+    <provides type="function" name="Log_sql::close" />
+    <provides type="function" name="Log_sql::log" />
+    <provides type="class" name="Log_syslog" />
+    <provides type="function" name="Log_syslog::open" />
+    <provides type="function" name="Log_syslog::close" />
+    <provides type="function" name="Log_syslog::log" />
     <filelist>
       <file role="php" md5sum="c9059c104a03104c0365040d5991f54f" name="Log.php"/>
-      <file role="php" md5sum="521d550cdaad4a1ffffdf1eb3f30435f" name="Log/composite.php"/>
+      <file role="php" md5sum="e6e4c238289ec38253452a53eacdf6b7" name="Log/composite.php"/>
       <file role="php" md5sum="8157ca9b33b4c6f3bbb45b48905443cf" name="Log/console.php"/>
       <file role="php" md5sum="37d9b8f0c4aac75844e15e6d8bb6c9cc" name="Log/file.php"/>
       <file role="php" md5sum="b38d956a37c523b9bf1be786ee8a83fe" name="Log/mail.php"/>
@@ -33,6 +74,14 @@
     </filelist>
   </release>
   <changelog>
+    <release>
+      <version>1.6.1</version>
+      <date>2003-04-02</date>
+      <state>stable</state>
+      <notes>- Fix a typo that broke the Log_Observer class.
+        
+</notes>
+    </release>
     <release>
       <version>1.6.0</version>
       <date>2003-02-17</date>
