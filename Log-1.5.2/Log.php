@@ -1,5 +1,5 @@
 <?php
-// $Id: Log.php,v 1.13 2002/09/27 19:22:54 jon Exp $
+// $Id: Log.php,v 1.14 2002/11/28 14:46:23 jon Exp $
 // $Horde: horde/lib/Log.php,v 1.15 2000/06/29 23:39:45 jon Exp $
 
 require_once 'PEAR.php';
@@ -19,7 +19,7 @@ define('PEAR_LOG_DEBUG',    7);
  *
  * @author  Chuck Hagenbuch <chuck@horde.org>
  * @author  Jon Parise <jon@php.net>
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  * @since   Horde 1.3
  * @package Log
  */
@@ -135,8 +135,8 @@ class Log extends PEAR {
     {
         static $instances;
         if (!isset($instances)) $instances = array();
-        
-        $signature = md5($type . '][' . $name . '][' . $ident . '][' . implode('][', $conf) . '][' . $maxLevel);
+
+        $signature = md5($type . '|' . $name . '|' . $ident . '|' . $maxLevel);
         if (!isset($instances[$signature])) {
             $instances[$signature] = &Log::factory($type, $name, $ident, $conf,
                 $maxLevel);

@@ -12,14 +12,13 @@
     </maintainer>
   </maintainers>
   <release>
-    <version>1.5.1</version>
-    <date>2002-11-17</date>
+    <version>1.5.2</version>
+    <date>2002-11-28</date>
     <license>PHP 2.02</license>
     <state>stable</state>
-    <notes>- The mail handler now implements a destructor to ensure close() is called.
-- The syslog handler now requires $name to be a valid syslog facility.</notes>
+    <notes>- Altered the singleton's &quot;signature&quot; construction to be shorter and more array-friendly.</notes>
     <filelist>
-      <file role="php" md5sum="5922a7dff6d8cc1b6271e311d8c44774" name="Log.php"/>
+      <file role="php" md5sum="c8cf1d5bc4e42a8d2c95094c811acd1a" name="Log.php"/>
       <file role="php" md5sum="df67e57119d34c2708b620f997ca7d77" name="Log/composite.php"/>
       <file role="php" md5sum="64a3704acd86aa451f5a19d8d2a8d134" name="Log/console.php"/>
       <file role="php" md5sum="959a386972bffcaa88b5522c8c20c90b" name="Log/file.php"/>
@@ -31,6 +30,15 @@
     </filelist>
   </release>
   <changelog>
+    <release>
+      <version>1.5.1</version>
+      <date>2002-11-17</date>
+      <state>stable</state>
+      <notes>- The mail handler now implements a destructor to ensure close() is called.
+- The syslog handler now requires $name to be a valid syslog facility.
+        
+</notes>
+    </release>
     <release>
       <version>1.5</version>
       <date>2002-10-24</date>
