@@ -1,5 +1,5 @@
 <?php
-// $Id: sql.php,v 1.14 2002/12/02 05:23:00 jon Exp $
+// $Id: sql.php,v 1.17 2003/02/17 21:17:24 jon Exp $
 // $Horde: horde/lib/Log/sql.php,v 1.12 2000/08/16 20:27:34 chuck Exp $
 
 require_once 'DB.php';
@@ -12,42 +12,43 @@ require_once 'DB.php';
  * This implementation uses PHP's PEAR database abstraction layer.
  *
  * CREATE TABLE log_table (
+ *  id          INT NOT NULL,
  *  logtime     TIMESTAMP NOT NULL,
- *  ident       char(16) NOT NULL,
- *  priority    int,
- *  message     varchar(200),
- *  primary key (logtime, ident)
+ *  ident       CHAR(16) NOT NULL,
+ *  priority    INT NOT NULL,
+ *  message     VARCHAR(200),
+ *  PRIMARY KEY (id)
  * );
  *
  * @author  Jon Parise <jon@php.net>
- * @version $Revision: 1.14 $
+ * @version $Revision: 1.17 $
  * @since   Horde 1.3
  * @package Log 
  */
 class Log_sql extends Log {
 
     /** 
-    * Array containing the dsn information. 
-    * @var string
-    */
+     * Array containing the dsn information. 
+     * @var string
+     */
     var $_dsn = '';
 
     /** 
-    * Object holding the database handle. 
-    * @var string
-    */
+     * Object holding the database handle. 
+     * @var string
+     */
     var $_db = '';
 
     /**
-    * Flag indicating that we're using an existing database connection.
-    * @var boolean
-    */
+     * Flag indicating that we're using an existing database connection.
+     * @var boolean
+     */
     var $_existingConnection = false;
 
     /** 
-    * String holding the database table to use. 
-    * @var string
-    */
+     * String holding the database table to use. 
+     * @var string
+     */
     var $_table = 'log_table';
 
 
@@ -139,9 +140,11 @@ class Log_sql extends Log {
         }
 
         /* Build the SQL query for this log entry insertion. */
-        $q = sprintf("insert into %s values(NOW(), %s, %d, %s)",
-            $this->_table, $this->_db->quote($this->_ident),
-            $priority, $this->_db->quote($message));
+        $id = $this->_db->nextId('log_id');
+        $q = sprintf('insert into %s (id, logtime, ident, priority, message)' .
+                     'values(%d, CURRENT_TIMESTAMP, %s, %d, %s)',
+                     $this->_table, $id, $this->_db->quote($this->_ident),
+                     $priority, $this->_db->quote($message));
 
         $result = $this->_db->query($q);
         if (DB::isError($result)) {

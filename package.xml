@@ -12,26 +12,38 @@
     </maintainer>
   </maintainers>
   <release>
-    <version>1.5.3</version>
-    <date>2003-01-01</date>
+    <version>1.6.0</version>
+    <date>2003-02-17</date>
     <license>PHP 2.02</license>
     <state>stable</state>
-    <notes>- Improved singleton()'s signature generation.
-- The SQL handler no longer closes existing database connections.
-- The log() method now returns a boolean result indicating success or failure.</notes>
+    <notes>- The SQL handler now uses sequences instead of timestamps as unique identifiers.
+- The time format used by the file handler is now configurable.</notes>
+    <deps>
+      <dep type="pkg" rel="has">DB</dep>
+    </deps>
     <filelist>
       <file role="php" md5sum="e09d11568597bb2055c2c65cbcdbb8b5" name="Log.php"/>
       <file role="php" md5sum="521d550cdaad4a1ffffdf1eb3f30435f" name="Log/composite.php"/>
       <file role="php" md5sum="8157ca9b33b4c6f3bbb45b48905443cf" name="Log/console.php"/>
-      <file role="php" md5sum="abedbca23ecb4d31ecda5ba90022a5fc" name="Log/file.php"/>
+      <file role="php" md5sum="37d9b8f0c4aac75844e15e6d8bb6c9cc" name="Log/file.php"/>
       <file role="php" md5sum="b38d956a37c523b9bf1be786ee8a83fe" name="Log/mail.php"/>
       <file role="php" md5sum="63c63ecfaec4976ed062c9a3ad5c6a0b" name="Log/mcal.php"/>
       <file role="php" md5sum="13402850fa7eff3357c0f86ef8a15189" name="Log/observer.php"/>
-      <file role="php" md5sum="91d1668490c2763651ba6ef93885e145" name="Log/sql.php"/>
+      <file role="php" md5sum="8534bbd8a009cb0c2414d7b33d1c8aa6" name="Log/sql.php"/>
       <file role="php" md5sum="aecec4c99e8fb94936b18d967e485cd4" name="Log/syslog.php"/>
     </filelist>
   </release>
   <changelog>
+    <release>
+      <version>1.5.3</version>
+      <date>2003-01-01</date>
+      <state>stable</state>
+      <notes>- Improved singleton()'s signature generation.
+- The SQL handler no longer closes existing database connections.
+- The log() method now returns a boolean result indicating success or failure.
+        
+</notes>
+    </release>
     <release>
       <version>1.5.2</version>
       <date>2002-11-28</date>

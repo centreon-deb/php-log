@@ -1,6 +1,6 @@
 <?php
 // +-----------------------------------------------------------------------+
-// | Copyright (c) 2002  Richard Heyes                                     |
+// | Copyright (c) 2002-2003  Richard Heyes                                     |
 // | All rights reserved.                                                  |
 // |                                                                       |
 // | Redistribution and use in source and binary forms, with or without    |
@@ -33,7 +33,7 @@
 // |         Jon Parise <jon@php.net>                                      |
 // +-----------------------------------------------------------------------+
 //
-// $Id: file.php,v 1.14 2002/12/02 05:23:00 jon Exp $
+// $Id: file.php,v 1.17 2003/02/06 05:21:54 jon Exp $
 
 /**
 * The Log_file class is a concrete implementation of the Log::
@@ -41,7 +41,7 @@
 * on the previous Log_file class by Jon Parise.
 * 
 * @author  Richard Heyes <richard@php.net>
-* @version $Revision: 1.14 $
+* @version $Revision: 1.17 $
 * @package Log
 */
 class Log_file extends Log
@@ -77,6 +77,12 @@ class Log_file extends Log
     var $_mode = 0644;
 
     /**
+    * String containing the format to use when generating timestamps.
+    * @var string
+    */
+    var $_timeFormat = '%b %d %H:%M:%S';
+
+    /**
     * Array holding the lines to log
     * @var array
     */
@@ -102,6 +108,11 @@ class Log_file extends Log
         /* If a file mode has been provided, use it. */
         if (!empty($conf['mode'])) {
             $this->_mode = $conf['mode'];
+        }
+
+        /* If a custom time format has been provided, use it. */
+        if (!empty($conf['timeFormat'])) {
+            $this->_timeFormat = $conf['timeFormat'];
         }
 
         if (!file_exists($name)) {
@@ -159,7 +170,7 @@ class Log_file extends Log
         }
 
         // Add to loglines array
-        $this->_logLines[] = array('message' => $message, 'priority' => $priority, 'time' => strftime('%b %d %H:%M:%S'));
+        $this->_logLines[] = array('message' => $message, 'priority' => $priority, 'time' => strftime($this->_timeFormat));
 
         // Notify observers
         $this->notifyAll(array('message' => $message, 'priority' => $priority));
@@ -209,7 +220,7 @@ class Log_file extends Log
             return false;
         }
 
-        chmod($this->_filename, $this->_mode);
+        @chmod($this->_filename, $this->_mode);
 
         return true;
     }
