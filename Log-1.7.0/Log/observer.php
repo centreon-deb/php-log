@@ -1,5 +1,5 @@
 <?php
-// $Id: observer.php,v 1.5 2003/04/08 16:17:16 jon Exp $
+// $Id: observer.php,v 1.7 2003/08/02 23:35:40 jon Exp $
 // $Horde: horde/lib/Log/observer.php,v 1.5 2000/06/28 21:36:13 jon Exp $
 
 /**
@@ -7,12 +7,20 @@
  * pattern for watching log activity and taking actions on exceptional events.
  *
  * @author  Chuck Hagenbuch <chuck@horde.org>
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.7 $
  * @since   Horde 1.3
  * @package Log
  */
 class Log_observer
 {
+    /**
+     * Instance-specific unique identification number.
+     *
+     * @var integer
+     * @access private
+     */
+    var $_id = 0;
+
     /**
      * The minimum priority level of message that we want to hear about.
      * PEAR_LOG_EMERG is the highest priority, so we will only hear messages
@@ -24,7 +32,6 @@ class Log_observer
      */
     var $_priority = PEAR_LOG_INFO;
 
-
     /**
      * Creates a new basic Log_observer instance.
      *
@@ -35,6 +42,7 @@ class Log_observer
      */
     function Log_observer($priority = PEAR_LOG_INFO)
     {
+        $this->_id = md5(microtime());
         $this->_priority = $priority;
     }
 
@@ -53,13 +61,22 @@ class Log_observer
     function factory($type, $priority = PEAR_LOG_INFO)
     {
         $type = strtolower($type);
+        $class = 'Log_observer_' . $type;
         $classfile = 'Log/' . $type . '.php';
-        if (@include_once $classfile) {
-            $class = 'Log_observer_' . $type;
+
+        /*
+         * Attempt to include our version of the named class, but don't treat
+         * a failure as fatal.  The caller may have already included their own
+         * version of the named class.
+         */
+        @include_once $classfile;
+
+        /* If the class exists, return a new instance of it. */
+        if (class_exists($class)) {
             return new $class($priority);
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**

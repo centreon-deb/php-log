@@ -1,5 +1,5 @@
 <?php
-// $Id: mcal.php,v 1.10 2003/04/08 05:55:05 jon Exp $
+// $Id: mcal.php,v 1.12 2003/06/17 05:35:24 jon Exp $
 // $Horde: horde/lib/Log/mcal.php,v 1.2 2000/06/28 21:36:13 jon Exp $
 
 /**
@@ -8,7 +8,7 @@
  * store accessed through MCAL.
  * 
  * @author  Chuck Hagenbuch <chuck@horde.org>
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.12 $
  * @since Horde 1.3
  * @package Log 
  */
@@ -66,7 +66,7 @@ class Log_mcal extends Log {
         $this->_id = md5(microtime());
         $this->_name = $name;
         $this->_ident = $ident;
-        $this->_maxLevel = $maxLevel;
+        $this->_mask = Log::UPTO($maxLevel);
         $this->_calendar = $conf['calendar'];
         $this->_username = $conf['username'];
         $this->_password = $conf['password'];
@@ -117,7 +117,7 @@ class Log_mcal extends Log {
     function log($message, $priority = PEAR_LOG_INFO)
     {
         /* Abort early if the priority is above the maximum logging level. */
-        if ($priority > $this->_maxLevel) {
+        if (!$this->_isMasked($priority)) {
             return false;
         }
 

@@ -1,5 +1,5 @@
 <?php
-// $Id: sql.php,v 1.21 2003/04/08 05:55:05 jon Exp $
+// $Id: sql.php,v 1.23 2003/06/17 05:35:24 jon Exp $
 // $Horde: horde/lib/Log/sql.php,v 1.12 2000/08/16 20:27:34 chuck Exp $
 
 require_once 'DB.php';
@@ -21,7 +21,7 @@ require_once 'DB.php';
  * );
  *
  * @author  Jon Parise <jon@php.net>
- * @version $Revision: 1.21 $
+ * @version $Revision: 1.23 $
  * @since   Horde 1.3
  * @package Log 
  */
@@ -67,7 +67,7 @@ class Log_sql extends Log {
         $this->_id = md5(microtime());
         $this->_table = $name;
         $this->_ident = $ident;
-        $this->_maxLevel = $maxLevel;
+        $this->_mask = Log::UPTO($maxLevel);
 
         /* If an existing database connection was provided, use it. */
         if (isset($conf['db'])) {
@@ -134,7 +134,9 @@ class Log_sql extends Log {
     function log($message, $priority = PEAR_LOG_INFO)
     {
         /* Abort early if the priority is above the maximum logging level. */
-        if ($priority > $this->_maxLevel) return;
+        if (!$this->_isMasked($priority)) {
+            return false;
+        }
 
         if (!$this->_opened) {
             $this->open();

@@ -1,5 +1,5 @@
 <?php
-// $Id: syslog.php,v 1.14 2003/04/29 04:32:01 jon Exp $
+// $Id: syslog.php,v 1.16 2003/06/17 05:35:24 jon Exp $
 // $Horde: horde/lib/Log/syslog.php,v 1.6 2000/06/28 21:36:13 jon Exp $
 
 /**
@@ -8,7 +8,7 @@
  * (PHP emulates this with the Event Log on Windows machines).
  *
  * @author  Chuck Hagenbuch <chuck@horde.org>
- * @version $Revision: 1.14 $
+ * @version $Revision: 1.16 $
  * @since   Horde 1.3
  * @package Log
  */
@@ -40,7 +40,7 @@ class Log_syslog extends Log
         $this->_id = md5(microtime());
         $this->_name = $name;
         $this->_ident = $ident;
-        $this->_maxLevel = $maxLevel;
+        $this->_mask = Log::UPTO($maxLevel);
     }
 
     /**
@@ -85,7 +85,7 @@ class Log_syslog extends Log
     function log($message, $priority = PEAR_LOG_INFO)
     {
         /* Abort early if the priority is above the maximum logging level. */
-        if ($priority > $this->_maxLevel) {
+        if (!$this->_isMasked($priority)) {
             return false;
         }
 

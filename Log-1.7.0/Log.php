@@ -1,15 +1,24 @@
 <?php
-// $Id: Log.php,v 1.26 2003/06/16 06:54:50 jon Exp $
+// $Id: Log.php,v 1.32 2003/08/02 23:35:40 jon Exp $
 // $Horde: horde/lib/Log.php,v 1.15 2000/06/29 23:39:45 jon Exp $
 
-define('PEAR_LOG_EMERG',    0);
-define('PEAR_LOG_ALERT',    1);
-define('PEAR_LOG_CRIT',     2);
-define('PEAR_LOG_ERR',      3);
-define('PEAR_LOG_WARNING',  4);
-define('PEAR_LOG_NOTICE',   5);
-define('PEAR_LOG_INFO',     6);
-define('PEAR_LOG_DEBUG',    7);
+define('PEAR_LOG_EMERG',    0);     /** System is unusable */
+define('PEAR_LOG_ALERT',    1);     /** Immediately action */
+define('PEAR_LOG_CRIT',     2);     /** Critical conditions */
+define('PEAR_LOG_ERR',      3);     /** Error conditions */
+define('PEAR_LOG_WARNING',  4);     /** Warning conditions */
+define('PEAR_LOG_NOTICE',   5);     /** Normal but significant */
+define('PEAR_LOG_INFO',     6);     /** Informational */
+define('PEAR_LOG_DEBUG',    7);     /** Debug-level messages */
+
+define('PEAR_LOG_ALL',      bindec('11111111'));  /** All messages */
+define('PEAR_LOG_NONE',     bindec('00000000'));  /** No message */
+
+/* Log types for PHP's native error_log() function. */
+define('PEAR_LOG_TYPE_SYSTEM',  0); /** Use PHP's system logger */
+define('PEAR_LOG_TYPE_MAIL',    1); /** Use PHP's mail() function */
+define('PEAR_LOG_TYPE_DEBUG',   2); /** Use PHP's debugging connection */
+define('PEAR_LOG_TYPE_FILE',    3); /** Append to a file */
 
 /**
  * The Log:: class implements both an abstraction for various logging
@@ -17,7 +26,7 @@ define('PEAR_LOG_DEBUG',    7);
  *
  * @author  Chuck Hagenbuch <chuck@horde.org>
  * @author  Jon Parise <jon@php.net>
- * @version $Revision: 1.26 $
+ * @version $Revision: 1.32 $
  * @since   Horde 1.3
  * @package Log
  */
@@ -32,6 +41,14 @@ class Log
     var $_opened = false;
 
     /**
+     * Instance-specific unique identification number.
+     *
+     * @var integer
+     * @access private
+     */
+    var $_id = 0;
+
+    /**
      * The label that uniquely identifies this set of log messages.
      *
      * @var string
@@ -39,13 +56,12 @@ class Log
      */
     var $_ident = '';
 
-    /**
-     * The maximum priority level at which to log a message.
-     *
-     * @var int
+    /*
+     * The bitmask of allowed log levels.
+     * @var integer
      * @access private
      */
-    var $_maxLevel = PEAR_LOG_DEBUG;
+    var $_mask = PEAR_LOG_ALL;
 
     /**
      * Holds all Log_observer objects that wish to be notified of new messages.
@@ -84,13 +100,22 @@ class Log
                      $maxLevel = PEAR_LOG_DEBUG)
     {
         $type = strtolower($type);
+        $class = 'Log_' . $type;
         $classfile = 'Log/' . $type . '.php';
-        if (@include_once $classfile) {
-            $class = 'Log_' . $type;
+
+        /*
+         * Attempt to include our version of the named class, but don't treat
+         * a failure as fatal.  The caller may have already included their own
+         * version of the named class.
+         */
+        @include_once $classfile;
+
+        /* If the class exists, return a new instance of it. */
+        if (class_exists($class)) {
             return new $class($name, $ident, $conf, $maxLevel);
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -160,6 +185,110 @@ class Log
     }
 
     /**
+     * A convenience function for logging a emergency event.  It will log a
+     * message at the PEAR_LOG_EMERG log level.
+     *
+     * @param   string  $message    String containing the message to log.
+     *
+     * @return  boolean True if the message was successfully logged.
+     */
+    function emerg($message)
+    {
+        return $this->log($message, PEAR_LOG_EMERG);
+    }
+
+    /**
+     * A convenience function for logging an alert event.  It will log a
+     * message at the PEAR_LOG_ALERT log level.
+     *
+     * @param   string  $message    String containing the message to log.
+     *
+     * @return  boolean True if the message was successfully logged.
+     */
+    function alert($message)
+    {
+        return $this->log($message, PEAR_LOG_ALERT);
+    }
+
+    /**
+     * A convenience function for logging a critical event.  It will log a
+     * message at the PEAR_LOG_CRIT log level.
+     *
+     * @param   string  $message    String containing the message to log.
+     *
+     * @return  boolean True if the message was successfully logged.
+     */
+    function crit($message)
+    {
+        return $this->log($message, PEAR_LOG_CRIT);
+    }
+
+    /**
+     * A convenience function for logging a error event.  It will log a
+     * message at the PEAR_LOG_ERR log level.
+     *
+     * @param   string  $message    String containing the message to log.
+     *
+     * @return  boolean True if the message was successfully logged.
+     */
+    function err($message)
+    {
+        return $this->log($message, PEAR_LOG_ERR);
+    }
+
+    /**
+     * A convenience function for logging a warning event.  It will log a
+     * message at the PEAR_LOG_WARNING log level.
+     *
+     * @param   string  $message    String containing the message to log.
+     *
+     * @return  boolean True if the message was successfully logged.
+     */
+    function warning($message)
+    {
+        return $this->log($message, PEAR_LOG_WARNING);
+    }
+
+    /**
+     * A convenience function for logging a notice event.  It will log a
+     * message at the PEAR_LOG_NOTICE log level.
+     *
+     * @param   string  $message    String containing the message to log.
+     *
+     * @return  boolean True if the message was successfully logged.
+     */
+    function notice($message)
+    {
+        return $this->log($message, PEAR_LOG_NOTICE);
+    }
+
+    /**
+     * A convenience function for logging a information event.  It will log a
+     * message at the PEAR_LOG_INFO log level.
+     *
+     * @param   string  $message    String containing the message to log.
+     *
+     * @return  boolean True if the message was successfully logged.
+     */
+    function info($message)
+    {
+        return $this->log($message, PEAR_LOG_INFO);
+    }
+
+    /**
+     * A convenience function for logging a debug event.  It will log a
+     * message at the PEAR_LOG_DEBUG log level.
+     *
+     * @param   string  $message    String containing the message to log.
+     *
+     * @return  boolean True if the message was successfully logged.
+     */
+    function debug($message)
+    {
+        return $this->log($message, PEAR_LOG_DEBUG);
+    }
+
+    /**
      * Returns the string representation of a PEAR_LOG_* integer constant.
      *
      * @param int $priority     A PEAR_LOG_* integer constant.
@@ -180,6 +309,77 @@ class Log
         );
 
         return $priorities[$priority];
+    }
+
+    /**
+     * Calculate the log mask for the given priority.
+     *
+     * @param integer   $priority   The priority whose mask will be calculated.
+     *
+     * @return integer  The calculated log mask.
+     *
+     * @access public
+     */
+    function MASK($priority)
+    {
+        return (1 << $priority);
+    }
+
+    /**
+     * Calculate the log mask for all priorities up to the given priority.
+     *
+     * @param integer   $priority   The maximum priority covered by this mask.
+     *
+     * @return integer  The calculated log mask.
+     *
+     * @access public
+     */
+    function UPTO($priority)
+    {
+        return ((1 << ($priority + 1)) - 1);
+    }
+
+    /**
+     * Set and return the level mask for the current Log instance.
+     *
+     * @param integer $mask     A bitwise mask of log levels.
+     *
+     * @return integer          The current level mask.
+     *
+     * @access public
+     */
+    function setMask($mask)
+    {
+        $this->_mask = $mask;
+
+        return $this->_mask;
+    }
+
+    /**
+     * Returns the current level mask.
+     *
+     * @return interger         The current level mask.
+     *
+     * @access public
+     */
+    function getMask()
+    {
+        return $this->_mask;
+    }
+
+    /**
+     * Check if the given priority is included in the current level mask.
+     *
+     * @param integer   $priority   The priority to check.
+     *
+     * @return boolean  True if the given priority is included in the current
+     *                  log mask.
+     *
+     * @access private
+     */
+    function _isMasked($priority)
+    {
+        return (Log::MASK($priority) & $this->_mask);
     }
 
     /**
