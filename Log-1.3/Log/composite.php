@@ -1,5 +1,5 @@
 <?php
-// $Id: composite.php,v 1.4 2002/04/29 05:18:45 jon Exp $
+// $Id: composite.php,v 1.5 2002/08/23 10:48:47 mj Exp $
 // $Horde: horde/lib/Log/composite.php,v 1.2 2000/06/28 21:36:13 jon Exp $
 
 /**
@@ -7,12 +7,12 @@
  * allows multiple Log implementations to get sent the same events.
  *
  * @author  Chuck Hagenbuch <chuck@horde.org>
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * @since Horde 1.3
  * @package Log 
  */
 
-class Log_composite {
+class Log_composite extends Log {
 
     /** 
     * Array holding all Log instances 
@@ -112,7 +112,7 @@ class Log_composite {
 
         $child->_childID = uniqid(rand());
 
-        $this->children[$child->_listenerID] = &$child;
+        $this->children[$child->_childID] = &$child;
     }
 
     /**
