@@ -1,5 +1,5 @@
 <?php
-// $Id: Log.php,v 1.32 2003/08/02 23:35:40 jon Exp $
+// $Id: Log.php,v 1.36 2003/09/02 06:43:14 jon Exp $
 // $Horde: horde/lib/Log.php,v 1.15 2000/06/29 23:39:45 jon Exp $
 
 define('PEAR_LOG_EMERG',    0);     /** System is unusable */
@@ -26,7 +26,7 @@ define('PEAR_LOG_TYPE_FILE',    3); /** Append to a file */
  *
  * @author  Chuck Hagenbuch <chuck@horde.org>
  * @author  Jon Parise <jon@php.net>
- * @version $Revision: 1.32 $
+ * @version $Revision: 1.36 $
  * @since   Horde 1.3
  * @package Log
  */
@@ -112,7 +112,8 @@ class Log
 
         /* If the class exists, return a new instance of it. */
         if (class_exists($class)) {
-            return new $class($name, $ident, $conf, $maxLevel);
+            $object =& new $class($name, $ident, $conf, $maxLevel);
+            return $object;
         }
 
         return false;
@@ -169,6 +170,14 @@ class Log
     }
 
     /**
+     * Abstract implementation of the open() method.
+     */
+    function open()
+    {
+        return false;
+    }
+
+    /**
      * Abstract implementation of the close() method.
      */
     function close()
@@ -188,7 +197,8 @@ class Log
      * A convenience function for logging a emergency event.  It will log a
      * message at the PEAR_LOG_EMERG log level.
      *
-     * @param   string  $message    String containing the message to log.
+     * @param   mixed   $message    String or object containing the message
+     *                              to log.
      *
      * @return  boolean True if the message was successfully logged.
      */
@@ -201,7 +211,8 @@ class Log
      * A convenience function for logging an alert event.  It will log a
      * message at the PEAR_LOG_ALERT log level.
      *
-     * @param   string  $message    String containing the message to log.
+     * @param   mixed   $message    String or object containing the message
+     *                              to log.
      *
      * @return  boolean True if the message was successfully logged.
      */
@@ -214,7 +225,8 @@ class Log
      * A convenience function for logging a critical event.  It will log a
      * message at the PEAR_LOG_CRIT log level.
      *
-     * @param   string  $message    String containing the message to log.
+     * @param   mixed   $message    String or object containing the message
+     *                              to log.
      *
      * @return  boolean True if the message was successfully logged.
      */
@@ -227,7 +239,8 @@ class Log
      * A convenience function for logging a error event.  It will log a
      * message at the PEAR_LOG_ERR log level.
      *
-     * @param   string  $message    String containing the message to log.
+     * @param   mixed   $message    String or object containing the message
+     *                              to log.
      *
      * @return  boolean True if the message was successfully logged.
      */
@@ -240,7 +253,8 @@ class Log
      * A convenience function for logging a warning event.  It will log a
      * message at the PEAR_LOG_WARNING log level.
      *
-     * @param   string  $message    String containing the message to log.
+     * @param   mixed   $message    String or object containing the message
+     *                              to log.
      *
      * @return  boolean True if the message was successfully logged.
      */
@@ -253,7 +267,8 @@ class Log
      * A convenience function for logging a notice event.  It will log a
      * message at the PEAR_LOG_NOTICE log level.
      *
-     * @param   string  $message    String containing the message to log.
+     * @param   mixed   $message    String or object containing the message
+     *                              to log.
      *
      * @return  boolean True if the message was successfully logged.
      */
@@ -266,7 +281,8 @@ class Log
      * A convenience function for logging a information event.  It will log a
      * message at the PEAR_LOG_INFO log level.
      *
-     * @param   string  $message    String containing the message to log.
+     * @param   mixed   $message    String or object containing the message
+     *                              to log.
      *
      * @return  boolean True if the message was successfully logged.
      */
@@ -279,13 +295,52 @@ class Log
      * A convenience function for logging a debug event.  It will log a
      * message at the PEAR_LOG_DEBUG log level.
      *
-     * @param   string  $message    String containing the message to log.
+     * @param   mixed   $message    String or object containing the message
+     *                              to log.
      *
      * @return  boolean True if the message was successfully logged.
      */
     function debug($message)
     {
         return $this->log($message, PEAR_LOG_DEBUG);
+    }
+
+    /**
+     * Returns the string representation of the message data.
+     *
+     * If $message is an object, _extractMessage() will attempt to extract
+     * the message text using a known method (such as a PEAR_Error object's
+     * getMessage() method).  If a known method, cannot be found, the
+     * serialized representation of the object will be returned.
+     *
+     * If the message data is already a string, it will be returned unchanged.
+     *
+     * @param  mixed $message   The original message data.  This may be a
+     *                          string or any object.
+     *
+     * @return string           The string representation of the message.
+     *
+     * @access private
+     */
+    function _extractMessage($message)
+    {
+        /*
+         * If we've been given an object, attempt to extract the message using
+         * a known method.  If we can't find such a method, default to the
+         * serialized version of the object.
+         */
+        if (is_object($message)) {
+            if (method_exists($message, 'getmessage')) {
+                $message = $message->getMessage();
+            } else if (method_exists($message, 'tostring')) {
+                $message = $message->toString();
+            } else {
+                $message = serialize($message);
+            }
+        }
+
+        /* Otherwise, we assume the message is a string. */
+        return $message;
     }
 
     /**

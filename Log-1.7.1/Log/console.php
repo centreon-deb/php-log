@@ -1,12 +1,12 @@
 <?php
-// $Id: console.php,v 1.13 2003/07/16 03:59:43 jon Exp $
+// $Id: console.php,v 1.14 2003/08/22 06:57:56 jon Exp $
 
 /**
  * The Log_console class is a concrete implementation of the Log::
  * abstract class which writes message to the text console.
  * 
  * @author  Jon Parise <jon@php.net>
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  * @package Log
  */
 class Log_console extends Log
@@ -122,7 +122,7 @@ class Log_console extends Log
      * Writes $message to the text console. Also, passes the message
      * along to any Log_observer instances that are observing this Log.
      * 
-     * @param string $message  The textual message to be logged.
+     * @param mixed  $message    String or object containing the message to log.
      * @param string $priority The priority of the message.  Valid
      *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT,
      *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
@@ -137,6 +137,9 @@ class Log_console extends Log
         if (!$this->_isMasked($priority)) {
             return false;
         }
+
+        /* Extract the string representation of the message. */
+        $message = $this->_extractMessage($message);
 
         /* Build the string containing the complete log line. */
         $line = sprintf($this->_lineFormat, strftime($this->_timeFormat),

@@ -1,5 +1,5 @@
 <?php
-// $Id: composite.php,v 1.16 2003/06/16 05:47:26 jon Exp $
+// $Id: composite.php,v 1.17 2003/08/22 06:57:56 jon Exp $
 // $Horde: horde/lib/Log/composite.php,v 1.2 2000/06/28 21:36:13 jon Exp $
 
 /**
@@ -8,7 +8,7 @@
  *
  * @author  Chuck Hagenbuch <chuck@horde.org>
  * @author  Jon Parise <jon@php.net>
- * @version $Revision: 1.16 $
+ * @version $Revision: 1.17 $
  * @since Horde 1.3
  * @package Log
  */
@@ -70,7 +70,8 @@ class Log_composite extends Log
     /**
      * Sends $message and $priority to each child of this composite.
      *
-     * @param string    $message    The textual message to be logged.
+     * @param mixed     $message    String or object containing the message
+     *                              to log.
      * @param string    $priority   (optional) The priority of the message.
      *                              Valid values are: PEAR_LOG_EMERG,
      *                              PEAR_LOG_ALERT, PEAR_LOG_CRIT,

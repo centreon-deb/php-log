@@ -1,5 +1,5 @@
 <?php
-// $Id: syslog.php,v 1.16 2003/06/17 05:35:24 jon Exp $
+// $Id: syslog.php,v 1.17 2003/08/22 06:57:56 jon Exp $
 // $Horde: horde/lib/Log/syslog.php,v 1.6 2000/06/28 21:36:13 jon Exp $
 
 /**
@@ -8,7 +8,7 @@
  * (PHP emulates this with the Event Log on Windows machines).
  *
  * @author  Chuck Hagenbuch <chuck@horde.org>
- * @version $Revision: 1.16 $
+ * @version $Revision: 1.17 $
  * @since   Horde 1.3
  * @package Log
  */
@@ -73,7 +73,7 @@ class Log_syslog extends Log
      * open() if necessary. Also passes the message along to any Log_observer
      * instances that are observing this Log.
      *
-     * @param string $message  The textual message to be logged.
+     * @param mixed $message String or object containing the message to log.
      * @param int $priority (optional) The priority of the message.  Valid
      *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT,
      *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
@@ -92,6 +92,9 @@ class Log_syslog extends Log
         if (!$this->_opened) {
             $this->open();
         }
+
+        /* Extract the string representation of the message. */
+        $message = $this->_extractMessage($message);
 
         if (!syslog($this->_toSyslog($priority), $message)) {
             return false;

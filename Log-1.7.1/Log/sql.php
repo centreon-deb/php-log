@@ -1,5 +1,5 @@
 <?php
-// $Id: sql.php,v 1.23 2003/06/17 05:35:24 jon Exp $
+// $Id: sql.php,v 1.24 2003/08/22 06:57:56 jon Exp $
 // $Horde: horde/lib/Log/sql.php,v 1.12 2000/08/16 20:27:34 chuck Exp $
 
 require_once 'DB.php';
@@ -21,7 +21,7 @@ require_once 'DB.php';
  * );
  *
  * @author  Jon Parise <jon@php.net>
- * @version $Revision: 1.23 $
+ * @version $Revision: 1.24 $
  * @since   Horde 1.3
  * @package Log 
  */
@@ -122,7 +122,7 @@ class Log_sql extends Log {
      * if necessary.  Also passes the message along to any Log_observer
      * instances that are observing this Log.
      *
-     * @param string $message  The textual message to be logged.
+     * @param mixed  $message  String or object containing the message to log.
      * @param string $priority The priority of the message.  Valid
      *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT,
      *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
@@ -141,6 +141,9 @@ class Log_sql extends Log {
         if (!$this->_opened) {
             $this->open();
         }
+
+        /* Extract the string representation of the message. */
+        $message = $this->_extractMessage($message);
 
         /* Build the SQL query for this log entry insertion. */
         $id = $this->_db->nextId('log_id');

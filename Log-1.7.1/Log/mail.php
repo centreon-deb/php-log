@@ -1,5 +1,5 @@
 <?php
-// $Id: mail.php,v 1.12 2003/06/17 05:35:24 jon Exp $
+// $Id: mail.php,v 1.14 2003/08/22 06:57:56 jon Exp $
 
 /**
  * The Log_mail class is a concrete implementation of the Log:: abstract class
@@ -15,11 +15,11 @@
  * 
  * @author  Ronnie Garcia <ronnie@mk2.net>
  * @author  Jon Parise <jon@php.net>
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.14 $
  * @package Log
  */
-class Log_mail extends Log {
-
+class Log_mail extends Log
+{
     /** 
      * String holding the recipient's email address.
      * @var string
@@ -110,7 +110,7 @@ class Log_mail extends Log {
     {
         if (!$this->_opened) {
             if (!empty($this->_preamble)) {
-                $this->_message = $this->_preamble . "\r\n\r\n";
+                $this->_message = $this->_preamble . "\n\n";
             }
             $this->_opened = true;
         }
@@ -126,11 +126,11 @@ class Log_mail extends Log {
     {
         if ($this->_opened) {
             if (!empty($this->_message)) {
-                $headers = "From: $this->_from\r\n";
-                $headers .= "User-Agent: Log_mail\r\n";
+                $headers = "From: $this->_from\n";
+                $headers .= "User-Agent: Log_mail";
 
                 if (mail($this->_recipient, $this->_subject, $this->_message,
-                        $headers) == false) {
+                         $headers) == false) {
                     error_log("Log_mail: Failure executing mail()", 0);
                     return false;
                 }
@@ -145,7 +145,7 @@ class Log_mail extends Log {
      * Writes $message to the currently open mail message.
      * Calls open(), if necessary.
      * 
-     * @param string $message  The textual message to be logged.
+     * @param mixed  $message  String or object containing the message to log.
      * @param string $priority The priority of the message.  Valid
      *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT,
      *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
@@ -165,8 +165,12 @@ class Log_mail extends Log {
             $this->open();
         }
 
-        $entry = sprintf("%s %s [%s] %s\r\n", strftime('%b %d %H:%M:%S'),
-            $this->_ident, Log::priorityToString($priority), $message);
+        /* Extract the string representation of the message. */
+        $message = $this->_extractMessage($message);
+
+        $entry = sprintf("%s %s [%s] %s\n", strftime('%b %d %H:%M:%S'),
+                         $this->_ident, Log::priorityToString($priority),
+                         $message);
 
         $this->_message .= $entry;
 

@@ -1,5 +1,5 @@
 <?php
-// $Id: win.php,v 1.5 2003/06/27 08:17:33 jon Exp $
+// $Id: win.php,v 1.6 2003/08/22 06:57:56 jon Exp $
 
 /**
  * The Log_win class is a concrete implementation of the Log abstract
@@ -11,7 +11,7 @@
  *  http://www.zend.com/zend/tut/tutorial-DebugLib.php
  * 
  * @author  Jon Parise <jon@php.net>
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * @package Log
  */
 class Log_win extends Log
@@ -185,7 +185,7 @@ win.document.writeln('<tr><th>Time</th><th>Ident</th><th>Message</th></tr>');
      * Logs $message to the output window.  The message is also passed along
      * to any Log_observer instances that are observing this Log.
      * 
-     * @param string $message  The textual message to be logged.
+     * @param mixed  $message  String or object containing the message to log.
      * @param string $priority The priority of the message.  Valid
      *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT,
      *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
@@ -200,6 +200,9 @@ win.document.writeln('<tr><th>Time</th><th>Ident</th><th>Message</th></tr>');
         if (!$this->_isMasked($priority)) {
             return false;
         }
+
+        /* Extract the string representation of the message. */
+        $message = $this->_extractMessage($message);
 
         list($usec, $sec) = explode(' ', microtime());
 

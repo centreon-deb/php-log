@@ -1,5 +1,5 @@
 <?php
-// $Id: file.php,v 1.28 2003/07/10 07:31:44 jon Exp $
+// $Id: file.php,v 1.32 2003/09/21 06:01:22 jon Exp $
 
 /**
  * The Log_file class is a concrete implementation of the Log abstract
@@ -7,7 +7,7 @@
  *
  * @author  Jon Parise <jon@php.net>
  * @author  Roman Neuhauser <neuhauser@bellavista.cz>
- * @version $Revision: 1.28 $
+ * @version $Revision: 1.32 $
  * @package Log
  */
 class Log_file extends Log
@@ -144,11 +144,21 @@ class Log_file extends Log
      */
     function _mkpath($path, $mode = 0700)
     {
+        static $depth = 0;
+
+        /* Guard against potentially infinite recursion. */
+        if ($depth++ > 25) {
+            trigger_error("_mkpath(): Maximum recursion depth (25) exceeded",
+                          E_USER_WARNING);
+            return false;
+        }
+
         /* We're only interested in the directory component of the path. */
         $path = dirname($path);
 
         /* If the directory already exists, return success immediately. */
         if (is_dir($path)) {
+            $depth = 0;
             return true;
         }
 
@@ -156,11 +166,11 @@ class Log_file extends Log
          * In order to understand recursion, you must first understand
          * recursion ...
          */
-        if ($this->_mkpath(dirname($path), $mode) === false) {
+        if ($this->_mkpath($path, $mode) === false) {
             return false;
         }
 
-        return @mkdir($path);
+        return @mkdir($path, $mode);
     }
 
     /**
@@ -211,7 +221,7 @@ class Log_file extends Log
      * Logs $message to the output window.  The message is also passed along
      * to any Log_observer instances that are observing this Log.
      *
-     * @param string $message  The textual message to be logged.
+     * @param mixed  $message  String or object containing the message to log.
      * @param string $priority The priority of the message.  Valid
      *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT,
      *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
@@ -231,6 +241,9 @@ class Log_file extends Log
         if (!$this->_opened && !$this->open()) {
             return false;
         }
+
+        /* Extract the string representation of the message. */
+        $message = $this->_extractMessage($message);
 
         /* Build the string containing the complete log line. */
         $line = sprintf($this->_lineFormat, strftime($this->_timeFormat),
