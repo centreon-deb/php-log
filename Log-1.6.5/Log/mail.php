@@ -1,5 +1,5 @@
 <?php
-// $Id: mail.php,v 1.7 2003/04/08 05:55:05 jon Exp $
+// $Id: mail.php,v 1.8 2003/04/27 01:46:40 jon Exp $
 
 /**
  * The Log_mail class is a concrete implementation of the Log:: abstract class
@@ -15,7 +15,7 @@
  * 
  * @author  Ronnie Garcia <ronnie@mk2.net>
  * @author  Jon Parise <jon@php.net>
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  * @package Log
  */
 class Log_mail extends Log {
@@ -77,7 +77,7 @@ class Log_mail extends Log {
         }
         
         /* register the destructor */
-        $this->PEAR();
+        register_shutdown_function(array(&$this, '_Log_mail'));
     }
     
     /**

@@ -12,15 +12,11 @@
     </maintainer>
   </maintainers>
   <release>
-    <version>1.6.4</version>
-    <date>2003-04-08</date>
+    <version>1.6.5</version>
+    <date>2003-04-26</date>
     <license>PHP 2.02</license>
     <state>stable</state>
-    <notes>The Log classes no longer inherits from the PEAR base class.  Not including the PEAR base class gives us smaller, faster Log objects.
-
-The Log_file class now registers its own destructor to ensure that the logfile is correctly closed upon shutdown.
-
-A ZendEngine 1 incompatibility was introduced in the previous release.  This has been corrrected.</notes>
+    <notes>The mail log handler needs to register its own destructer now that the Log class no longer inherits from the PEAR base class.</notes>
     <deps>
       <dep type="pkg" rel="has">DB</dep>
     </deps>
@@ -71,7 +67,7 @@ A ZendEngine 1 incompatibility was introduced in the previous release.  This has
       <file role="php" md5sum="538e3ea7297953113d6d29aa5a75e322" name="Log/composite.php"/>
       <file role="php" md5sum="4d2a2a6cfe09cc69193f1caee453e5b6" name="Log/console.php"/>
       <file role="php" md5sum="dbfeb274cdef25cab06fab9322572ca6" name="Log/file.php"/>
-      <file role="php" md5sum="4688f7075cf5759b9a9e959b918629ad" name="Log/mail.php"/>
+      <file role="php" md5sum="7ca0262b50fba82ca4f552a2d13a3fd9" name="Log/mail.php"/>
       <file role="php" md5sum="234952b786b9d31247aece9631b0a98b" name="Log/mcal.php"/>
       <file role="php" md5sum="a7f246042b3d1e8201a07439438454e0" name="Log/observer.php"/>
       <file role="php" md5sum="13feb0516630f612b5beed762133d0d0" name="Log/sql.php"/>
@@ -79,6 +75,18 @@ A ZendEngine 1 incompatibility was introduced in the previous release.  This has
     </filelist>
   </release>
   <changelog>
+    <release>
+      <version>1.6.4</version>
+      <date>2003-04-08</date>
+      <state>stable</state>
+      <notes>The Log classes no longer inherits from the PEAR base class.  Not including the PEAR base class gives us smaller, faster Log objects.
+
+The Log_file class now registers its own destructor to ensure that the logfile is correctly closed upon shutdown.
+
+A ZendEngine 1 incompatibility was introduced in the previous release.  This has been corrrected.
+        
+</notes>
+    </release>
     <release>
       <version>1.6.3</version>
       <date>2003-04-07</date>
