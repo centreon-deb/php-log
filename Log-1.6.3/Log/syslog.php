@@ -1,5 +1,5 @@
 <?php
-// $Id: syslog.php,v 1.10 2002/12/02 05:23:00 jon Exp $
+// $Id: syslog.php,v 1.12 2003/04/08 05:55:05 jon Exp $
 // $Horde: horde/lib/Log/syslog.php,v 1.6 2000/06/28 21:36:13 jon Exp $
 
 /**
@@ -8,7 +8,7 @@
  * (PHP emulates this with the Event Log on Windows machines).
  * 
  * @author  Chuck Hagenbuch <chuck@horde.org>
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.12 $
  * @since   Horde 1.3
  * @package Log 
  */
@@ -38,6 +38,7 @@ class Log_syslog extends Log {
             $name = LOG_SYSLOG;
         }
 
+        $this->_id = md5(microtime());
         $this->_name = $name;
         $this->_ident = $ident;
         $this->_maxLevel = $maxLevel;
@@ -97,7 +98,7 @@ class Log_syslog extends Log {
             return false;
         }
 
-        $this->notifyAll(array('priority' => $priority, 'message' => $message));
+        $this->_announce(array('priority' => $priority, 'message' => $message));
 
         return true;
     }

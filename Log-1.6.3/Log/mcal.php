@@ -1,5 +1,5 @@
 <?php
-// $Id: mcal.php,v 1.8 2002/12/02 05:23:00 jon Exp $
+// $Id: mcal.php,v 1.10 2003/04/08 05:55:05 jon Exp $
 // $Horde: horde/lib/Log/mcal.php,v 1.2 2000/06/28 21:36:13 jon Exp $
 
 /**
@@ -8,7 +8,7 @@
  * store accessed through MCAL.
  * 
  * @author  Chuck Hagenbuch <chuck@horde.org>
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.10 $
  * @since Horde 1.3
  * @package Log 
  */
@@ -63,6 +63,7 @@ class Log_mcal extends Log {
     function Log_mcal($name, $ident = '', $conf = array(),
                       $maxLevel = PEAR_LOG_DEBUG)
     {
+        $this->_id = md5(microtime());
         $this->_name = $name;
         $this->_ident = $ident;
         $this->_maxLevel = $maxLevel;
@@ -138,7 +139,7 @@ class Log_mcal extends Log {
             $dates[3], $dates[4], $dates[5]);
         mcal_append_event($this->_stream);
 
-        $this->notifyAll(array('priority' => $priority, 'message' => $message));
+        $this->_announce(array('priority' => $priority, 'message' => $message));
 
         return true;
     }

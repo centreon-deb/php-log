@@ -33,7 +33,7 @@
 // |         Jon Parise <jon@php.net>                                      |
 // +-----------------------------------------------------------------------+
 //
-// $Id: file.php,v 1.17 2003/02/06 05:21:54 jon Exp $
+// $Id: file.php,v 1.21 2003/04/08 05:55:05 jon Exp $
 
 /**
 * The Log_file class is a concrete implementation of the Log::
@@ -41,7 +41,7 @@
 * on the previous Log_file class by Jon Parise.
 * 
 * @author  Richard Heyes <richard@php.net>
-* @version $Revision: 1.17 $
+* @version $Revision: 1.21 $
 * @package Log
 */
 class Log_file extends Log
@@ -51,18 +51,6 @@ class Log_file extends Log
     * @var string
     */
     var $_filename;
-
-    /**
-    * No idea what this does.
-    * @var string (maybe)
-    */
-    var $_ident;
-
-    /**
-    * Maximum level to log
-    * @var integer
-    */
-    var $_maxLevel;
 
     /**
     * Integer holding the file handle. 
@@ -103,7 +91,7 @@ class Log_file extends Log
     * @param  int    $maxLevel Maximum level at which to log.
     * @access public
     */
-    function Log_File($name, $ident = '', $conf = array(), $maxLevel = PEAR_LOG_DEBUG)
+    function Log_file($name, $ident = '', $conf = array(), $maxLevel = PEAR_LOG_DEBUG)
     {
         /* If a file mode has been provided, use it. */
         if (!empty($conf['mode'])) {
@@ -120,6 +108,7 @@ class Log_file extends Log
             chmod($name, $this->_mode);
         }
 
+        $this->_id       = md5(microtime());
         $this->_filename = realpath($name);
         $this->_ident    = $ident;
         $this->_maxLevel = $maxLevel;
@@ -173,7 +162,7 @@ class Log_file extends Log
         $this->_logLines[] = array('message' => $message, 'priority' => $priority, 'time' => strftime($this->_timeFormat));
 
         // Notify observers
-        $this->notifyAll(array('message' => $message, 'priority' => $priority));
+        $this->_announce(array('message' => $message, 'priority' => $priority));
 
         return true;
     }

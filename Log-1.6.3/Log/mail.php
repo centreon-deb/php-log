@@ -1,5 +1,5 @@
 <?php
-// $Id: mail.php,v 1.5 2002/12/02 05:23:00 jon Exp $
+// $Id: mail.php,v 1.7 2003/04/08 05:55:05 jon Exp $
 
 /**
  * The Log_mail class is a concrete implementation of the Log:: abstract class
@@ -15,7 +15,7 @@
  * 
  * @author  Ronnie Garcia <ronnie@mk2.net>
  * @author  Jon Parise <jon@php.net>
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.7 $
  * @package Log
  */
 class Log_mail extends Log {
@@ -61,6 +61,7 @@ class Log_mail extends Log {
     function Log_mail($name, $ident = '', $conf = array(),
                       $maxLevel = PEAR_LOG_DEBUG)
     {
+        $this->_id = md5(microtime());
         $this->_recipient = $name;
         $this->_ident    = $ident;
         $this->_maxLevel = $maxLevel;
@@ -157,7 +158,7 @@ class Log_mail extends Log {
 
         $this->_message .= $entry;
 
-        $this->notifyAll(array('priority' => $priority, 'message' => $message));
+        $this->_announce(array('priority' => $priority, 'message' => $message));
 
         return true;
     }

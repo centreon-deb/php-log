@@ -1,5 +1,5 @@
 <?php
-// $Id: composite.php,v 1.11 2003/04/07 05:37:53 jon Exp $
+// $Id: composite.php,v 1.14 2003/04/08 05:55:05 jon Exp $
 // $Horde: horde/lib/Log/composite.php,v 1.2 2000/06/28 21:36:13 jon Exp $
 
 /**
@@ -8,7 +8,7 @@
  *
  * @author  Chuck Hagenbuch <chuck@horde.org>
  * @author  Jon Parise <jon@php.net>
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.14 $
  * @since Horde 1.3
  * @package Log
  */
@@ -89,7 +89,7 @@ class Log_composite extends Log
             $this->_children[$id]->log($message, $priority);
         }
 
-        $this->notifyAll(array('priority' => $priority, 'message' => $message));
+        $this->_announce(array('priority' => $priority, 'message' => $message));
 
         return true;
     }
@@ -122,9 +122,7 @@ class Log_composite extends Log
             return false;
         }
 
-        $id = md5(microtime());
-        $child->_id = $id;
-        $this->_children[$id] = &$child;
+        $this->_children[$child->_id] = &$child;
 
         return true;
     }
@@ -140,7 +138,7 @@ class Log_composite extends Log
      */
     function removeChild($child)
     {
-        if (!isset($this->_children[$child->_id])) {
+        if (!is_a($child, 'Log') || !isset($this->_children[$child->_id])) {
             return false;
         }
 

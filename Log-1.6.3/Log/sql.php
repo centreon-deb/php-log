@@ -1,5 +1,5 @@
 <?php
-// $Id: sql.php,v 1.19 2003/02/17 21:38:54 jon Exp $
+// $Id: sql.php,v 1.21 2003/04/08 05:55:05 jon Exp $
 // $Horde: horde/lib/Log/sql.php,v 1.12 2000/08/16 20:27:34 chuck Exp $
 
 require_once 'DB.php';
@@ -21,7 +21,7 @@ require_once 'DB.php';
  * );
  *
  * @author  Jon Parise <jon@php.net>
- * @version $Revision: 1.19 $
+ * @version $Revision: 1.21 $
  * @since   Horde 1.3
  * @package Log 
  */
@@ -64,6 +64,7 @@ class Log_sql extends Log {
     function Log_sql($name, $ident = '', $conf = array(),
                      $maxLevel = PEAR_LOG_DEBUG)
     {
+        $this->_id = md5(microtime());
         $this->_table = $name;
         $this->_ident = $ident;
         $this->_maxLevel = $maxLevel;
@@ -151,7 +152,7 @@ class Log_sql extends Log {
             return false;
         }
 
-        $this->notifyAll(array('priority' => $priority, 'message' => $message));
+        $this->_announce(array('priority' => $priority, 'message' => $message));
 
         return true;
     }

@@ -1,12 +1,12 @@
 <?php
-// $Id: console.php,v 1.7 2002/12/02 05:23:00 jon Exp $
+// $Id: console.php,v 1.9 2003/04/08 05:55:05 jon Exp $
 
 /**
  * The Log_console class is a concrete implementation of the Log::
  * abstract class which writes message to the text console.
  * 
  * @author  Jon Parise <jon@php.net>
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.9 $
  * @package Log
  */
 class Log_console extends Log
@@ -23,6 +23,7 @@ class Log_console extends Log
     function Log_console($name, $ident = '', $conf = array(),
                          $maxLevel = PEAR_LOG_DEBUG)
     {
+        $this->_id = md5(microtime());
         $this->_ident = $ident;
         $this->_maxLevel = $maxLevel;
     }
@@ -50,7 +51,7 @@ class Log_console extends Log
         printf("%s %s [%s] %s\n", strftime('%b %d %H:%M:%S'), $this->_ident,
             Log::priorityToString($priority), $message);
 
-        $this->notifyAll(array('priority' => $priority, 'message' => $message));
+        $this->_announce(array('priority' => $priority, 'message' => $message));
 
         return true;
     }

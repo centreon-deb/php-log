@@ -12,11 +12,15 @@
     </maintainer>
   </maintainers>
   <release>
-    <version>1.6.2</version>
-    <date>2003-04-06</date>
+    <version>1.6.3</version>
+    <date>2003-04-07</date>
     <license>PHP 2.02</license>
     <state>stable</state>
-    <notes>In the Log_observer class, operate directly on the reference to the Log instance (instead of on a copy of the object).</notes>
+    <notes>A unique identifier is now stored inside each Log instance.  Both the composite and subject-observer mechanisms use this identifier to index their object lists.
+
+The internals of the Log_observer system have been rewritten for general cleanliness.  The external interface remains unchanged.
+
+The Log class now offers public setIdent() and getIdent() members for setting and getting the Log instance's identification string during the object's lifetime.</notes>
     <deps>
       <dep type="pkg" rel="has">DB</dep>
     </deps>
@@ -27,8 +31,9 @@
     <provides type="function" name="Log::priorityToString" />
     <provides type="function" name="Log::attach" />
     <provides type="function" name="Log::detach" />
-    <provides type="function" name="Log::notifyAll" />
     <provides type="function" name="Log::isComposite" />
+    <provides type="function" name="Log::setIdent" />
+    <provides type="function" name="Log::getIdent" />
     <provides type="class" name="Log_composite" />
     <provides type="function" name="Log_composite::open" />
     <provides type="function" name="Log_composite::close" />
@@ -62,18 +67,26 @@
     <provides type="function" name="Log_syslog::close" />
     <provides type="function" name="Log_syslog::log" />
     <filelist>
-      <file role="php" md5sum="c9059c104a03104c0365040d5991f54f" name="Log.php"/>
-      <file role="php" md5sum="e6e4c238289ec38253452a53eacdf6b7" name="Log/composite.php"/>
-      <file role="php" md5sum="8157ca9b33b4c6f3bbb45b48905443cf" name="Log/console.php"/>
-      <file role="php" md5sum="37d9b8f0c4aac75844e15e6d8bb6c9cc" name="Log/file.php"/>
-      <file role="php" md5sum="b38d956a37c523b9bf1be786ee8a83fe" name="Log/mail.php"/>
-      <file role="php" md5sum="63c63ecfaec4976ed062c9a3ad5c6a0b" name="Log/mcal.php"/>
-      <file role="php" md5sum="13402850fa7eff3357c0f86ef8a15189" name="Log/observer.php"/>
-      <file role="php" md5sum="768be6e5db96e60099c551a22c99aeb2" name="Log/sql.php"/>
-      <file role="php" md5sum="aecec4c99e8fb94936b18d967e485cd4" name="Log/syslog.php"/>
+      <file role="php" md5sum="f72cfea958c0cb04a72b51202e6d82f6" name="Log.php"/>
+      <file role="php" md5sum="9c5c15cf6efd02b999ece608d5971d73" name="Log/composite.php"/>
+      <file role="php" md5sum="4d2a2a6cfe09cc69193f1caee453e5b6" name="Log/console.php"/>
+      <file role="php" md5sum="b57992435853b33b450310e838a383b6" name="Log/file.php"/>
+      <file role="php" md5sum="4688f7075cf5759b9a9e959b918629ad" name="Log/mail.php"/>
+      <file role="php" md5sum="234952b786b9d31247aece9631b0a98b" name="Log/mcal.php"/>
+      <file role="php" md5sum="1ddd1c7f919be4456986b020b00b2554" name="Log/observer.php"/>
+      <file role="php" md5sum="13feb0516630f612b5beed762133d0d0" name="Log/sql.php"/>
+      <file role="php" md5sum="97b7ac05fdc40676aaf4e5b18d696b28" name="Log/syslog.php"/>
     </filelist>
   </release>
   <changelog>
+    <release>
+      <version>1.6.2</version>
+      <date>2003-04-06</date>
+      <state>stable</state>
+      <notes>In the Log_observer class, operate directly on the reference to the Log instance (instead of on a copy of the object).
+        
+</notes>
+    </release>
     <release>
       <version>1.6.1</version>
       <date>2003-04-02</date>
