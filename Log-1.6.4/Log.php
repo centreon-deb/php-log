@@ -1,5 +1,5 @@
 <?php
-// $Id: Log.php,v 1.20 2003/04/08 06:18:27 jon Exp $
+// $Id: Log.php,v 1.23 2003/04/08 17:07:28 jon Exp $
 // $Horde: horde/lib/Log.php,v 1.15 2000/06/29 23:39:45 jon Exp $
 
 require_once 'PEAR.php';
@@ -19,11 +19,11 @@ define('PEAR_LOG_DEBUG',    7);
  *
  * @author  Chuck Hagenbuch <chuck@horde.org>
  * @author  Jon Parise <jon@php.net>
- * @version $Revision: 1.20 $
+ * @version $Revision: 1.23 $
  * @since   Horde 1.3
  * @package Log
  */
-class Log extends PEAR {
+class Log {
 
     /**
      * Indicates whether or not the log can been opened / connected.
@@ -170,7 +170,7 @@ class Log extends PEAR {
      */
     function priorityToString($priority)
     {
-        static $priorities = array(
+        $priorities = array(
             PEAR_LOG_EMERG   => 'emergency',
             PEAR_LOG_ALERT   => 'alert',
             PEAR_LOG_CRIT    => 'critical',
@@ -185,7 +185,7 @@ class Log extends PEAR {
     }
 
     /**
-     * Add a Log_observer instance to the list of observers that are listening
+     * Adds a Log_observer instance to the list of observers that are listening
      * for messages emitted by this Log instance.
      *
      * @param object    $observer   The Log_observer instance to attach as a
@@ -207,7 +207,7 @@ class Log extends PEAR {
     }
 
     /**
-     * Remove a Log_observer instance from the list of observers.
+     * Removes a Log_observer instance from the list of observers.
      *
      * @param object    $observer   The Log_observer instance to detach from
      *                              the list of listeners.
@@ -229,7 +229,7 @@ class Log extends PEAR {
     }
 
     /**
-     * Inform each registered observer instance that a new message has been
+     * Informs each registered observer instance that a new message has been
      * logged.
      *
      * @param array     $event      A hash describing the log event.
@@ -256,7 +256,7 @@ class Log extends PEAR {
     }
 
     /**
-     * Set this Log instance's identification string.
+     * Sets this Log instance's identification string.
      *
      * @param string    $ident      The new identification string for this Log
      *                              instance.
@@ -269,7 +269,7 @@ class Log extends PEAR {
     }
 
     /**
-     * Return the current identification string.
+     * Returns the current identification string.
      *
      * @return string   The current Log instance's identification string.
      *

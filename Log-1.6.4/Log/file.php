@@ -33,7 +33,7 @@
 // |         Jon Parise <jon@php.net>                                      |
 // +-----------------------------------------------------------------------+
 //
-// $Id: file.php,v 1.21 2003/04/08 05:55:05 jon Exp $
+// $Id: file.php,v 1.22 2003/04/08 06:37:42 jon Exp $
 
 /**
 * The Log_file class is a concrete implementation of the Log::
@@ -41,7 +41,7 @@
 * on the previous Log_file class by Jon Parise.
 * 
 * @author  Richard Heyes <richard@php.net>
-* @version $Revision: 1.21 $
+* @version $Revision: 1.22 $
 * @package Log
 */
 class Log_file extends Log
@@ -115,8 +115,8 @@ class Log_file extends Log
         
         $this->_logLines = array();
         $this->_writeOut = true;
-        
-        $this->PEAR();
+
+        register_shutdown_function(array(&$this, '_Log_file'));
     }
     
     /**
@@ -125,10 +125,8 @@ class Log_file extends Log
     *
     * @access private
     */
-    function _Log_File()
+    function _Log_file()
     {
-        $this->_PEAR();
-
         if (!empty($this->_logLines) AND $this->_writeOut AND $this->_openLogfile()) {
             
             foreach ($this->_logLines as $line) {

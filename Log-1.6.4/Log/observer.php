@@ -1,5 +1,5 @@
 <?php
-// $Id: observer.php,v 1.4 2003/04/08 05:55:05 jon Exp $
+// $Id: observer.php,v 1.5 2003/04/08 16:17:16 jon Exp $
 // $Horde: horde/lib/Log/observer.php,v 1.5 2000/06/28 21:36:13 jon Exp $
 
 /**
@@ -7,7 +7,7 @@
  * pattern for watching log activity and taking actions on exceptional events.
  *
  * @author  Chuck Hagenbuch <chuck@horde.org>
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * @since   Horde 1.3
  * @package Log
  */
@@ -26,7 +26,7 @@ class Log_observer
 
 
     /**
-     * Create a new basic Log_observer instance.
+     * Creates a new basic Log_observer instance.
      *
      * @param integer   $priority   The highest priority at which to receive
      *                              log event notifications.
@@ -39,7 +39,8 @@ class Log_observer
     }
 
     /**
-     * Attempt to return a concrete Log_observer instance of the requested type.
+     * Attempts to return a new concrete Log_observer instance of the requested
+     * type.
      *
      * @param string    $type       The type of concreate Log_observer subclass
      *                              to return.
