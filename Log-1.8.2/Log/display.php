@@ -1,8 +1,8 @@
 <?php
 /**
- * $Header: /repository/pear/Log/Log/display.php,v 1.3 2003/11/10 16:39:12 jon Exp $
+ * $Header: /repository/pear/Log/Log/display.php,v 1.4 2004/01/02 02:03:40 jon Exp $
  *
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  * @package Log
  */
 
@@ -16,6 +16,8 @@
  * @author  Paul Yanchenko <pusher@inaco.ru>
  * @since   Log 1.8.0
  * @package Log
+ *
+ * @example display.php     Using the display handler.
  */
 class Log_display extends Log
 {

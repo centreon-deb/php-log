@@ -1,9 +1,9 @@
 <?php
 /**
- * $Header: /repository/pear/Log/Log/observer.php,v 1.10 2003/12/15 04:21:13 jon Exp $
+ * $Header: /repository/pear/Log/Log/observer.php,v 1.11 2004/01/02 02:03:40 jon Exp $
  * $Horde: horde/lib/Log/observer.php,v 1.5 2000/06/28 21:36:13 jon Exp $
  *
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  * @package Log
  */
 
@@ -15,6 +15,8 @@
  * @since   Horde 1.3
  * @since   Log 1.0
  * @package Log
+ *
+ * @example observer_mail.php   An example Log_observer implementation.
  */
 class Log_observer
 {

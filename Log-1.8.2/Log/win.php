@@ -1,8 +1,8 @@
 <?php
 /**
- * $Header: /repository/pear/Log/Log/win.php,v 1.12 2003/11/23 20:55:14 jon Exp $
+ * $Header: /repository/pear/Log/Log/win.php,v 1.13 2004/01/02 02:03:40 jon Exp $
  *
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  * @package Log
  */
 
@@ -18,6 +18,8 @@
  * @author  Jon Parise <jon@php.net>
  * @since   Log 1.7.0
  * @package Log
+ *
+ * @example win.php     Using the window handler.
  */
 class Log_win extends Log
 {

@@ -1,9 +1,9 @@
 <?php
 /**
- * $Header: /repository/pear/Log/Log/composite.php,v 1.19 2003/11/08 22:39:55 jon Exp $
+ * $Header: /repository/pear/Log/Log/composite.php,v 1.21 2004/01/02 02:03:40 jon Exp $
  * $Horde: horde/lib/Log/composite.php,v 1.2 2000/06/28 21:36:13 jon Exp $
  *
- * @version $Revision: 1.19 $
+ * @version $Revision: 1.21 $
  * @package Log
  */
 
@@ -17,6 +17,8 @@
  * @since Horde 1.3
  * @since Log 1.0
  * @package Log
+ *
+ * @example composite.php   Using the composite handler.
  */
 class Log_composite extends Log
 {
@@ -69,6 +71,21 @@ class Log_composite extends Log
         if ($this->_opened) {
             foreach ($this->_children as $id => $child) {
                 $this->_children[$id]->close();
+            }
+        }
+    }
+
+    /**
+     * Flushes all open child instances.
+     *
+     * @access public
+     * @since Log 1.8.2
+     */
+    function flush()
+    {
+        if ($this->_opened) {
+            foreach ($this->_children as $id => $child) {
+                $this->_children[$id]->flush();
             }
         }
     }

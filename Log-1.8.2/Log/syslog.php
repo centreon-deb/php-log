@@ -1,9 +1,9 @@
 <?php
 /**
- * $Header: /repository/pear/Log/Log/syslog.php,v 1.19 2003/11/08 22:39:55 jon Exp $
+ * $Header: /repository/pear/Log/Log/syslog.php,v 1.20 2004/01/02 02:03:40 jon Exp $
  * $Horde: horde/lib/Log/syslog.php,v 1.6 2000/06/28 21:36:13 jon Exp $
  *
- * @version $Revision: 1.19 $
+ * @version $Revision: 1.20 $
  * @package Log
  */
 
@@ -16,6 +16,8 @@
  * @since   Horde 1.3
  * @since   Log 1.0
  * @package Log
+ *
+ * @example syslog.php      Using the syslog handler.
  */
 class Log_syslog extends Log
 {

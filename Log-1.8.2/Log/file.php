@@ -1,19 +1,21 @@
 <?php
 /**
- * $Header: /repository/pear/Log/Log/file.php,v 1.34 2003/11/08 22:39:55 jon Exp $
+ * $Header: /repository/pear/Log/Log/file.php,v 1.36 2004/01/02 02:03:40 jon Exp $
  *
- * @version $Revision: 1.34 $
+ * @version $Revision: 1.36 $
  * @package Log
  */
 
 /**
  * The Log_file class is a concrete implementation of the Log abstract
  * class that logs messages to a text file.
- *
+ * 
  * @author  Jon Parise <jon@php.net>
  * @author  Roman Neuhauser <neuhauser@bellavista.cz>
  * @since   Log 1.0
  * @package Log
+ *
+ * @example file.php    Using the file handler.
  */
 class Log_file extends Log
 {
@@ -221,6 +223,17 @@ class Log_file extends Log
         }
 
         return ($this->_opened === false);
+    }
+
+    /**
+     * Flushes all pending data to the file handle.
+     *
+     * @access public
+     * @since Log 1.8.2
+     */
+    function flush()
+    {
+        return fflush($this->_fp);
     }
 
     /**

@@ -1,8 +1,8 @@
 <?php
 /**
- * $Header: /repository/pear/Log/Log/mail.php,v 1.16 2003/11/08 22:39:55 jon Exp $
+ * $Header: /repository/pear/Log/Log/mail.php,v 1.19 2004/01/02 02:03:40 jon Exp $
  *
- * @version $Revision: 1.16 $
+ * @version $Revision: 1.19 $
  * @package Log
  */
 
@@ -22,6 +22,8 @@
  * @author  Jon Parise <jon@php.net>
  * @since   Log 1.3
  * @package Log
+ *
+ * @example mail.php    Using the mail handler.
  */
 class Log_mail extends Log
 {
@@ -144,11 +146,31 @@ class Log_mail extends Log
                     error_log("Log_mail: Failure executing mail()", 0);
                     return false;
                 }
+
+                /* Clear the message string now that the email has been sent. */
+                $this->_message = '';
             }
             $this->_opened = false;
         }
 
         return true;
+    }
+
+    /**
+     * Flushes the log output by forcing the email message to be sent now.
+     * Events that are logged after flush() is called will be appended to a
+     * new email message.
+     *
+     * @access public
+     * @since Log 1.8.2
+     */
+    function flush()
+    {
+        /*
+         * It's sufficient to simply call close() to flush the output.
+         * The next call to log() will cause the handler to be reopened.
+         */
+        return $this->close();
     }
 
     /**

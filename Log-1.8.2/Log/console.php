@@ -1,8 +1,8 @@
 <?php
 /**
- * $Header: /repository/pear/Log/Log/console.php,v 1.16 2003/11/08 22:39:55 jon Exp $
+ * $Header: /repository/pear/Log/Log/console.php,v 1.18 2004/01/02 02:03:40 jon Exp $
  *
- * @version $Revision: 1.16 $
+ * @version $Revision: 1.18 $
  * @package Log
  */
 
@@ -13,6 +13,8 @@
  * @author  Jon Parise <jon@php.net>
  * @since   Log 1.1
  * @package Log
+ *
+ * @example console.php     Using the console handler.
  */
 class Log_console extends Log
 {
@@ -113,6 +115,17 @@ class Log_console extends Log
      */
     function _Log_console()
     {
+        $this->flush();
+    }
+
+    /**
+     * Flushes all pending ("buffered") data to the output stream.
+     *
+     * @access public
+     * @since Log 1.8.2
+     */
+    function flush()
+    {
         /*
          * If output buffering is enabled, dump the contents of the buffer to
          * the output stream.
@@ -121,6 +134,8 @@ class Log_console extends Log
             fwrite($this->_stream, $this->_buffer);
             $this->_buffer = '';
         }
+ 
+        return fflush($this->_stream);
     }
 
     /**

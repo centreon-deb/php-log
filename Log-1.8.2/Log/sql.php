@@ -1,9 +1,9 @@
 <?php
 /**
- * $Header: /repository/pear/Log/Log/sql.php,v 1.26 2003/11/08 22:39:55 jon Exp $
+ * $Header: /repository/pear/Log/Log/sql.php,v 1.27 2004/01/02 02:03:40 jon Exp $
  * $Horde: horde/lib/Log/sql.php,v 1.12 2000/08/16 20:27:34 chuck Exp $
  *
- * @version $Revision: 1.26 $
+ * @version $Revision: 1.27 $
  * @package Log
  */
 
@@ -30,6 +30,8 @@ require_once 'DB.php';
  * @since   Horde 1.3
  * @since   Log 1.0
  * @package Log 
+ *
+ * @example sql.php     Using the SQL handler.
  */
 class Log_sql extends Log {
 

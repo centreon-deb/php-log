@@ -1,8 +1,8 @@
 <?php
 /**
- * $Header: /repository/pear/Log/Log/error_log.php,v 1.4 2003/11/08 22:39:55 jon Exp $
+ * $Header: /repository/pear/Log/Log/error_log.php,v 1.5 2004/01/02 02:03:40 jon Exp $
  *
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * @package Log
  */
 
@@ -13,6 +13,8 @@
  * @author  Jon Parise <jon@php.net>
  * @since   Log 1.7.0
  * @package Log
+ * 
+ * @example error_log.php   Using the error_log handler.
  */
 class Log_error_log extends Log
 {

@@ -1,9 +1,9 @@
 <?php
 /**
- * $Header: /repository/pear/Log/Log.php,v 1.41 2003/11/08 22:39:54 jon Exp $
+ * $Header: /repository/pear/Log/Log.php,v 1.42 2004/01/02 01:45:30 jon Exp $
  * $Horde: horde/lib/Log.php,v 1.15 2000/06/29 23:39:45 jon Exp $
  *
- * @version $Revision: 1.41 $
+ * @version $Revision: 1.42 $
  * @package Log
  */
 
@@ -189,6 +189,15 @@ class Log
      * @since Log 1.0
      */
     function close()
+    {
+        return false;
+    }
+
+    /**
+     * Abstract implementation of the flush() method.
+     * @since Log 1.8.2
+     */
+    function flush()
     {
         return false;
     }
