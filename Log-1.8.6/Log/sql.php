@@ -1,9 +1,9 @@
 <?php
 /**
- * $Header: /repository/pear/Log/Log/sql.php,v 1.33 2004/08/09 18:35:49 jon Exp $
+ * $Header: /repository/pear/Log/Log/sql.php,v 1.34 2004/08/19 06:35:57 jon Exp $
  * $Horde: horde/lib/Log/sql.php,v 1.12 2000/08/16 20:27:34 chuck Exp $
  *
- * @version $Revision: 1.33 $
+ * @version $Revision: 1.34 $
  * @package Log
  */
 
@@ -70,6 +70,14 @@ class Log_sql extends Log {
      */
     var $_sequence = 'log_id';
 
+    /**
+     * Maximum length of the $ident string.  This corresponds to the size of
+     * the 'ident' column in the SQL table.
+     * @var integer
+     * @access private
+     */
+    var $_identLimit = 16;
+
 
     /**
      * Constructs a new sql logging object.
@@ -86,12 +94,19 @@ class Log_sql extends Log {
         $this->_id = md5(microtime());
         $this->_table = $name;
         $this->_mask = Log::UPTO($level);
-        $this->setIdent($ident);
 
         /* If a specific sequence name was provided, use it. */
         if (!empty($conf['sequence'])) {
             $this->_sequence = $conf['sequence'];
         }
+
+        /* If a specific sequence name was provided, use it. */
+        if (isset($conf['identLimit'])) {
+            $this->_identLimit = $conf['identLimit'];
+        }
+
+        /* Now that the ident limit is confirmed, set the ident string. */
+        $this->setIdent($ident);
 
         /* If an existing database connection was provided, use it. */
         if (isset($conf['db'])) {
@@ -153,7 +168,7 @@ class Log_sql extends Log {
      */
     function setIdent($ident)
     {
-        $this->_ident = substr($ident, 0, 16);
+        $this->_ident = substr($ident, 0, $this->_identLimit);
     }
 
     /**
