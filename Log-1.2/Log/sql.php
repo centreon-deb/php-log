@@ -1,5 +1,5 @@
 <?php
-// $Id: sql.php,v 1.1 2002/03/08 00:08:21 jon Exp $
+// $Id: sql.php,v 1.5 2002/07/15 10:52:16 cox Exp $
 // $Horde: horde/lib/Log/sql.php,v 1.12 2000/08/16 20:27:34 chuck Exp $
 
 require_once 'DB.php';
@@ -20,7 +20,7 @@ require_once 'DB.php';
  * );
  *
  * @author  Jon Parise <jon@horde.org>
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.5 $
  * @since   Horde 1.3
  * @package Log 
  */
@@ -44,25 +44,21 @@ class Log_sql extends Log {
     */
     var $table = 'log_table';
 
-    /** 
-    * Boolean indicating the current connection state. 
-    * @var boolean
-    */
-    var $opened = false;
-
 
     /**
      * Constructs a new sql logging object.
      *
-     * @param string $log_name     The target SQL table.
+     * @param string $name         The target SQL table.
      * @param string $ident        The identification field.
      * @param array $conf          The connection configuration array.
+     * @param int $maxLevel        Maximum level at which to log.
      * @access public     
      */
-    function Log_sql($log_name, $ident = '', $conf)
+    function Log_sql($name, $ident = '', $conf = array(), $maxLevel = LOG_DEBUG)
     {
-        $this->table = $log_name;
-        $this->ident = $ident;
+        $this->table = $name;
+        $this->_ident = $ident;
+        $this->_maxLevel = $maxLevel;
         $this->dsn = $conf['dsn'];
     }
 
@@ -75,12 +71,12 @@ class Log_sql extends Log {
      */
     function open()
     {
-        if (!$this->opened) {
+        if (!$this->_opened) {
             $this->db = &DB::connect($this->dsn, true);
-            if (DB::isError($this->db) || DB::isWarning($this->db)) {
+            if (DB::isError($this->db)) {
                 return false;
             }
-            $this->opened = true;
+            $this->_opened = true;
         }
 
         return true;
@@ -94,8 +90,8 @@ class Log_sql extends Log {
      */
     function close()
     {
-        if ($this->opened) {
-            $this->opened = false;
+        if ($this->_opened) {
+            $this->_opened = false;
             return $this->db->disconnect();
         }
 
@@ -116,13 +112,16 @@ class Log_sql extends Log {
      */
     function log($message, $priority = LOG_INFO)
     {
-        if (!$this->opened) {
+        /* Abort early if the priority is above the maximum logging level. */
+        if ($priority > $this->_maxLevel) return;
+
+        if (!$this->_opened) {
             $this->open();
         }
 
         $timestamp = time();
         $q = "insert into $this->table
-              values($timestamp, '$this->ident', $priority, '$message')";
+              values($timestamp, '$this->_ident', $priority, '$message')";
         $this->db->query($q);
         $this->notifyAll(array('priority' => $priority, 'message' => $message));
     }

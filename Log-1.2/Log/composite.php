@@ -1,5 +1,5 @@
 <?php
-// $Id: composite.php,v 1.1 2002/03/08 00:08:21 jon Exp $
+// $Id: composite.php,v 1.4 2002/04/29 05:18:45 jon Exp $
 // $Horde: horde/lib/Log/composite.php,v 1.2 2000/06/28 21:36:13 jon Exp $
 
 /**
@@ -7,7 +7,7 @@
  * allows multiple Log implementations to get sent the same events.
  *
  * @author  Chuck Hagenbuch <chuck@horde.org>
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.4 $
  * @since Horde 1.3
  * @package Log 
  */
@@ -25,12 +25,14 @@ class Log_composite {
     /**
      * Constructs a new composite Log object.
      * 
-     * @param boolean $log_name This is ignored.
+     * @param boolean $name     This is ignored.
      * @param boolean $ident    This is ignored.
      * @param boolean $conf     This is ignored.
+     * @param boolean $maxLevel This is ignored.
      * @access public
      */
-    function Log_composite($log_name = false, $ident = false, $conf = false)
+    function Log_composite($name = false, $ident = false, $conf = false,
+                           $maxLevel = LOG_DEBUG)
     {
     }
     
@@ -41,7 +43,7 @@ class Log_composite {
      */
     function open()
     {
-        if (!$this->opened) {
+        if (!$this->_opened) {
             reset($this->children);
             foreach ($this->children as $child) {
                 $child->open();
@@ -56,7 +58,7 @@ class Log_composite {
      */
     function close()
     {
-        if ($this->opened) {
+        if ($this->_opened) {
             reset($this->children);
             foreach ($this->children as $child) {
                 $child->close();

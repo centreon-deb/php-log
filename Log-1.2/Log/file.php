@@ -1,5 +1,5 @@
 <?php
-// $Id: file.php,v 1.1 2002/03/08 00:08:21 jon Exp $
+// $Id: file.php,v 1.5 2002/05/20 22:51:08 rashid Exp $
 // $Horde: horde/lib/Log/file.php,v 1.4 2000/06/28 21:36:13 jon Exp $
 
 /**
@@ -7,7 +7,7 @@
  * abstract class which writes message to a text file.
  * 
  * @author  Jon Parise <jon@horde.org>
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.5 $
  * @since   Horde 1.3
  * @package Log
  */
@@ -29,19 +29,22 @@ class Log_file extends Log {
     /**
      * Constructs a new logfile object.
      * 
-     * @param string $log_name The filename of the logfile.
+     * @param string $name     The filename of the logfile.
      * @param string $ident    The identity string.
      * @param array  $conf     The configuration array.
+     * @param int    $maxLevel Maximum level at which to log.
      * @access public
      */
-    function Log_file($log_name, $ident = '', $conf = array())
+    function Log_file($name, $ident = '', $conf = array(),
+                      $maxLevel = LOG_DEBUG)
     {
         // bc compatibilty
         if( 0 == count( $conf )) {
             $conf = false ;
         }    
-        $this->filename = $log_name;
-        $this->ident = $ident;
+        $this->filename = $name;
+        $this->_ident = $ident;
+        $this->_maxLevel = $maxLevel;
     }
 
     /**
@@ -52,9 +55,9 @@ class Log_file extends Log {
      */
     function open()
     {
-        if (!$this->opened) {
+        if (!$this->_opened) {
             $this->fp = fopen($this->filename, 'a');
-            $this->opened = true;
+            $this->_opened = true;
         }
     }
 
@@ -64,9 +67,9 @@ class Log_file extends Log {
      */
     function close()
     {
-        if ($this->opened) {
+        if ($this->_opened) {
             fclose($this->fp);
-            $this->opened = false;
+            $this->_opened = false;
         }
     }
 
@@ -84,12 +87,15 @@ class Log_file extends Log {
      */
     function log($message, $priority = LOG_INFO)
     {
-        if (!$this->opened) {
+        /* Abort early if the priority is above the maximum logging level. */
+        if ($priority > $this->_maxLevel) return;
+
+        if (!$this->_opened) {
             $this->open();
         }
 
-        $entry = sprintf("%s %s [%s] %s\n", strftime('%b %d %T'),
-            $this->ident, Log::priorityToString($priority), $message);
+        $entry = sprintf("%s %s [%s] %s\n", strftime('%b %d %H:%M:%S'),
+            $this->_ident, Log::priorityToString($priority), $message);
 
         if ($this->fp) {
             fwrite($this->fp, $entry);

@@ -1,12 +1,12 @@
 <?php
-// $Id: console.php,v 1.1 2002/04/13 00:33:00 jon Exp $
+// $Id: console.php,v 1.5 2002/05/20 22:51:08 rashid Exp $
 
 /**
  * The Log_console class is a concrete implementation of the Log::
  * abstract class which writes message to the text console.
  * 
  * @author  Jon Parise <jon@php.net>
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.5 $
  * @package Log
  */
 class Log_console extends Log
@@ -14,14 +14,17 @@ class Log_console extends Log
     /**
      * Constructs a new Log_console object.
      * 
-     * @param string $log_name Ignored.
+     * @param string $name     Ignored.
      * @param string $ident    The identity string.
      * @param array  $conf     The configuration array.
+     * @param array  $maxLevel Maximum priority level at which to log.
      * @access public
      */
-    function Log_console($log_name, $ident = '', $conf = array())
+    function Log_console($name, $ident = '', $conf = array(),
+                         $maxLevel = LOG_DEBUG)
     {
-        $this->ident = $ident;
+        $this->_ident = $ident;
+        $this->_maxLevel = $maxLevel;
     }
 
     /**
@@ -37,7 +40,10 @@ class Log_console extends Log
      */
     function log($message, $priority = LOG_INFO)
     {
-        printf("%s %s [%s] %s\n", strftime('%b %d %T'), $this->ident,
+        /* Abort early if the priority is above the maximum logging level. */
+        if ($priority > $this->_maxLevel) return;
+
+        printf("%s %s [%s] %s\n", strftime('%b %d %H:%M:%S'), $this->_ident,
             Log::priorityToString($priority), $message);
 
         $this->notifyAll(array('priority' => $priority, 'message' => $message));

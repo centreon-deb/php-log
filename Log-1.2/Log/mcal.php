@@ -1,5 +1,5 @@
 <?php
-// $Id: mcal.php,v 1.1 2002/03/08 00:08:21 jon Exp $
+// $Id: mcal.php,v 1.4 2002/04/29 05:18:45 jon Exp $
 // $Horde: horde/lib/Log/mcal.php,v 1.2 2000/06/28 21:36:13 jon Exp $
 
 /**
@@ -8,7 +8,7 @@
  * store accessed through MCAL.
  * 
  * @author  Chuck Hagenbuch <chuck@horde.org>
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.4 $
  * @since Horde 1.3
  * @package Log 
  */
@@ -54,19 +54,22 @@ class Log_mcal extends Log {
     /**
      * Constructs a new Log_mcal object.
      * 
-     * @param string $log_name The category to use for our events.
+     * @param string $name     The category to use for our events.
      * @param string $ident    The identity string.
      * @param array  $conf     The configuration array.
+     * @param int    $maxLevel Maximum level at which to log.
      * @access public
      */
-    function Log_mcal($log_name = LOG_SYSLOG, $ident = '', $conf = array())
+    function Log_mcal($name, $ident = '', $conf = array(),
+                      $maxLevel = LOG_DEBUG)
     {
         // bc compatibilty
         if( 0 == count( $conf )) {
             $conf = false ;
         }
-        $this->name = $log_name;
-        $this->ident = $ident;
+        $this->name = $name;
+        $this->_ident = $ident;
+        $this->_maxLevel = $maxLevel;
         $this->calendar = $conf['calendar'];
         $this->username = $conf['username'];
         $this->password = $conf['password'];
@@ -80,9 +83,9 @@ class Log_mcal extends Log {
      */
     function open()
     {
-        if (!$this->opened) {
+        if (!$this->_opened) {
             $this->stream = mcal_open($this->calendar, $this->username, $this->password, $this->options);
-            $this->opened = true;
+            $this->_opened = true;
         }
     }
 
@@ -92,9 +95,9 @@ class Log_mcal extends Log {
      */
     function close()
     {
-        if ($this->opened) {
+        if ($this->_opened) {
             mcal_close($this->stream);
-            $this->opened = false;
+            $this->_opened = false;
         }
     }
 
@@ -113,7 +116,10 @@ class Log_mcal extends Log {
      */
     function log($message, $priority = LOG_INFO)
     {
-        if (!$this->opened) {
+        /* Abort early if the priority is above the maximum logging level. */
+        if ($priority > $this->_maxLevel) return;
+
+        if (!$this->_opened) {
             $this->open();
         }
 
@@ -121,7 +127,7 @@ class Log_mcal extends Log {
         $dates = explode(':', $date_str);
 
         mcal_event_init($this->stream);
-        mcal_event_set_title($this->stream, $this->ident);
+        mcal_event_set_title($this->stream, $this->_ident);
         mcal_event_set_category($this->stream, $this->name);
         mcal_event_set_description($this->stream, $message);
         mcal_event_add_attribute($this->stream, 'priority', $priority);
