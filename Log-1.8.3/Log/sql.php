@@ -1,9 +1,9 @@
 <?php
 /**
- * $Header: /repository/pear/Log/Log/sql.php,v 1.27 2004/01/02 02:03:40 jon Exp $
+ * $Header: /repository/pear/Log/Log/sql.php,v 1.28 2004/01/06 05:13:13 jon Exp $
  * $Horde: horde/lib/Log/sql.php,v 1.12 2000/08/16 20:27:34 chuck Exp $
  *
- * @version $Revision: 1.27 $
+ * @version $Revision: 1.28 $
  * @package Log
  */
 
@@ -108,7 +108,7 @@ class Log_sql extends Log {
             $this->_opened = true;
         }
 
-        return true;
+        return $this->_opened;
     }
 
     /**
@@ -126,7 +126,7 @@ class Log_sql extends Log {
             return $this->_db->disconnect();
         }
 
-        return true;
+        return ($this->_opened === false);
     }
 
     /**
@@ -150,8 +150,9 @@ class Log_sql extends Log {
             return false;
         }
 
-        if (!$this->_opened) {
-            $this->open();
+        /* If the connection isn't open and can't be opened, return failure. */
+        if (!$this->_opened && !$this->open()) {
+            return false;
         }
 
         /* Extract the string representation of the message. */

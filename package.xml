@@ -3,7 +3,7 @@
 <package version="1.0">
   <name>Log</name>
   <summary>Logging utilities</summary>
-  <description>The Log framework provides an abstracted logging system.  It supports logging to console, file, syslog, SQL, mail, and mcal targets.  It also provides a subject - observer mechanism.</description>
+  <description>The Log framework provides an abstracted logging system.  It supports logging to console, file, syslog, SQL, Sqlite, mail and mcal targets.  It also provides a subject - observer mechanism.</description>
   <maintainers>
     <maintainer>
       <user>jon</user>
@@ -13,14 +13,16 @@
     </maintainer>
   </maintainers>
   <release>
-    <version>1.8.2</version>
-    <date>2004-01-01</date>
+    <version>1.8.3</version>
+    <date>2004-01-07</date>
     <license>PHP License</license>
     <state>stable</state>
-    <notes>Added a new 'null' log handler.
-Added a flush() method to the public Log API.</notes>
+    <notes>Added a new handler that logs using the Sqlite extension.
+
+The open(), close() and log() methods now consistently return success or failure.</notes>
     <deps>
       <dep type="pkg" rel="has" optional="yes">DB</dep>
+      <dep type="ext" rel="has" optional="yes">sqlite</dep>
     </deps>
     <filelist>
       <file role="doc" baseinstalldir="/" name="docs/guide.txt"/>
@@ -35,6 +37,7 @@ Added a flush() method to the public Log API.</notes>
       <file role="doc" baseinstalldir="/" name="docs/examples/pear_error_handler.php"/>
       <file role="doc" baseinstalldir="/" name="docs/examples/php_error_handler.php"/>
       <file role="doc" baseinstalldir="/" name="docs/examples/sql.php"/>
+      <file role="doc" baseinstalldir="/" name="docs/examples/sqlite.php"/>
       <file role="doc" baseinstalldir="/" name="docs/examples/syslog.php"/>
       <file role="doc" baseinstalldir="/" name="docs/examples/win.php"/>
       <file role="php" baseinstalldir="/" name="Log/composite.php"/>
@@ -47,6 +50,7 @@ Added a flush() method to the public Log API.</notes>
       <file role="php" baseinstalldir="/" name="Log/null.php"/>
       <file role="php" baseinstalldir="/" name="Log/observer.php"/>
       <file role="php" baseinstalldir="/" name="Log/sql.php"/>
+      <file role="php" baseinstalldir="/" name="Log/sqlite.php"/>
       <file role="php" baseinstalldir="/" name="Log/syslog.php"/>
       <file role="php" baseinstalldir="/" name="Log/win.php"/>
       <file role="test" baseinstalldir="/" name="tests/composite.phpt"/>
@@ -56,10 +60,21 @@ Added a flush() method to the public Log API.</notes>
       <file role="test" baseinstalldir="/" name="tests/factory.phpt"/>
       <file role="test" baseinstalldir="/" name="tests/null.phpt"/>
       <file role="test" baseinstalldir="/" name="tests/singleton.phpt"/>
+      <file role="test" baseinstalldir="/" name="tests/sqlite.phpt"/>
       <file role="php" baseinstalldir="/" name="Log.php"/>
     </filelist>
   </release>
   <changelog>
+    <release>
+      <version>1.8.3</version>
+      <date>2004-01-07</date>
+      <license>PHP License</license>
+      <state>stable</state>
+      <notes>The open() and close() methods now consistently return success or failure.  Previously, some handlers' open() and close() methods did not return any result.  Also, the log() methods will return failure when the handler cannot be opened.
+
+Bertrand Mansion contributed a new handler that logs using the Sqlite extension.
+</notes>
+    </release>
     <release>
       <version>1.8.2</version>
       <date>2004-01-01</date>

@@ -1,8 +1,8 @@
 <?php
 /**
- * $Header: /repository/pear/Log/Log/mail.php,v 1.19 2004/01/02 02:03:40 jon Exp $
+ * $Header: /repository/pear/Log/Log/mail.php,v 1.20 2004/01/06 05:13:13 jon Exp $
  *
- * @version $Revision: 1.19 $
+ * @version $Revision: 1.20 $
  * @package Log
  */
 
@@ -126,6 +126,8 @@ class Log_mail extends Log
             }
             $this->_opened = true;
         }
+
+        return $this->_opened;
     }
 
     /**
@@ -153,7 +155,7 @@ class Log_mail extends Log
             $this->_opened = false;
         }
 
-        return true;
+        return ($this->_opened === false);
     }
 
     /**
@@ -193,8 +195,9 @@ class Log_mail extends Log
             return false;
         }
 
-        if (!$this->_opened) {
-            $this->open();
+        /* If the message isn't open and can't be opened, return failure. */
+        if (!$this->_opened && !$this->open()) {
+            return false;
         }
 
         /* Extract the string representation of the message. */

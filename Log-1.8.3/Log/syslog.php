@@ -1,9 +1,9 @@
 <?php
 /**
- * $Header: /repository/pear/Log/Log/syslog.php,v 1.20 2004/01/02 02:03:40 jon Exp $
+ * $Header: /repository/pear/Log/Log/syslog.php,v 1.21 2004/01/06 05:13:13 jon Exp $
  * $Horde: horde/lib/Log/syslog.php,v 1.6 2000/06/28 21:36:13 jon Exp $
  *
- * @version $Revision: 1.20 $
+ * @version $Revision: 1.21 $
  * @package Log
  */
 
@@ -62,6 +62,8 @@ class Log_syslog extends Log
             openlog($this->_ident, LOG_PID, $this->_name);
             $this->_opened = true;
         }
+
+        return $this->_opened;
     }
 
     /**
@@ -74,6 +76,8 @@ class Log_syslog extends Log
             closelog();
             $this->_opened = false;
         }
+
+        return ($this->_opened === false);
     }
 
     /**
@@ -97,8 +101,9 @@ class Log_syslog extends Log
             return false;
         }
 
-        if (!$this->_opened) {
-            $this->open();
+        /* If the connection isn't open and can't be opened, return failure. */
+        if (!$this->_opened && !$this->open()) {
+            return false;
         }
 
         /* Extract the string representation of the message. */

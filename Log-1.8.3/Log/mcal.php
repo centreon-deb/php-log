@@ -1,9 +1,9 @@
 <?php
 /**
- * $Header: /repository/pear/Log/Log/mcal.php,v 1.15 2003/11/08 22:39:55 jon Exp $
+ * $Header: /repository/pear/Log/Log/mcal.php,v 1.16 2004/01/06 05:13:13 jon Exp $
  * $Horde: horde/lib/Log/mcal.php,v 1.2 2000/06/28 21:36:13 jon Exp $
  *
- * @version $Revision: 1.15 $
+ * @version $Revision: 1.16 $
  * @package Log 
  */
 
@@ -96,6 +96,8 @@ class Log_mcal extends Log {
                 $this->_password, $this->_options);
             $this->_opened = true;
         }
+
+        return $this->_opened;
     }
 
     /**
@@ -108,6 +110,8 @@ class Log_mcal extends Log {
             mcal_close($this->_stream);
             $this->_opened = false;
         }
+
+        return ($this->_opened === false);
     }
 
     /**
@@ -132,8 +136,9 @@ class Log_mcal extends Log {
             return false;
         }
 
-        if (!$this->_opened) {
-            $this->open();
+        /* If the connection isn't open and can't be opened, return failure. */
+        if (!$this->_opened && !$this->open()) {
+            return false;
         }
 
         /* Extract the string representation of the message. */
