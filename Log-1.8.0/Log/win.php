@@ -1,5 +1,10 @@
 <?php
-// $Id: win.php,v 1.6 2003/08/22 06:57:56 jon Exp $
+/**
+ * $Header: /repository/pear/Log/Log/win.php,v 1.11 2003/11/08 22:39:55 jon Exp $
+ *
+ * @version $Revision: 1.11 $
+ * @package Log
+ */
 
 /**
  * The Log_win class is a concrete implementation of the Log abstract
@@ -11,7 +16,7 @@
  *  http://www.zend.com/zend/tut/tutorial-DebugLib.php
  * 
  * @author  Jon Parise <jon@php.net>
- * @version $Revision: 1.6 $
+ * @since   Log 1.7.0
  * @package Log
  */
 class Log_win extends Log
@@ -59,16 +64,16 @@ class Log_win extends Log
      * @param string $name     Ignored.
      * @param string $ident    The identity string.
      * @param array  $conf     The configuration array.
-     * @param array  $maxLevel Maximum priority level at which to log.
+     * @param int    $level    Log messages up to and including this level.
      * @access public
      */
     function Log_win($name, $ident = '', $conf = array(),
-                          $maxLevel = PEAR_LOG_DEBUG)
+                          $level = PEAR_LOG_DEBUG)
     {
         $this->_id = md5(microtime());
         $this->_name = $name;
         $this->_ident = $ident;
-        $this->_mask = Log::UPTO($maxLevel);
+        $this->_mask = Log::UPTO($level);
 
         if (isset($conf['title'])) {
             $this->_title = $conf['title'];
@@ -116,7 +121,11 @@ win.document.writeln('</style>');
 win.document.writeln('</head>');
 win.document.writeln('<body>');
 win.document.writeln('<table border="0" cellpadding="2" cellspacing="0">');
-win.document.writeln('<tr><th>Time</th><th>Ident</th><th>Message</th></tr>');
+win.document.writeln('<tr><th>Time</th>');
+<?php if (!empty($this->_ident)): ?>
+win.document.writeln('<th>Ident</th>');
+<?php endif; ?>
+win.document.writeln('<th>Priority</th><th width="100%">Message</th></tr>');
 </script>
 <?php
             $this->_opened = true;
@@ -172,7 +181,7 @@ win.document.writeln('<tr><th>Time</th><th>Ident</th><th>Message</th></tr>');
         /* Drain the buffer to the output window. */
         foreach ($this->_buffer as $line) {
             echo "<script language='JavaScript'>\n";
-            echo "win.document.writeln('$line');\n";
+            echo "win.document.writeln('" . addslashes($line) . "');\n";
             echo "self.focus();\n";
             echo "</script>\n";
         }
@@ -208,10 +217,13 @@ win.document.writeln('<tr><th>Time</th><th>Ident</th><th>Message</th></tr>');
 
         /* Build the output line that contains the log entry row. */
         $line  = '<tr align="left" valign="top">';
-        $line .= sprintf('<td>%s.%s</td><td>%s</td>',
-                         strftime('%T', $sec), substr($usec, 2, 2),
-                         $this->_ident);
-        $line .= sprintf('<td style="color: %s" width="100%%">%s</td>',
+        $line .= sprintf('<td>%s.%s</td>',
+                         strftime('%T', $sec), substr($usec, 2, 2));
+        if (!empty($this->_ident)) {
+            $line .= '<td>' . $this->_ident . '</td>';
+        }
+        $line .= '<td>' . ucfirst($this->priorityToString($priority)) . '</td>';
+        $line .= sprintf('<td style="color: %s">%s</td>',
                          $this->_colors[$priority], nl2br($message));
         $line .= '</tr>';
 

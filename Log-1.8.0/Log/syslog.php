@@ -1,6 +1,11 @@
 <?php
-// $Id: syslog.php,v 1.17 2003/08/22 06:57:56 jon Exp $
-// $Horde: horde/lib/Log/syslog.php,v 1.6 2000/06/28 21:36:13 jon Exp $
+/**
+ * $Header: /repository/pear/Log/Log/syslog.php,v 1.19 2003/11/08 22:39:55 jon Exp $
+ * $Horde: horde/lib/Log/syslog.php,v 1.6 2000/06/28 21:36:13 jon Exp $
+ *
+ * @version $Revision: 1.19 $
+ * @package Log
+ */
 
 /**
  * The Log_syslog class is a concrete implementation of the Log::
@@ -8,8 +13,8 @@
  * (PHP emulates this with the Event Log on Windows machines).
  *
  * @author  Chuck Hagenbuch <chuck@horde.org>
- * @version $Revision: 1.17 $
  * @since   Horde 1.3
+ * @since   Log 1.0
  * @package Log
  */
 class Log_syslog extends Log
@@ -17,6 +22,7 @@ class Log_syslog extends Log
     /**
     * Integer holding the log facility to use. 
     * @var string
+    * @access private
     */
     var $_name = LOG_SYSLOG;
 
@@ -26,11 +32,11 @@ class Log_syslog extends Log
      * @param string $name     The syslog facility.
      * @param string $ident    The identity string.
      * @param array  $conf     The configuration array.
-     * @param int    $maxLevel Maximum level at which to log.
+     * @param int    $level    Log messages up to and including this level.
      * @access public
      */
     function Log_syslog($name, $ident = '', $conf = array(),
-                        $maxLevel = PEAR_LOG_DEBUG)
+                        $level = PEAR_LOG_DEBUG)
     {
         /* Ensure we have a valid integer value for $name. */
         if (empty($name) || !is_int($name)) {
@@ -40,7 +46,7 @@ class Log_syslog extends Log
         $this->_id = md5(microtime());
         $this->_name = $name;
         $this->_ident = $ident;
-        $this->_mask = Log::UPTO($maxLevel);
+        $this->_mask = Log::UPTO($level);
     }
 
     /**

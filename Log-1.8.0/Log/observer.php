@@ -1,14 +1,19 @@
 <?php
-// $Id: observer.php,v 1.7 2003/08/02 23:35:40 jon Exp $
-// $Horde: horde/lib/Log/observer.php,v 1.5 2000/06/28 21:36:13 jon Exp $
+/**
+ * $Header: /repository/pear/Log/Log/observer.php,v 1.8 2003/11/08 22:39:55 jon Exp $
+ * $Horde: horde/lib/Log/observer.php,v 1.5 2000/06/28 21:36:13 jon Exp $
+ *
+ * @version $Revision: 1.8 $
+ * @package Log
+ */
 
 /**
  * The Log_observer:: class implements the Observer end of a Subject-Observer
  * pattern for watching log activity and taking actions on exceptional events.
  *
  * @author  Chuck Hagenbuch <chuck@horde.org>
- * @version $Revision: 1.7 $
  * @since   Horde 1.3
+ * @since   Log 1.0
  * @package Log
  */
 class Log_observer

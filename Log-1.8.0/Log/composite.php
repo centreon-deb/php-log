@@ -1,6 +1,11 @@
 <?php
-// $Id: composite.php,v 1.17 2003/08/22 06:57:56 jon Exp $
-// $Horde: horde/lib/Log/composite.php,v 1.2 2000/06/28 21:36:13 jon Exp $
+/**
+ * $Header: /repository/pear/Log/Log/composite.php,v 1.19 2003/11/08 22:39:55 jon Exp $
+ * $Horde: horde/lib/Log/composite.php,v 1.2 2000/06/28 21:36:13 jon Exp $
+ *
+ * @version $Revision: 1.19 $
+ * @package Log
+ */
 
 /**
  * The Log_composite:: class implements a Composite pattern which
@@ -8,11 +13,11 @@
  *
  * @author  Chuck Hagenbuch <chuck@horde.org>
  * @author  Jon Parise <jon@php.net>
- * @version $Revision: 1.17 $
+ *
  * @since Horde 1.3
+ * @since Log 1.0
  * @package Log
  */
-
 class Log_composite extends Log
 {
     /**
@@ -20,6 +25,7 @@ class Log_composite extends Log
      * sent.
      *
      * @var array
+     * @access private
      */
     var $_children = array();
 
@@ -30,12 +36,12 @@ class Log_composite extends Log
      * @param boolean   $name       This parameter is ignored.
      * @param boolean   $ident      This parameter is ignored.
      * @param boolean   $conf       This parameter is ignored.
-     * @param boolean   $maxLevel   This parameter is ignored.
+     * @param boolean   $level      This parameter is ignored.
      *
      * @access public
      */
     function Log_composite($name = false, $ident = false, $conf = false,
-                           $maxLevel = PEAR_LOG_DEBUG)
+                           $level = PEAR_LOG_DEBUG)
     {
     }
 
@@ -113,6 +119,7 @@ class Log_composite extends Log
      * @param string    $ident      The new identification string.
      *
      * @access public
+     * @since  Log 1.6.7
      */
     function setIdent($ident)
     {

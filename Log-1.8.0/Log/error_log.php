@@ -1,12 +1,17 @@
 <?php
-// $Id: error_log.php,v 1.2 2003/08/22 06:57:56 jon Exp $
+/**
+ * $Header: /repository/pear/Log/Log/error_log.php,v 1.4 2003/11/08 22:39:55 jon Exp $
+ *
+ * @version $Revision: 1.4 $
+ * @package Log
+ */
 
 /**
  * The Log_error_log class is a concrete implementation of the Log abstract
  * class that logs messages using PHP's error_log() function.
  * 
  * @author  Jon Parise <jon@php.net>
- * @version $Revision: 1.2 $
+ * @since   Log 1.7.0
  * @package Log
  */
 class Log_error_log extends Log
@@ -14,12 +19,14 @@ class Log_error_log extends Log
     /**
      * The error_log() log type.
      * @var integer
+     * @access private
      */
     var $_type = PEAR_LOG_TYPE_SYSTEM;
 
     /**
      * The type-specific destination value.
      * @var string
+     * @access private
      */
     var $_destination = '';
 
@@ -27,6 +34,7 @@ class Log_error_log extends Log
      * Additional headers to pass to the mail() function when the
      * PEAR_LOG_TYPE_MAIL type is used.
      * @var string
+     * @access private
      */
     var $_extra_headers = '';
 
@@ -36,16 +44,16 @@ class Log_error_log extends Log
      * @param string $name     Ignored.
      * @param string $ident    The identity string.
      * @param array  $conf     The configuration array.
-     * @param array  $maxLevel Maximum priority level at which to log.
+     * @param int    $level    Log messages up to and including this level.
      * @access public
      */
     function Log_error_log($name, $ident = '', $conf = array(),
-                           $maxLevel = PEAR_LOG_DEBUG)
+                           $level = PEAR_LOG_DEBUG)
     {
         $this->_id = md5(microtime());
         $this->_type = $name;
         $this->_ident = $ident;
-        $this->_mask = Log::UPTO($maxLevel);
+        $this->_mask = Log::UPTO($level);
 
         if (!empty($conf['destination'])) {
             $this->_destination = $conf['destination'];

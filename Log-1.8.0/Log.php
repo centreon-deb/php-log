@@ -1,9 +1,14 @@
 <?php
-// $Id: Log.php,v 1.36 2003/09/02 06:43:14 jon Exp $
-// $Horde: horde/lib/Log.php,v 1.15 2000/06/29 23:39:45 jon Exp $
+/**
+ * $Header: /repository/pear/Log/Log.php,v 1.41 2003/11/08 22:39:54 jon Exp $
+ * $Horde: horde/lib/Log.php,v 1.15 2000/06/29 23:39:45 jon Exp $
+ *
+ * @version $Revision: 1.41 $
+ * @package Log
+ */
 
 define('PEAR_LOG_EMERG',    0);     /** System is unusable */
-define('PEAR_LOG_ALERT',    1);     /** Immediately action */
+define('PEAR_LOG_ALERT',    1);     /** Immediate action required */
 define('PEAR_LOG_CRIT',     2);     /** Critical conditions */
 define('PEAR_LOG_ERR',      3);     /** Error conditions */
 define('PEAR_LOG_WARNING',  4);     /** Warning conditions */
@@ -26,7 +31,6 @@ define('PEAR_LOG_TYPE_FILE',    3); /** Append to a file */
  *
  * @author  Chuck Hagenbuch <chuck@horde.org>
  * @author  Jon Parise <jon@php.net>
- * @version $Revision: 1.36 $
  * @since   Horde 1.3
  * @package Log
  */
@@ -56,7 +60,7 @@ class Log
      */
     var $_ident = '';
 
-    /*
+    /**
      * The bitmask of allowed log levels.
      * @var integer
      * @access private
@@ -73,9 +77,9 @@ class Log
 
 
     /**
-     * Attempts to return a concrete Log instance of $type.
+     * Attempts to return a concrete Log instance of type $handler.
      *
-     * @param string $type      The type of concrete Log subclass to return.
+     * @param string $handler   The type of concrete Log subclass to return.
      *                          Attempt to dynamically include the code for
      *                          this subclass. Currently, valid values are
      *                          'console', 'syslog', 'sql', 'file', and 'mcal'.
@@ -90,18 +94,19 @@ class Log
      * @param array  $conf      A hash containing any additional configuration
      *                          information that a subclass might need.
      *
-     * @param int $maxLevel     Maximum priority level at which to log.
+     * @param int $level        Log messages up to and including this level.
      *
      * @return object Log       The newly created concrete Log instance, or an
      *                          false on an error.
      * @access public
+     * @since Log 1.0
      */
-    function &factory($type, $name = '', $ident = '', $conf = array(),
-                     $maxLevel = PEAR_LOG_DEBUG)
+    function &factory($handler, $name = '', $ident = '', $conf = array(),
+                      $level = PEAR_LOG_DEBUG)
     {
-        $type = strtolower($type);
-        $class = 'Log_' . $type;
-        $classfile = 'Log/' . $type . '.php';
+        $handler = strtolower($handler);
+        $class = 'Log_' . $handler;
+        $classfile = 'Log/' . $handler . '.php';
 
         /*
          * Attempt to include our version of the named class, but don't treat
@@ -112,7 +117,7 @@ class Log
 
         /* If the class exists, return a new instance of it. */
         if (class_exists($class)) {
-            $object =& new $class($name, $ident, $conf, $maxLevel);
+            $object =& new $class($name, $ident, $conf, $level);
             return $object;
         }
 
@@ -120,9 +125,9 @@ class Log
     }
 
     /**
-     * Attempts to return a reference to a concrete Log instance of $type, only
-     * creating a new instance if no log instance with the same parameters
-     * currently exists.
+     * Attempts to return a reference to a concrete Log instance of type
+     * $handler, only creating a new instance if no log instance with the same
+     * parameters currently exists.
      *
      * You should use this if there are multiple places you might create a
      * logger, you don't want to create multiple loggers, and you don't want to
@@ -133,7 +138,7 @@ class Log
      * Without the ampersand (&) in front of the method name, you will not get
      * a reference, you will get a copy.</b>
      *
-     * @param string $type      The type of concrete Log subclass to return.
+     * @param string $handler   The type of concrete Log subclass to return.
      *                          Attempt to dynamically include the code for
      *                          this subclass. Currently, valid values are
      *                          'console', 'syslog', 'sql', 'file', and 'mcal'.
@@ -148,22 +153,23 @@ class Log
      * @param array $conf       A hash containing any additional configuration
      *                          information that a subclass might need.
      *
-     * @param int $maxLevel     Minimum priority level at which to log.
+     * @param int $level        Log messages up to and including this level.
      *
      * @return object Log       The newly created concrete Log instance, or an
      *                          false on an error.
      * @access public
+     * @since Log 1.0
      */
-    function &singleton($type, $name = '', $ident = '', $conf = array(),
-                        $maxLevel = PEAR_LOG_DEBUG)
+    function &singleton($handler, $name = '', $ident = '', $conf = array(),
+                        $level = PEAR_LOG_DEBUG)
     {
         static $instances;
         if (!isset($instances)) $instances = array();
 
-        $signature = serialize(array($type, $name, $ident, $conf, $maxLevel));
+        $signature = serialize(array($handler, $name, $ident, $conf, $level));
         if (!isset($instances[$signature])) {
-            $instances[$signature] = &Log::factory($type, $name, $ident, $conf,
-                $maxLevel);
+            $instances[$signature] = &Log::factory($handler, $name, $ident,
+                                                   $conf, $level);
         }
 
         return $instances[$signature];
@@ -171,6 +177,7 @@ class Log
 
     /**
      * Abstract implementation of the open() method.
+     * @since Log 1.0
      */
     function open()
     {
@@ -179,6 +186,7 @@ class Log
 
     /**
      * Abstract implementation of the close() method.
+     * @since Log 1.0
      */
     function close()
     {
@@ -187,6 +195,7 @@ class Log
 
     /**
      * Abstract implementation of the log() method.
+     * @since Log 1.0
      */
     function log($message, $priority = PEAR_LOG_INFO)
     {
@@ -201,6 +210,9 @@ class Log
      *                              to log.
      *
      * @return  boolean True if the message was successfully logged.
+     *
+     * @access  public
+     * @since   Log 1.7.0
      */
     function emerg($message)
     {
@@ -215,6 +227,9 @@ class Log
      *                              to log.
      *
      * @return  boolean True if the message was successfully logged.
+     *
+     * @access  public
+     * @since   Log 1.7.0
      */
     function alert($message)
     {
@@ -229,6 +244,9 @@ class Log
      *                              to log.
      *
      * @return  boolean True if the message was successfully logged.
+     *
+     * @access  public
+     * @since   Log 1.7.0
      */
     function crit($message)
     {
@@ -243,6 +261,9 @@ class Log
      *                              to log.
      *
      * @return  boolean True if the message was successfully logged.
+     *
+     * @access  public
+     * @since   Log 1.7.0
      */
     function err($message)
     {
@@ -257,6 +278,9 @@ class Log
      *                              to log.
      *
      * @return  boolean True if the message was successfully logged.
+     *
+     * @access  public
+     * @since   Log 1.7.0
      */
     function warning($message)
     {
@@ -271,6 +295,9 @@ class Log
      *                              to log.
      *
      * @return  boolean True if the message was successfully logged.
+     *
+     * @access  public
+     * @since   Log 1.7.0
      */
     function notice($message)
     {
@@ -285,6 +312,9 @@ class Log
      *                              to log.
      *
      * @return  boolean True if the message was successfully logged.
+     *
+     * @access  public
+     * @since   Log 1.7.0
      */
     function info($message)
     {
@@ -299,6 +329,9 @@ class Log
      *                              to log.
      *
      * @return  boolean True if the message was successfully logged.
+     *
+     * @access  public
+     * @since   Log 1.7.0
      */
     function debug($message)
     {
@@ -334,6 +367,8 @@ class Log
                 $message = $message->getMessage();
             } else if (method_exists($message, 'tostring')) {
                 $message = $message->toString();
+            } else if (method_exists($message, '__tostring')) {
+                $message = (string)$message;
             } else {
                 $message = serialize($message);
             }
@@ -348,11 +383,13 @@ class Log
      *
      * @param int $priority     A PEAR_LOG_* integer constant.
      *
-     * @return string           The string representation of $priority.
+     * @return string           The string representation of $level.
+     *
+     * @since   Log 1.0
      */
     function priorityToString($priority)
     {
-        $priorities = array(
+        $levels = array(
             PEAR_LOG_EMERG   => 'emergency',
             PEAR_LOG_ALERT   => 'alert',
             PEAR_LOG_CRIT    => 'critical',
@@ -363,7 +400,7 @@ class Log
             PEAR_LOG_DEBUG   => 'debug'
         );
 
-        return $priorities[$priority];
+        return $levels[$priority];
     }
 
     /**
@@ -373,7 +410,8 @@ class Log
      *
      * @return integer  The calculated log mask.
      *
-     * @access public
+     * @access  public
+     * @since   Log 1.7.0
      */
     function MASK($priority)
     {
@@ -387,7 +425,8 @@ class Log
      *
      * @return integer  The calculated log mask.
      *
-     * @access public
+     * @access  public
+     * @since   Log 1.7.0
      */
     function UPTO($priority)
     {
@@ -401,7 +440,8 @@ class Log
      *
      * @return integer          The current level mask.
      *
-     * @access public
+     * @access  public
+     * @since   Log 1.7.0
      */
     function setMask($mask)
     {
@@ -415,7 +455,8 @@ class Log
      *
      * @return interger         The current level mask.
      *
-     * @access public
+     * @access  public
+     * @since   Log 1.7.0
      */
     function getMask()
     {
@@ -430,7 +471,8 @@ class Log
      * @return boolean  True if the given priority is included in the current
      *                  log mask.
      *
-     * @access private
+     * @access  private
+     * @since   Log 1.7.0
      */
     function _isMasked($priority)
     {
@@ -446,7 +488,8 @@ class Log
      *
      * @param boolean   True if the observer is successfully attached.
      *
-     * @access public
+     * @access  public
+     * @since   Log 1.0
      */
     function attach(&$observer)
     {
@@ -467,7 +510,8 @@ class Log
      *
      * @param boolean   True if the observer is successfully detached.
      *
-     * @access public
+     * @access  public
+     * @since   Log 1.0
      */
     function detach($observer)
     {
@@ -502,6 +546,9 @@ class Log
      * Indicates whether this is a composite class.
      *
      * @return boolean          True if this is a composite class.
+     *
+     * @access  public
+     * @since   Log 1.0
      */
     function isComposite()
     {
@@ -513,7 +560,8 @@ class Log
      *
      * @param string    $ident      The new identification string.
      *
-     * @access public
+     * @access  public
+     * @since   Log 1.6.3
      */
     function setIdent($ident)
     {
@@ -525,7 +573,8 @@ class Log
      *
      * @return string   The current Log instance's identification string.
      *
-     * @access public
+     * @access  public
+     * @since   Log 1.6.3
      */
     function getIdent()
     {

@@ -1,7 +1,13 @@
 <?php
-// $Id: sql.php,v 1.24 2003/08/22 06:57:56 jon Exp $
-// $Horde: horde/lib/Log/sql.php,v 1.12 2000/08/16 20:27:34 chuck Exp $
+/**
+ * $Header: /repository/pear/Log/Log/sql.php,v 1.26 2003/11/08 22:39:55 jon Exp $
+ * $Horde: horde/lib/Log/sql.php,v 1.12 2000/08/16 20:27:34 chuck Exp $
+ *
+ * @version $Revision: 1.26 $
+ * @package Log
+ */
 
+/** PEAR's DB package */
 require_once 'DB.php';
 
 /**
@@ -21,8 +27,8 @@ require_once 'DB.php';
  * );
  *
  * @author  Jon Parise <jon@php.net>
- * @version $Revision: 1.24 $
  * @since   Horde 1.3
+ * @since   Log 1.0
  * @package Log 
  */
 class Log_sql extends Log {
@@ -30,24 +36,28 @@ class Log_sql extends Log {
     /** 
      * Array containing the dsn information. 
      * @var string
+     * @access private
      */
     var $_dsn = '';
 
     /** 
      * Object holding the database handle. 
      * @var object
+     * @access private
      */
     var $_db = null;
 
     /**
      * Flag indicating that we're using an existing database connection.
      * @var boolean
+     * @access private
      */
     var $_existingConnection = false;
 
     /** 
      * String holding the database table to use. 
      * @var string
+     * @access private
      */
     var $_table = 'log_table';
 
@@ -58,16 +68,16 @@ class Log_sql extends Log {
      * @param string $name         The target SQL table.
      * @param string $ident        The identification field.
      * @param array $conf          The connection configuration array.
-     * @param int $maxLevel        Maximum level at which to log.
+     * @param int $level           Log messages up to and including this level.
      * @access public     
      */
     function Log_sql($name, $ident = '', $conf = array(),
-                     $maxLevel = PEAR_LOG_DEBUG)
+                     $level = PEAR_LOG_DEBUG)
     {
         $this->_id = md5(microtime());
         $this->_table = $name;
         $this->_ident = $ident;
-        $this->_mask = Log::UPTO($maxLevel);
+        $this->_mask = Log::UPTO($level);
 
         /* If an existing database connection was provided, use it. */
         if (isset($conf['db'])) {

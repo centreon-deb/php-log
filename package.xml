@@ -13,41 +13,18 @@
     </maintainer>
   </maintainers>
   <release>
-    <version>1.7.1</version>
-    <date>2003-09-21</date>
-    <license>PHP 2.02</license>
+    <version>1.8.0</version>
+    <date>2003-11-18</date>
+    <license>PHP License</license>
     <state>stable</state>
-    <notes>The mail handler now uses &quot;\n&quot; to terminate lines instead of &quot;\r\n&quot;.
+    <notes>The Log package now includes a users guide, example scripts and unit tests.
 
-The file handler's path creation routines now guard against potentially infinite recursion.
+A number of small improvements have been made to the 'win' log handler (based on suggestions from Paul Yanchenko).
 
-It is now possible to pass an object to the logging methods.  If the object offers a PEAR_Error-style getMessage() or PHP5 exception-style toString() method, it will be used to extract the message text.</notes>
+A new 'display' log handler has been added to the distribution.  Contributed by Paul Yanchenko, this handler simply prints the error message back to the browser.  It respects the 'error_prepend_string' and 'error_append_string' PHP INI values and is useful when using PEAR::setErrorHandling()'s PEAR_ERROR_CALLBACK mechanism.</notes>
     <deps>
       <dep type="pkg" rel="has" optional="yes">DB</dep>
     </deps>
-    <provides type="class" name="Log" />
-    <provides type="function" name="Log::factory" />
-    <provides type="function" name="Log::singleton" />
-    <provides type="function" name="Log::open" />
-    <provides type="function" name="Log::close" />
-    <provides type="function" name="Log::emerg" />
-    <provides type="function" name="Log::alert" />
-    <provides type="function" name="Log::crit" />
-    <provides type="function" name="Log::err" />
-    <provides type="function" name="Log::warning" />
-    <provides type="function" name="Log::notice" />
-    <provides type="function" name="Log::info" />
-    <provides type="function" name="Log::debug" />
-    <provides type="function" name="Log::priorityToString" />
-    <provides type="function" name="Log::MASK" />
-    <provides type="function" name="Log::UPTO" />
-    <provides type="function" name="Log::setMask" />
-    <provides type="function" name="Log::getMask" />
-    <provides type="function" name="Log::attach" />
-    <provides type="function" name="Log::detach" />
-    <provides type="function" name="Log::isComposite" />
-    <provides type="function" name="Log::setIdent" />
-    <provides type="function" name="Log::getIdent" />
     <provides type="class" name="Log_composite" extends="Log" />
     <provides type="function" name="Log_composite::open" />
     <provides type="function" name="Log_composite::close" />
@@ -58,6 +35,8 @@ It is now possible to pass an object to the logging methods.  If the object offe
     <provides type="function" name="Log_composite::removeChild" />
     <provides type="class" name="Log_console" extends="Log" />
     <provides type="function" name="Log_console::log" />
+    <provides type="class" name="Log_display" extends="Log" />
+    <provides type="function" name="Log_display::log" />
     <provides type="class" name="Log_error_log" extends="Log" />
     <provides type="function" name="Log_error_log::log" />
     <provides type="class" name="Log_file" extends="Log" />
@@ -87,21 +66,96 @@ It is now possible to pass an object to the logging methods.  If the object offe
     <provides type="function" name="Log_win::open" />
     <provides type="function" name="Log_win::close" />
     <provides type="function" name="Log_win::log" />
+    <provides type="class" name="Log" />
+    <provides type="function" name="Log::factory" />
+    <provides type="function" name="Log::singleton" />
+    <provides type="function" name="Log::open" />
+    <provides type="function" name="Log::close" />
+    <provides type="function" name="Log::emerg" />
+    <provides type="function" name="Log::alert" />
+    <provides type="function" name="Log::crit" />
+    <provides type="function" name="Log::err" />
+    <provides type="function" name="Log::warning" />
+    <provides type="function" name="Log::notice" />
+    <provides type="function" name="Log::info" />
+    <provides type="function" name="Log::debug" />
+    <provides type="function" name="Log::priorityToString" />
+    <provides type="function" name="Log::MASK" />
+    <provides type="function" name="Log::UPTO" />
+    <provides type="function" name="Log::setMask" />
+    <provides type="function" name="Log::getMask" />
+    <provides type="function" name="Log::attach" />
+    <provides type="function" name="Log::detach" />
+    <provides type="function" name="Log::isComposite" />
+    <provides type="function" name="Log::setIdent" />
+    <provides type="function" name="Log::getIdent" />
     <filelist>
-      <file role="php" md5sum="952b25f024fe4475973499325b763184" name="Log.php"/>
-      <file role="php" md5sum="d0c705069f85902bce56b403cf67e7fc" name="Log/composite.php"/>
-      <file role="php" md5sum="ee3dae7e348c5754dab02578a60d1d86" name="Log/console.php"/>
-      <file role="php" md5sum="abdedca4e296b2d894db845b17f34299" name="Log/error_log.php"/>
-      <file role="php" md5sum="9ed4e6b0157ebafa4f448f72e994cfe2" name="Log/file.php"/>
-      <file role="php" md5sum="63fe2c65b7d5eb1e06e67519309d030b" name="Log/mail.php"/>
-      <file role="php" md5sum="f3b443cd6ac29c7438bedab28995e391" name="Log/mcal.php"/>
-      <file role="php" md5sum="cb0b0a68bf3588d4f3b419d277fefd9a" name="Log/observer.php"/>
-      <file role="php" md5sum="481e6028fccc26f663ea5adb4619c07a" name="Log/sql.php"/>
-      <file role="php" md5sum="00a5b64b7b0e37cb0152b18bfc064e9f" name="Log/syslog.php"/>
-      <file role="php" md5sum="f340cc6d947ca8263f1fc5be91720a2b" name="Log/win.php"/>
+      <file role="doc" baseinstalldir="/" md5sum="3925064494fa4586c8801fd61788f6bd" name="docs/guide.txt"/>
+      <file role="doc" baseinstalldir="/" md5sum="f0fe92c4693f85b5d23dd7fb787311cb" name="docs/examples/composite.php"/>
+      <file role="doc" baseinstalldir="/" md5sum="19e0f5e8f0bb9d2e31a09b5b4ae86a73" name="docs/examples/console.php"/>
+      <file role="doc" baseinstalldir="/" md5sum="ece4e33eabcd56ae45013155bd623d5c" name="docs/examples/display.php"/>
+      <file role="doc" baseinstalldir="/" md5sum="775294dbee8158b8c4b13f0f1849f0bc" name="docs/examples/error_log.php"/>
+      <file role="doc" baseinstalldir="/" md5sum="f1829c72e025359de7d04af6adb2685f" name="docs/examples/file.php"/>
+      <file role="doc" baseinstalldir="/" md5sum="d53ed4d000a0848919136f74fd57b6c8" name="docs/examples/mail.php"/>
+      <file role="doc" baseinstalldir="/" md5sum="959d3590bcce733131fb5cdac2873d0b" name="docs/examples/pear_error_handler.php"/>
+      <file role="doc" baseinstalldir="/" md5sum="34c957866e5c983d3b67af00099ce8f1" name="docs/examples/php_error_handler.php"/>
+      <file role="doc" baseinstalldir="/" md5sum="5ce33090cd30c47fb028736bf918b85a" name="docs/examples/sql.php"/>
+      <file role="doc" baseinstalldir="/" md5sum="73963c2e2ed53f6349e0bcd6d3955bc8" name="docs/examples/syslog.php"/>
+      <file role="doc" baseinstalldir="/" md5sum="6a758092ffb2a6a3a80f9d3dd5539ebf" name="docs/examples/win.php"/>
+      <file role="php" baseinstalldir="/" md5sum="6877af86967b93e2ebc9ab9de2906d31" name="Log/composite.php"/>
+      <file role="php" baseinstalldir="/" md5sum="3d0ffcb67cad3c5082d202806cca96b1" name="Log/console.php"/>
+      <file role="php" baseinstalldir="/" md5sum="b7ec829ba97894fbeff80d14ff46b881" name="Log/display.php"/>
+      <file role="php" baseinstalldir="/" md5sum="671991dbf28dacb6ddb910398a921f87" name="Log/error_log.php"/>
+      <file role="php" baseinstalldir="/" md5sum="14b5fbe0f5487ea8c549bf68b2b66271" name="Log/file.php"/>
+      <file role="php" baseinstalldir="/" md5sum="bf591a4550662cb88f9189224c8e6008" name="Log/mail.php"/>
+      <file role="php" baseinstalldir="/" md5sum="877e2a99d689f1fdcd34cde7b3da4635" name="Log/mcal.php"/>
+      <file role="php" baseinstalldir="/" md5sum="f74cf852c1275fb3d9f23bc4f7386175" name="Log/observer.php"/>
+      <file role="php" baseinstalldir="/" md5sum="9f6f7750d3804adf273c1a0eedbb44b7" name="Log/sql.php"/>
+      <file role="php" baseinstalldir="/" md5sum="9ea63304921b3c084aa07aded4bd643c" name="Log/syslog.php"/>
+      <file role="php" baseinstalldir="/" md5sum="2d65e4ff4f72a080e37b4879d5191496" name="Log/win.php"/>
+      <file role="test" baseinstalldir="/" md5sum="c8bb01df1ac3a923b474cc003d51b189" name="tests/composite.phpt"/>
+      <file role="test" baseinstalldir="/" md5sum="cda100f931b35c935125a0bf8f44f769" name="tests/console.phpt"/>
+      <file role="test" baseinstalldir="/" md5sum="0d86370df14ae3b5267abdeddf0b8b7a" name="tests/display.phpt"/>
+      <file role="test" baseinstalldir="/" md5sum="efdc9b35727a3de34ea32fa594a0bfa4" name="tests/error_log.phpt"/>
+      <file role="php" baseinstalldir="/" md5sum="db839ac561ba2638f9cb5558cb827c35" name="Log.php"/>
     </filelist>
   </release>
   <changelog>
+    <release>
+      <version>1.8.0</version>
+      <date>2003-11-15</date>
+      <license>PHP License</license>
+      <state>stable</state>
+      <notes>The Log package now includes a users guide.
+
+A number of small improvements have been made to the 'win' log handler (based on suggestions from Paul Yanchenko).
+
+A new 'display' log handler has been added to the distribution.  Contributed by Paul Yanchenko, this handler simply prints the error message back to the browser.  It respects the 'error_prepend_string' and 'error_append_string' PHP INI values and is useful when using PEAR::setErrorHandling()'s PEAR_ERROR_CALLBACK mechanism.
+</notes>
+    </release>
+    <release>
+      <version>1.8.0</version>
+      <date>2003-11-18</date>
+      <license>PHP License</license>
+      <state>stable</state>
+      <notes>The Log package now includes a users guide, example scripts and unit tests.
+
+A number of small improvements have been made to the 'win' log handler (based on suggestions from Paul Yanchenko).
+
+A new 'display' log handler has been added to the distribution.  Contributed by Paul Yanchenko, this handler simply prints the error message back to the browser.  It respects the 'error_prepend_string' and 'error_append_string' PHP INI values and is useful when using PEAR::setErrorHandling()'s PEAR_ERROR_CALLBACK mechanism.
+</notes>
+    </release>
+    <release>
+      <version>1.7.1</version>
+      <date>2003-09-21</date>
+      <state>stable</state>
+      <notes>The mail handler now uses &quot;\n&quot; to terminate lines instead of &quot;\r\n&quot;.
+
+The file handler's path creation routines now guard against potentially infinite recursion.
+
+It is now possible to pass an object to the logging methods.  If the object offers a PEAR_Error-style getMessage() or PHP5 exception-style toString() method, it will be used to extract the message text.
+</notes>
+    </release>
     <release>
       <version>1.7.0</version>
       <date>2003-08-02</date>
@@ -115,7 +169,6 @@ Two new log handers have been added: the 'error_log' handler wraps PHP's native 
 The file log handler has been completely rewritten based on suggestions from Roman Neuhauser.  It no longer buffers log output in memory before writing to the log file.
 
 Greg Beaver submitted a change that allows callers to provide their own Log classes (that existing outside of the PEAR file hierarchy) by including them before invoking a factory() method.
-        
 </notes>
     </release>
     <release>
@@ -125,7 +178,6 @@ Greg Beaver submitted a change that allows callers to provide their own Log clas
       <notes>It is now possible to set the identification string for all of a composite's child instances.
 
 The preamble of the mail handler's message is now configurable.
-        
 </notes>
     </release>
     <release>
@@ -133,7 +185,6 @@ The preamble of the mail handler's message is now configurable.
       <date>2003-04-26</date>
       <state>stable</state>
       <notes>The mail log handler needs to register its own destructer now that the Log class no longer inherits from the PEAR base class.
-        
 </notes>
     </release>
     <release>
@@ -145,7 +196,6 @@ The preamble of the mail handler's message is now configurable.
 The Log_file class now registers its own destructor to ensure that the logfile is correctly closed upon shutdown.
 
 A ZendEngine 1 incompatibility was introduced in the previous release.  This has been corrrected.
-        
 </notes>
     </release>
     <release>
@@ -157,7 +207,6 @@ A ZendEngine 1 incompatibility was introduced in the previous release.  This has
 The internals of the Log_observer system have been rewritten for general cleanliness.  The external interface remains unchanged.
 
 The Log class now offers public setIdent() and getIdent() members for setting and getting the Log instance's identification string during the object's lifetime.
-        
 </notes>
     </release>
     <release>
@@ -165,7 +214,6 @@ The Log class now offers public setIdent() and getIdent() members for setting an
       <date>2003-04-06</date>
       <state>stable</state>
       <notes>In the Log_observer class, operate directly on the reference to the Log instance (instead of on a copy of the object).
-        
 </notes>
     </release>
     <release>
@@ -173,7 +221,6 @@ The Log class now offers public setIdent() and getIdent() members for setting an
       <date>2003-04-02</date>
       <state>stable</state>
       <notes>- Fix a typo that broke the Log_Observer class.
-        
 </notes>
     </release>
     <release>
@@ -182,7 +229,6 @@ The Log class now offers public setIdent() and getIdent() members for setting an
       <state>stable</state>
       <notes>- The SQL handler now uses sequences instead of timestamps as unique identifiers.
 - The time format used by the file handler is now configurable.
-        
 </notes>
     </release>
     <release>
@@ -192,7 +238,6 @@ The Log class now offers public setIdent() and getIdent() members for setting an
       <notes>- Improved singleton()'s signature generation.
 - The SQL handler no longer closes existing database connections.
 - The log() method now returns a boolean result indicating success or failure.
-        
 </notes>
     </release>
     <release>
@@ -200,7 +245,6 @@ The Log class now offers public setIdent() and getIdent() members for setting an
       <date>2002-11-28</date>
       <state>stable</state>
       <notes>- Altered the singleton's &quot;signature&quot; construction to be shorter and more array-friendly.
-        
 </notes>
     </release>
     <release>
@@ -209,7 +253,6 @@ The Log class now offers public setIdent() and getIdent() members for setting an
       <state>stable</state>
       <notes>- The mail handler now implements a destructor to ensure close() is called.
 - The syslog handler now requires $name to be a valid syslog facility.
-        
 </notes>
     </release>
     <release>
@@ -219,7 +262,6 @@ The Log class now offers public setIdent() and getIdent() members for setting an
       <notes>- Adding the ability to set the mode of the logfile in the Log_file.
 - mail() failures in Log_mail are logged via error_log().
 - Replaced all remaining LOG_* constants with the PEAR_LOG_* versions.
-        
 </notes>
     </release>
     <release>
@@ -229,7 +271,6 @@ The Log class now offers public setIdent() and getIdent() members for setting an
       <notes>- Altered the format of the SQL logging table to use a TIMESTAMP field.
 - The Log class now extends the PEAR base class.
 - New file logger that keeps the log file open for the life of the request.
-        
 </notes>
     </release>
     <release>

@@ -1,12 +1,17 @@
 <?php
-// $Id: console.php,v 1.14 2003/08/22 06:57:56 jon Exp $
+/**
+ * $Header: /repository/pear/Log/Log/console.php,v 1.16 2003/11/08 22:39:55 jon Exp $
+ *
+ * @version $Revision: 1.16 $
+ * @package Log
+ */
 
 /**
  * The Log_console class is a concrete implementation of the Log::
  * abstract class which writes message to the text console.
  * 
  * @author  Jon Parise <jon@php.net>
- * @version $Revision: 1.14 $
+ * @since   Log 1.1
  * @package Log
  */
 class Log_console extends Log
@@ -66,15 +71,15 @@ class Log_console extends Log
      * @param string $name     Ignored.
      * @param string $ident    The identity string.
      * @param array  $conf     The configuration array.
-     * @param array  $maxLevel Maximum priority level at which to log.
+     * @param int    $level    Log messages up to and including this level.
      * @access public
      */
     function Log_console($name, $ident = '', $conf = array(),
-                         $maxLevel = PEAR_LOG_DEBUG)
+                         $level = PEAR_LOG_DEBUG)
     {
         $this->_id = md5(microtime());
         $this->_ident = $ident;
-        $this->_mask = Log::UPTO($maxLevel);
+        $this->_mask = Log::UPTO($level);
 
         if (!empty($conf['stream'])) {
             $this->_stream = $conf['stream'];

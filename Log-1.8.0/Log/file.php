@@ -1,5 +1,10 @@
 <?php
-// $Id: file.php,v 1.32 2003/09/21 06:01:22 jon Exp $
+/**
+ * $Header: /repository/pear/Log/Log/file.php,v 1.34 2003/11/08 22:39:55 jon Exp $
+ *
+ * @version $Revision: 1.34 $
+ * @package Log
+ */
 
 /**
  * The Log_file class is a concrete implementation of the Log abstract
@@ -7,7 +12,7 @@
  *
  * @author  Jon Parise <jon@php.net>
  * @author  Roman Neuhauser <neuhauser@bellavista.cz>
- * @version $Revision: 1.32 $
+ * @since   Log 1.0
  * @package Log
  */
 class Log_file extends Log
@@ -37,6 +42,7 @@ class Log_file extends Log
     /**
      * Integer (in octal) containing the log file's permissions mode.
      * @var integer
+     * @access private
      */
     var $_mode = 0644;
 
@@ -81,16 +87,16 @@ class Log_file extends Log
      * @param string $name     Ignored.
      * @param string $ident    The identity string.
      * @param array  $conf     The configuration array.
-     * @param array  $maxLevel Maximum priority level at which to log.
+     * @param int    $level    Log messages up to and including this level.
      * @access public
      */
     function Log_file($name, $ident = '', $conf = array(),
-                      $maxLevel = PEAR_LOG_DEBUG)
+                      $level = PEAR_LOG_DEBUG)
     {
         $this->_id = md5(microtime());
         $this->_filename = $name;
         $this->_ident = $ident;
-        $this->_mask = Log::UPTO($maxLevel);
+        $this->_mask = Log::UPTO($level);
 
         if (isset($conf['append'])) {
             $this->_append = $conf['append'];

@@ -1,5 +1,10 @@
 <?php
-// $Id: mail.php,v 1.14 2003/08/22 06:57:56 jon Exp $
+/**
+ * $Header: /repository/pear/Log/Log/mail.php,v 1.16 2003/11/08 22:39:55 jon Exp $
+ *
+ * @version $Revision: 1.16 $
+ * @package Log
+ */
 
 /**
  * The Log_mail class is a concrete implementation of the Log:: abstract class
@@ -15,7 +20,7 @@
  * 
  * @author  Ronnie Garcia <ronnie@mk2.net>
  * @author  Jon Parise <jon@php.net>
- * @version $Revision: 1.14 $
+ * @since   Log 1.3
  * @package Log
  */
 class Log_mail extends Log
@@ -23,30 +28,35 @@ class Log_mail extends Log
     /** 
      * String holding the recipient's email address.
      * @var string
+     * @access private
      */
     var $_recipient = '';
 
     /** 
      * String holding the sender's email address.
      * @var string
+     * @access private
      */
     var $_from = '';
 
     /** 
      * String holding the email's subject.
      * @var string
+     * @access private
      */
     var $_subject = '[Log_mail] Log message';
 
     /**
      * String holding an optional preamble for the log messages.
      * @var string
+     * @access private
      */
     var $_preamble = '';
 
     /**
      * String holding the mail message body.
      * @var string
+     * @access private
      */
     var $_message = '';
 
@@ -61,16 +71,16 @@ class Log_mail extends Log
      * @param string $name      The filename of the logfile.
      * @param string $ident     The identity string.
      * @param array  $conf      The configuration array.
-     * @param int    $maxLevel  Maximum level at which to log.
+     * @param int    $level     Log messages up to and including this level.
      * @access public
      */
     function Log_mail($name, $ident = '', $conf = array(),
-                      $maxLevel = PEAR_LOG_DEBUG)
+                      $level = PEAR_LOG_DEBUG)
     {
         $this->_id = md5(microtime());
         $this->_recipient = $name;
         $this->_ident = $ident;
-        $this->_mask = Log::UPTO($maxLevel);
+        $this->_mask = Log::UPTO($level);
 
         if (!empty($conf['from'])) {
             $this->_from = $conf['from'];

@@ -1,6 +1,11 @@
 <?php
-// $Id: mcal.php,v 1.13 2003/08/22 06:57:56 jon Exp $
-// $Horde: horde/lib/Log/mcal.php,v 1.2 2000/06/28 21:36:13 jon Exp $
+/**
+ * $Header: /repository/pear/Log/Log/mcal.php,v 1.15 2003/11/08 22:39:55 jon Exp $
+ * $Horde: horde/lib/Log/mcal.php,v 1.2 2000/06/28 21:36:13 jon Exp $
+ *
+ * @version $Revision: 1.15 $
+ * @package Log 
+ */
 
 /**
  * The Log_mcal class is a concrete implementation of the Log::
@@ -8,8 +13,8 @@
  * store accessed through MCAL.
  * 
  * @author  Chuck Hagenbuch <chuck@horde.org>
- * @version $Revision: 1.13 $
  * @since Horde 1.3
+ * @since Log 1.0
  * @package Log 
  */
 class Log_mcal extends Log {
@@ -17,36 +22,42 @@ class Log_mcal extends Log {
     /**
     * holding the calendar specification to connect to. 
     * @var string
+    * @access private
     */
     var $_calendar = '{localhost/mstore}';
 
     /** 
     * holding the username to use. 
     * @var string
+    * @access private
     */
     var $_username = '';
 
     /** 
     * holding the password to use. 
     * @var string
+    * @access private
     */
     var $_password = '';
 
     /** 
     * holding the options to pass to the calendar stream. 
     * @var integer
+    * @access private
     */
     var $_options = 0;
 
     /** 
     * ResourceID of the MCAL stream. 
     * @var string
+    * @access private
     */
     var $_stream = '';
 
     /** 
     * Integer holding the log facility to use. 
     * @var string
+    * @access private
     */
     var $_name = LOG_SYSLOG;
 
@@ -57,16 +68,16 @@ class Log_mcal extends Log {
      * @param string $name     The category to use for our events.
      * @param string $ident    The identity string.
      * @param array  $conf     The configuration array.
-     * @param int    $maxLevel Maximum level at which to log.
+     * @param int    $level    Log messages up to and including this level.
      * @access public
      */
     function Log_mcal($name, $ident = '', $conf = array(),
-                      $maxLevel = PEAR_LOG_DEBUG)
+                      $level = PEAR_LOG_DEBUG)
     {
         $this->_id = md5(microtime());
         $this->_name = $name;
         $this->_ident = $ident;
-        $this->_mask = Log::UPTO($maxLevel);
+        $this->_mask = Log::UPTO($level);
         $this->_calendar = $conf['calendar'];
         $this->_username = $conf['username'];
         $this->_password = $conf['password'];
