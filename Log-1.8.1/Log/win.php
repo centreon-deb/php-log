@@ -1,8 +1,8 @@
 <?php
 /**
- * $Header: /repository/pear/Log/Log/win.php,v 1.11 2003/11/08 22:39:55 jon Exp $
+ * $Header: /repository/pear/Log/Log/win.php,v 1.12 2003/11/23 20:55:14 jon Exp $
  *
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  * @package Log
  */
 
@@ -224,7 +224,8 @@ win.document.writeln('<th>Priority</th><th width="100%">Message</th></tr>');
         }
         $line .= '<td>' . ucfirst($this->priorityToString($priority)) . '</td>';
         $line .= sprintf('<td style="color: %s">%s</td>',
-                         $this->_colors[$priority], nl2br($message));
+                         $this->_colors[$priority],
+                         preg_replace('/\r\n|\n|\r/', '<br />', $message));
         $line .= '</tr>';
 
         $this->_writeln($line);

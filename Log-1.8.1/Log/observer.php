@@ -1,9 +1,9 @@
 <?php
 /**
- * $Header: /repository/pear/Log/Log/observer.php,v 1.8 2003/11/08 22:39:55 jon Exp $
+ * $Header: /repository/pear/Log/Log/observer.php,v 1.10 2003/12/15 04:21:13 jon Exp $
  * $Horde: horde/lib/Log/observer.php,v 1.5 2000/06/28 21:36:13 jon Exp $
  *
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.10 $
  * @package Log
  */
 
@@ -59,15 +59,32 @@ class Log_observer
      *                              to return.
      * @param integer   $priority   The highest priority at which to receive
      *                              log event notifications.
+     * @param array     $conf       Optional associative array of additional
+     *                              configuration values.
      *
      * @return object               The newly created concrete Log_observer
      *                              instance, or an false on an error.
      */
-    function factory($type, $priority = PEAR_LOG_INFO)
+    function &factory($type, $priority = PEAR_LOG_INFO, $conf = array())
     {
         $type = strtolower($type);
         $class = 'Log_observer_' . $type;
-        $classfile = 'Log/' . $type . '.php';
+
+        /* Support both the new-style and old-style file naming conventions. */
+        if (file_exists(dirname(__FILE__) . '/observer_' . $type . '.php')) {
+            $classfile = 'Log/observer_' . $type . '.php';
+            $newstyle = true;
+        } else {
+            $classfile = 'Log/' . $type . '.php';
+            $newstyle = false;
+        }
+
+        /* Issue a warning if the old-style conventions are being used. */
+        if (!$newstyle)
+        {
+            trigger_error('Using old-style Log_observer conventions',
+                          E_USER_WARNING);
+        }
 
         /*
          * Attempt to include our version of the named class, but don't treat
@@ -78,7 +95,13 @@ class Log_observer
 
         /* If the class exists, return a new instance of it. */
         if (class_exists($class)) {
-            return new $class($priority);
+            /* Support both new-style and old-style construction. */
+            if ($newstyle) {
+                $object =& new $class($priority, $conf);
+            } else {
+                $object =& new $class($priority);
+            }
+            return $object;
         }
 
         return false;
