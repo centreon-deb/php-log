@@ -12,11 +12,13 @@
     </maintainer>
   </maintainers>
   <release>
-    <version>1.6.6</version>
-    <date>2003-06-05</date>
+    <version>1.6.7</version>
+    <date>2003-06-16</date>
     <license>PHP 2.02</license>
     <state>stable</state>
-    <notes>In the file handler, store the ident string in the _logLines cache.  It's now possible to change the ident string using Log::setIdent() in the middle of a set of log entries.</notes>
+    <notes>It is now possible to set the identification string for all of a composite's child instances.
+
+The preamble of the mail handler's message is now configurable.</notes>
     <deps>
       <dep type="pkg" rel="has">DB</dep>
     </deps>
@@ -35,6 +37,7 @@
     <provides type="function" name="Log_composite::close" />
     <provides type="function" name="Log_composite::log" />
     <provides type="function" name="Log_composite::isComposite" />
+    <provides type="function" name="Log_composite::setIdent" />
     <provides type="function" name="Log_composite::addChild" />
     <provides type="function" name="Log_composite::removeChild" />
     <provides type="class" name="Log_console" />
@@ -63,11 +66,11 @@
     <provides type="function" name="Log_syslog::close" />
     <provides type="function" name="Log_syslog::log" />
     <filelist>
-      <file role="php" md5sum="796677008c9b0e6625f5287724df714a" name="Log.php"/>
-      <file role="php" md5sum="538e3ea7297953113d6d29aa5a75e322" name="Log/composite.php"/>
+      <file role="php" md5sum="d8278b2ac0c01e63e283784d6b07c397" name="Log.php"/>
+      <file role="php" md5sum="e68a625087c133492bd2ae1b3308d758" name="Log/composite.php"/>
       <file role="php" md5sum="4d2a2a6cfe09cc69193f1caee453e5b6" name="Log/console.php"/>
       <file role="php" md5sum="31d2daa1af7557d082f6daca986b794a" name="Log/file.php"/>
-      <file role="php" md5sum="7ca0262b50fba82ca4f552a2d13a3fd9" name="Log/mail.php"/>
+      <file role="php" md5sum="a165e6ba47d6e16098915010f90df5ee" name="Log/mail.php"/>
       <file role="php" md5sum="234952b786b9d31247aece9631b0a98b" name="Log/mcal.php"/>
       <file role="php" md5sum="a7f246042b3d1e8201a07439438454e0" name="Log/observer.php"/>
       <file role="php" md5sum="13feb0516630f612b5beed762133d0d0" name="Log/sql.php"/>

@@ -1,5 +1,5 @@
 <?php
-// $Id: composite.php,v 1.15 2003/04/08 16:17:16 jon Exp $
+// $Id: composite.php,v 1.16 2003/06/16 05:47:26 jon Exp $
 // $Horde: horde/lib/Log/composite.php,v 1.2 2000/06/28 21:36:13 jon Exp $
 
 /**
@@ -8,7 +8,7 @@
  *
  * @author  Chuck Hagenbuch <chuck@horde.org>
  * @author  Jon Parise <jon@php.net>
- * @version $Revision: 1.15 $
+ * @version $Revision: 1.16 $
  * @since Horde 1.3
  * @package Log
  */
@@ -104,6 +104,20 @@ class Log_composite extends Log
     function isComposite()
     {
         return true;
+    }
+
+    /**
+     * Sets this identification string for all of this composite's children.
+     *
+     * @param string    $ident      The new identification string.
+     *
+     * @access public
+     */
+    function setIdent($ident)
+    {
+        foreach ($this->_children as $id => $child) {
+            $this->_children[$id]->setIdent($ident);
+        }
     }
 
     /**

@@ -1,5 +1,5 @@
 <?php
-// $Id: mail.php,v 1.8 2003/04/27 01:46:40 jon Exp $
+// $Id: mail.php,v 1.10 2003/06/16 06:25:04 jon Exp $
 
 /**
  * The Log_mail class is a concrete implementation of the Log:: abstract class
@@ -15,7 +15,7 @@
  * 
  * @author  Ronnie Garcia <ronnie@mk2.net>
  * @author  Jon Parise <jon@php.net>
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.10 $
  * @package Log
  */
 class Log_mail extends Log {
@@ -37,6 +37,12 @@ class Log_mail extends Log {
      * @var string
      */
     var $_subject = '[Log_mail] Log message';
+
+    /**
+     * String holding an optional preamble for the log messages.
+     * @var string
+     */
+    var $_preamble = '';
 
     /**
      * String holding the mail message body.
@@ -75,6 +81,10 @@ class Log_mail extends Log {
         if (!empty($conf['subject'])) {
             $this->_subject = $conf['subject'];
         }
+
+        if (!empty($conf['preamble'])) {
+            $this->_preamble = $conf['preamble'];
+        }
         
         /* register the destructor */
         register_shutdown_function(array(&$this, '_Log_mail'));
@@ -99,7 +109,9 @@ class Log_mail extends Log {
     function open()
     {
         if (!$this->_opened) {
-            $this->_message = "Log messages:\n\n";
+            if (!empty($this->_preamble)) {
+                $this->_message = $this->_preamble . "\r\n\r\n";
+            }
             $this->_opened = true;
         }
     }
@@ -153,7 +165,7 @@ class Log_mail extends Log {
             $this->open();
         }
 
-        $entry = sprintf("%s %s [%s] %s\n", strftime('%b %d %H:%M:%S'),
+        $entry = sprintf("%s %s [%s] %s\r\n", strftime('%b %d %H:%M:%S'),
             $this->_ident, Log::priorityToString($priority), $message);
 
         $this->_message .= $entry;
