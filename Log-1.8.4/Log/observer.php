@@ -1,9 +1,9 @@
 <?php
 /**
- * $Header: /repository/pear/Log/Log/observer.php,v 1.11 2004/01/02 02:03:40 jon Exp $
+ * $Header: /repository/pear/Log/Log/observer.php,v 1.12 2004/01/11 20:49:49 jon Exp $
  * $Horde: horde/lib/Log/observer.php,v 1.5 2000/06/28 21:36:13 jon Exp $
  *
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  * @package Log
  */
 
@@ -99,11 +99,10 @@ class Log_observer
         if (class_exists($class)) {
             /* Support both new-style and old-style construction. */
             if ($newstyle) {
-                $object =& new $class($priority, $conf);
+                return new $class($priority, $conf);
             } else {
-                $object =& new $class($priority);
+                return new $class($priority);
             }
-            return $object;
         }
 
         return false;

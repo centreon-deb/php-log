@@ -1,9 +1,9 @@
 <?php
 /**
- * $Header: /repository/pear/Log/Log.php,v 1.42 2004/01/02 01:45:30 jon Exp $
+ * $Header: /repository/pear/Log/Log.php,v 1.45 2004/01/19 08:02:38 jon Exp $
  * $Horde: horde/lib/Log.php,v 1.15 2000/06/29 23:39:45 jon Exp $
  *
- * @version $Revision: 1.42 $
+ * @version $Revision: 1.45 $
  * @package Log
  */
 
@@ -59,6 +59,14 @@ class Log
      * @access private
      */
     var $_ident = '';
+
+    /**
+     * The default priority to use when logging an event.
+     *
+     * @var integer
+     * @access private
+     */
+    var $_priority = PEAR_LOG_INFO;
 
     /**
      * The bitmask of allowed log levels.
@@ -117,8 +125,7 @@ class Log
 
         /* If the class exists, return a new instance of it. */
         if (class_exists($class)) {
-            $object =& new $class($name, $ident, $conf, $level);
-            return $object;
+            return new $class($name, $ident, $conf, $level);
         }
 
         return false;
@@ -206,7 +213,7 @@ class Log
      * Abstract implementation of the log() method.
      * @since Log 1.0
      */
-    function log($message, $priority = PEAR_LOG_INFO)
+    function log($message, $priority = null)
     {
         return false;
     }
@@ -369,7 +376,9 @@ class Log
         /*
          * If we've been given an object, attempt to extract the message using
          * a known method.  If we can't find such a method, default to the
-         * serialized version of the object.
+         * "human-readable" version of the object.
+         *
+         * We also use the human-readable format for arrays.
          */
         if (is_object($message)) {
             if (method_exists($message, 'getmessage')) {
@@ -379,8 +388,10 @@ class Log
             } else if (method_exists($message, '__tostring')) {
                 $message = (string)$message;
             } else {
-                $message = serialize($message);
+                $message = print_r($message, true);
             }
+        } else if (is_array($message)) {
+            $message = print_r($message, true);
         }
 
         /* Otherwise, we assume the message is a string. */
@@ -486,6 +497,32 @@ class Log
     function _isMasked($priority)
     {
         return (Log::MASK($priority) & $this->_mask);
+    }
+
+    /**
+     * Returns the current default priority.
+     *
+     * @return integer  The current default priority.
+     *
+     * @access  public
+     * @since   Log 1.8.4
+     */
+    function getPriority()
+    {
+        return $this->_priority;
+    }
+
+    /**
+     * Sets the default priority to the specified value.
+     *
+     * @param   integer $priority   The new default priority.
+     *
+     * @access  public
+     * @since   Log 1.8.4
+     */
+    function setPriority($priority)
+    {
+        $this->_priority = $priority;
     }
 
     /**

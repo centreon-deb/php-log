@@ -1,9 +1,9 @@
 <?php
 /**
- * $Header: /repository/pear/Log/Log/composite.php,v 1.21 2004/01/02 02:03:40 jon Exp $
+ * $Header: /repository/pear/Log/Log/composite.php,v 1.22 2004/01/19 08:02:40 jon Exp $
  * $Horde: horde/lib/Log/composite.php,v 1.2 2000/06/28 21:36:13 jon Exp $
  *
- * @version $Revision: 1.21 $
+ * @version $Revision: 1.22 $
  * @package Log
  */
 
@@ -101,14 +101,18 @@ class Log_composite extends Log
      *                              PEAR_LOG_ERR, PEAR_LOG_WARNING,
      *                              PEAR_LOG_NOTICE, PEAR_LOG_INFO, and
      *                              PEAR_LOG_DEBUG.
-     *                              The default is PEAR_LOG_INFO.
      *
      * @return boolean  True if the entry is successfully logged.
      *
      * @access public
      */
-    function log($message, $priority = PEAR_LOG_INFO)
+    function log($message, $priority = null)
     {
+        /* If a priority hasn't been specified, use the default value. */
+        if ($priority === null) {
+            $priority = $this->_priority;
+        }
+
         foreach ($this->_children as $id => $child) {
             $this->_children[$id]->log($message, $priority);
         }

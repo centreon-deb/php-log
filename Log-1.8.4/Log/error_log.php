@@ -1,8 +1,8 @@
 <?php
 /**
- * $Header: /repository/pear/Log/Log/error_log.php,v 1.5 2004/01/02 02:03:40 jon Exp $
+ * $Header: /repository/pear/Log/Log/error_log.php,v 1.6 2004/01/19 08:02:40 jon Exp $
  *
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * @package Log
  */
 
@@ -74,12 +74,16 @@ class Log_error_log extends Log
      *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT,
      *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
      *                  PEAR_LOG_NOTICE, PEAR_LOG_INFO, and PEAR_LOG_DEBUG.
-     *                  The default is PEAR_LOG_INFO.
      * @return boolean  True on success or false on failure.
      * @access public
      */
-    function log($message, $priority = PEAR_LOG_INFO)
+    function log($message, $priority = null)
     {
+        /* If a priority hasn't been specified, use the default value. */
+        if ($priority === null) {
+            $priority = $this->_priority;
+        }
+
         /* Abort early if the priority is above the maximum logging level. */
         if (!$this->_isMasked($priority)) {
             return false;

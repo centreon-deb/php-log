@@ -8,8 +8,8 @@
 
 :Author:        Jon Parise
 :Contact:       jon@php.net
-:Date:          $Date: 2004/01/08 06:43:35 $
-:Revision:      $Revision: 1.7 $
+:Date:          $Date: 2004/01/31 21:48:16 $
+:Revision:      $Revision: 1.10 $
 
 .. contents:: Contents
 .. section-numbering::
@@ -26,7 +26,7 @@ A wide variety of handlers are distributed with the Log package, and, should
 none of them fit your application's needs, it's easy to `write your own`__.
 
 .. _Log class: http://cvs.php.net/co.php/pear/Log/Log.php
-__ `Writing Custom Handlers`_
+__ `Custom Handlers`_
 
 Creating a Log Object
 ---------------------
@@ -166,7 +166,7 @@ logged.
 "Shortcut" methods are also available for logging an event at a specific log
 level.  See the `Log Levels`_ table for the complete list.
 
-.. _serialized: http://www.php.net/manual/en/function.serialize.php
+.. _serialized: http://www.php.net/serialize
 
 
 Log Levels
@@ -294,7 +294,7 @@ Configuration
 +-------------------+-----------+---------------+---------------------------+
 
 .. _STDOUT: http://www.php.net/wrappers.php
-.. _strftime: http://www.php.net/manual/en/function.strftime.php
+.. _strftime: http://www.php.net/strftime
 
 Example
 ~~~~~~~
@@ -326,7 +326,7 @@ Configuration
 |                   |           |               | output.                   |
 +-------------------+-----------+---------------+---------------------------+
 
-.. _error handling values: http://www.php.net/manual/en/ref.errorfunc.php
+.. _error handling values: http://www.php.net/errorfunc
 
 Example
 ~~~~~~~
@@ -389,10 +389,10 @@ parameter.
 |                           | by the ``destination`` value.                 |
 +---------------------------+-----------------------------------------------+
 
-.. _error_log(): http://www.php.net/manual/en/function.error-log.php
-.. _mail(): http://www.php.net/manual/en/function.mail.php
-.. _error_log configuration directive: http://www.php.net/manual/en/ref.errorfunc.php#ini.error-log
-.. _remote debugging: http://www.php.net/manual/en/install.configure.php#install.configure.enable-debugger
+.. _error_log(): http://www.php.net/error_log
+.. _mail(): http://www.php.net/mail
+.. _error_log configuration directive: http://www.php.net/errorfunc#ini.error-log
+.. _remote debugging: http://www.php.net/install.configure#install.configure.enable-debugger
 
 Example
 ~~~~~~~
@@ -434,7 +434,7 @@ Configuration
 |                   |           | %H:%M:%S``    | (for strftime_).          |
 +-------------------+-----------+---------------+---------------------------+
 
-.. _strftime: http://www.php.net/manual/en/function.strftime.php
+.. _strftime: http://www.php.net/strftime
 
 Example
 ~~~~~~~
@@ -457,8 +457,8 @@ Configuration
 +-------------------+-----------+---------------+---------------------------+
 | Parameter         | Type      | Default       | Description               |
 +===================+===========+===============+===========================+
-| ``from``          | String    | '' `(empty)`  | Value for the message's   |
-|                   |           |               | ``From:`` header.         |
+| ``from``          | String    | sendmail_from | Value for the message's   |
+|                   |           | INI value     | ``From:`` header.         |
 +-------------------+-----------+---------------+---------------------------+
 | ``subject``       | String    | ``[Log_mail]  | Value for the message's   |
 |                   |           | Log message`` | ``Subject:`` header.      |
@@ -466,7 +466,7 @@ Configuration
 | ``preamble``      | String    | `` `(empty)`  | Preamble for the message. |
 +-------------------+-----------+---------------+---------------------------+
 
-.. _mail(): http://www.php.net/manual/en/function.mail.php
+.. _mail(): http://www.php.net/mail
 
 Example
 ~~~~~~~
@@ -507,6 +507,7 @@ Configuration
 | Parameter         | Type      | Default       | Description               |
 +===================+===========+===============+===========================+
 | ``dsn``           | String    | '' `(empty)`  | A `Data Source Name`_.    |
+|                   |           |               | |required|                |
 +-------------------+-----------+---------------+---------------------------+
 | ``db``            | Object    | NULL          | An existing `DB`_ object. |
 |                   |           |               | If specified, this object |
@@ -578,7 +579,7 @@ Configuration
 | Parameter         | Type      | Default       | Description               |
 +===================+===========+===============+===========================+
 | ``filename``      | String    | '' `(empty)`  | Path to an Sqlite         |
-|                   |           |               | database.                 |
+|                   |           |               | database. |required|      |
 +-------------------+-----------+---------------+---------------------------+
 | ``mode``          | Integer   | 0666          | Octal mode used to open   |
 |                   |           |               | the database.             |
@@ -648,7 +649,7 @@ Facilities
 | ``LOG_UUCP``      | UUCP subsystem                                        |
 +-------------------+-------------------------------------------------------+
 
-.. _syslog(): http://www.php.net/manual/en/function.syslog.php
+.. _syslog(): http://www.php.net/syslog
 
 Example
 ~~~~~~~
@@ -792,7 +793,7 @@ time.
     set_error_handler('errorHandler');
     trigger_error('This is an information log message.', E_USER_NOTICE);
 
-.. _set_error_handler(): http://www.php.net/manual/en/function.set-error-handler.php
+.. _set_error_handler(): http://www.php.net/set_error_handler
 
 Logging PEAR Errors
 -------------------
@@ -823,8 +824,46 @@ uses a global Log instance.  Here's an example::
 .. _PEAR::setErrorHandling(): http://pear.php.net/manual/en/core.pear.pear.seterrorhandling.php
 
 
-Writing Custom Handlers
-=======================
+Custom Handlers
+===============
+There are times when the standard handlers aren't a perfect match for your
+needs.  In those situations, the solution might be to write a custom handler.
+
+Using a Custom Handler
+----------------------
+Using a custom Log handler is very simple.  Once written (see `Writing New
+Handlers`_ and `Extending Existing Handlers`_ below), you have the choice of
+placing the file in your PEAR installation's main ``Log/`` directory (usually
+something like ``/usr/local/lib/php/Log`` or ``C:\php\pear\Log``), where it
+can be found and use by any PHP application on the system, or placing the file
+somewhere in your application's local hierarchy and including it before the
+the custom Log object is constructed.
+
+Method 1: Handler in the Standard Location
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+After copying the handler file to your PEAR installation's ``Log/`` directory,
+simply treat the handler as if it were part of the standard distributed.  If
+your handler is named ``custom`` (and therefore implemented by a class named
+``Log_custom``)::
+
+    require_once 'Log.php';
+
+    $logger = &Log::factory('custom', '', 'CUSTOM');
+
+
+Method 2: Handler in a Custom Location
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+If you prefer storing your handler in your application's local hierarchy,
+you'll need to include that file before you can create a Log instance based on
+it.
+
+::
+
+    require_once 'Log.php';
+    require_once 'LocalHandlers/custom.php';
+
+    $logger = &Log::factory('custom', '', 'CUSTOM');
+
 
 Writing New Handlers
 --------------------
@@ -837,4 +876,6 @@ Extending Existing Handlers
 TODO
 
 
-.. vim: tabstop=4 shiftwidth=4 softtabstop=4 expandtab textwidth=78:
+.. |required| replace:: **[required]**
+
+.. vim: tabstop=4 shiftwidth=4 softtabstop=4 expandtab textwidth=78 ft=rst:

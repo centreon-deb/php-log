@@ -1,9 +1,9 @@
 <?php
 /**
- * $Header: /repository/pear/Log/Log/sql.php,v 1.28 2004/01/06 05:13:13 jon Exp $
+ * $Header: /repository/pear/Log/Log/sql.php,v 1.29 2004/01/19 08:02:40 jon Exp $
  * $Horde: horde/lib/Log/sql.php,v 1.12 2000/08/16 20:27:34 chuck Exp $
  *
- * @version $Revision: 1.28 $
+ * @version $Revision: 1.29 $
  * @package Log
  */
 
@@ -139,12 +139,16 @@ class Log_sql extends Log {
      *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT,
      *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
      *                  PEAR_LOG_NOTICE, PEAR_LOG_INFO, and PEAR_LOG_DEBUG.
-     *                  The default is PEAR_LOG_INFO.
      * @return boolean  True on success or false on failure.
      * @access public     
      */
-    function log($message, $priority = PEAR_LOG_INFO)
+    function log($message, $priority = null)
     {
+        /* If a priority hasn't been specified, use the default value. */
+        if ($priority === null) {
+            $priority = $this->_priority;
+        }
+
         /* Abort early if the priority is above the maximum logging level. */
         if (!$this->_isMasked($priority)) {
             return false;
