@@ -1,5 +1,7 @@
 --TEST--
-Log: _extractMessage()
+Log: _extractMessage() [Zend Engine 2]
+--SKIPIF--
+<?php if (version_compare(zend_version(), "2.0.0", "<")) die('skip'); ?>
 --FILE--
 <?php
 
@@ -42,7 +44,7 @@ ident [info] BareObject Object
 
 ident [info] getMessage
 ident [info] toString
-ident [info] __toString
+ident [info] Object id #2
 ident [info] PEAR_Error object
 ident [info] Array
 (

@@ -13,15 +13,15 @@
     </maintainer>
   </maintainers>
   <release>
-    <version>1.8.4</version>
-    <date>2004-02-16</date>
+    <version>1.8.5</version>
+    <date>2004-08-09</date>
     <license>PHP License</license>
     <state>stable</state>
-    <notes>The Log package now requires PHP 4.3.0 or later.
+    <notes>The 'sql' handler now enforces a maximum 'ident' length of 16 characters.
 
-If an object or array is passed as a log event, its human-readable representation will be used.
+The 'sql' handler can now use a user-defined sequence.
 
-It's now possible to specify the default priority for events logged using the log() method.</notes>
+The 'composite' handler now properly closes all of its children. (Bug 1947)</notes>
     <deps>
       <dep type="pkg" rel="has" optional="yes">DB</dep>
       <dep type="ext" rel="has" optional="yes">sqlite</dep>
@@ -56,20 +56,35 @@ It's now possible to specify the default priority for events logged using the lo
       <file role="php" baseinstalldir="/" name="Log/sqlite.php"/>
       <file role="php" baseinstalldir="/" name="Log/syslog.php"/>
       <file role="php" baseinstalldir="/" name="Log/win.php"/>
+      <file role="data" baseinstalldir="/" name="misc/log.sql"/>
       <file role="test" baseinstalldir="/" name="tests/composite.phpt"/>
       <file role="test" baseinstalldir="/" name="tests/console.phpt"/>
       <file role="test" baseinstalldir="/" name="tests/display.phpt"/>
       <file role="test" baseinstalldir="/" name="tests/error_log.phpt"/>
       <file role="test" baseinstalldir="/" name="tests/extract.phpt"/>
+      <file role="test" baseinstalldir="/" name="tests/extract2.phpt"/>
       <file role="test" baseinstalldir="/" name="tests/factory.phpt"/>
       <file role="test" baseinstalldir="/" name="tests/null.phpt"/>
       <file role="test" baseinstalldir="/" name="tests/priority.phpt"/>
       <file role="test" baseinstalldir="/" name="tests/singleton.phpt"/>
       <file role="test" baseinstalldir="/" name="tests/sqlite.phpt"/>
+      <file role="test" baseinstalldir="/" name="tests/sql_ident.phpt"/>
       <file role="php" baseinstalldir="/" name="Log.php"/>
     </filelist>
   </release>
   <changelog>
+    <release>
+      <version>1.8.5</version>
+      <date>2004-08-09</date>
+      <license>PHP License</license>
+      <state>stable</state>
+      <notes>The 'sql' handler now enforces a maximum 'ident' length of 16 characters.
+
+The 'sql' handler can now use a user-defined sequence (via the 'sequence' configuration parameter).  This allows each log table to use its own sequence.  You will need to take appropriate steps to preserve your sequence numbering if that is important to your site; the ID sequence will be reinitialized to 0 the first time this updated handler is used.  You may also need to explicitly drop the 'log_id_seq' sequence before using this new code.
+
+The 'composite' handler now properly closes all of its children when its close() method is called.  It also guards against multiple calls to open(). (Bug 1947)
+</notes>
+    </release>
     <release>
       <version>1.8.4</version>
       <date>2004-02-16</date>
