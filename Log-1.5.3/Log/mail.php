@@ -1,5 +1,5 @@
 <?php
-// $Id: mail.php,v 1.4 2002/11/10 03:47:03 jon Exp $
+// $Id: mail.php,v 1.5 2002/12/02 05:23:00 jon Exp $
 
 /**
  * The Log_mail class is a concrete implementation of the Log:: abstract class
@@ -15,7 +15,7 @@
  * 
  * @author  Ronnie Garcia <ronnie@mk2.net>
  * @author  Jon Parise <jon@php.net>
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * @package Log
  */
 class Log_mail extends Log {
@@ -138,12 +138,15 @@ class Log_mail extends Log {
      *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
      *                  PEAR_LOG_NOTICE, PEAR_LOG_INFO, and PEAR_LOG_DEBUG.
      *                  The default is PEAR_LOG_INFO.
+     * @return boolean  True on success or false on failure.
      * @access public
      */
     function log($message, $priority = PEAR_LOG_INFO)
     {
         /* Abort early if the priority is above the maximum logging level. */
-        if ($priority > $this->_maxLevel) return;
+        if ($priority > $this->_maxLevel) {
+            return false;
+        }
 
         if (!$this->_opened) {
             $this->open();
@@ -155,6 +158,8 @@ class Log_mail extends Log {
         $this->_message .= $entry;
 
         $this->notifyAll(array('priority' => $priority, 'message' => $message));
+
+        return true;
     }
 }
 

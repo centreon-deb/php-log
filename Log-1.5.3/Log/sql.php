@@ -1,5 +1,5 @@
 <?php
-// $Id: sql.php,v 1.11 2002/10/22 00:13:47 jon Exp $
+// $Id: sql.php,v 1.14 2002/12/02 05:23:00 jon Exp $
 // $Horde: horde/lib/Log/sql.php,v 1.12 2000/08/16 20:27:34 chuck Exp $
 
 require_once 'DB.php';
@@ -20,7 +20,7 @@ require_once 'DB.php';
  * );
  *
  * @author  Jon Parise <jon@php.net>
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.14 $
  * @since   Horde 1.3
  * @package Log 
  */
@@ -37,6 +37,12 @@ class Log_sql extends Log {
     * @var string
     */
     var $_db = '';
+
+    /**
+    * Flag indicating that we're using an existing database connection.
+    * @var boolean
+    */
+    var $_existingConnection = false;
 
     /** 
     * String holding the database table to use. 
@@ -64,6 +70,7 @@ class Log_sql extends Log {
         /* If an existing database connection was provided, use it. */
         if (isset($conf['db'])) {
             $this->_db = &$conf['db'];
+            $this->_existingConnection = true;
             $this->_opened = true;
         } else {
             $this->_dsn = $conf['dsn'];
@@ -91,14 +98,16 @@ class Log_sql extends Log {
     }
 
     /**
-     * Closes the connection to the database, if it is open.
+     * Closes the connection to the database if it is still open and we were
+     * the ones that opened it.  It is the caller's responsible to close an
+     * existing connection that was passed to us via $conf['db'].
      *
      * @return boolean   True on success, false on failure.
      * @access public     
      */
     function close()
     {
-        if ($this->_opened) {
+        if ($this->_opened && !$this->_existingConnection) {
             $this->_opened = false;
             return $this->_db->disconnect();
         }
@@ -117,6 +126,7 @@ class Log_sql extends Log {
      *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
      *                  PEAR_LOG_NOTICE, PEAR_LOG_INFO, and PEAR_LOG_DEBUG.
      *                  The default is PEAR_LOG_INFO.
+     * @return boolean  True on success or false on failure.
      * @access public     
      */
     function log($message, $priority = PEAR_LOG_INFO)
@@ -133,9 +143,14 @@ class Log_sql extends Log {
             $this->_table, $this->_db->quote($this->_ident),
             $priority, $this->_db->quote($message));
 
-        $this->_db->query($q);
+        $result = $this->_db->query($q);
+        if (DB::isError($result)) {
+            return false;
+        }
 
         $this->notifyAll(array('priority' => $priority, 'message' => $message));
+
+        return true;
     }
 }
 

@@ -1,5 +1,5 @@
 <?php
-// $Id: mcal.php,v 1.7 2002/10/22 00:13:47 jon Exp $
+// $Id: mcal.php,v 1.8 2002/12/02 05:23:00 jon Exp $
 // $Horde: horde/lib/Log/mcal.php,v 1.2 2000/06/28 21:36:13 jon Exp $
 
 /**
@@ -8,7 +8,7 @@
  * store accessed through MCAL.
  * 
  * @author  Chuck Hagenbuch <chuck@horde.org>
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  * @since Horde 1.3
  * @package Log 
  */
@@ -110,12 +110,15 @@ class Log_mcal extends Log {
      *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
      *                  PEAR_LOG_NOTICE, PEAR_LOG_INFO, and PEAR_LOG_DEBUG.
      *                  The default is PEAR_LOG_INFO.
+     * @return boolean  True on success or false on failure.
      * @access public
      */
     function log($message, $priority = PEAR_LOG_INFO)
     {
         /* Abort early if the priority is above the maximum logging level. */
-        if ($priority > $this->_maxLevel) return;
+        if ($priority > $this->_maxLevel) {
+            return false;
+        }
 
         if (!$this->_opened) {
             $this->open();
@@ -136,6 +139,8 @@ class Log_mcal extends Log {
         mcal_append_event($this->_stream);
 
         $this->notifyAll(array('priority' => $priority, 'message' => $message));
+
+        return true;
     }
 }
 

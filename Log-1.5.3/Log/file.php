@@ -33,7 +33,7 @@
 // |         Jon Parise <jon@php.net>                                      |
 // +-----------------------------------------------------------------------+
 //
-// $Id: file.php,v 1.12 2002/10/14 03:27:50 jon Exp $
+// $Id: file.php,v 1.14 2002/12/02 05:23:00 jon Exp $
 
 /**
 * The Log_file class is a concrete implementation of the Log::
@@ -41,7 +41,7 @@
 * on the previous Log_file class by Jon Parise.
 * 
 * @author  Richard Heyes <richard@php.net>
-* @version $Revision: 1.12 $
+* @version $Revision: 1.14 $
 * @package Log
 */
 class Log_file extends Log
@@ -97,7 +97,7 @@ class Log_file extends Log
     * @param  int    $maxLevel Maximum level at which to log.
     * @access public
     */
-    function Log_File($name, $ident = '', $conf = array(), $maxLevel = LOG_DEBUG)
+    function Log_File($name, $ident = '', $conf = array(), $maxLevel = PEAR_LOG_DEBUG)
     {
         /* If a file mode has been provided, use it. */
         if (!empty($conf['mode'])) {
@@ -148,6 +148,7 @@ class Log_file extends Log
     *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT, PEAR_LOG_CRIT,
     *                  PEAR_LOG_ERR, PEAR_LOG_WARNING, PEAR_LOG_NOTICE, PEAR_LOG_INFO, and
     *                  PEAR_LOG_DEBUG. The default is PEAR_LOG_INFO.
+    * @return boolean  True on success or false on failure.
     * @access public
     */
     function log($message, $priority = PEAR_LOG_INFO)
@@ -162,6 +163,8 @@ class Log_file extends Log
 
         // Notify observers
         $this->notifyAll(array('message' => $message, 'priority' => $priority));
+
+        return true;
     }
     
     /**
