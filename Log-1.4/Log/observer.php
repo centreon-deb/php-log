@@ -1,5 +1,5 @@
 <?php
-// $Id: observer.php,v 1.1 2002/03/08 00:08:21 jon Exp $
+// $Id: observer.php,v 1.2 2002/09/19 01:53:58 jon Exp $
 // $Horde: horde/lib/Log/observer.php,v 1.5 2000/06/28 21:36:13 jon Exp $
 
 /**
@@ -8,7 +8,7 @@
  * actions on exceptional events.
  *
  * @author  Chuck Hagenbuch <chuck@horde.org>
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  * @since   Horde 1.3
  * @package Log
  */
@@ -22,7 +22,7 @@ class Log_observer {
     * everything except LOG_DEBUG. 
     * @var string
     */
-    var $priority = LOG_INFO;
+    var $_priority = LOG_INFO;
 
 
     /**
@@ -33,14 +33,14 @@ class Log_observer {
      */
     function Log_observer($priority = LOG_INFO)
     {
-        $this->priority = $priority;
+        $this->_priority = $priority;
     }
 
     /**
      * Attempts to return a concrete Log_observer instance of the
      * specified type.
      * 
-     * @param string $observer_type    The type of concrate Log_observer subclass
+     * @param string $observer_type  The type of concrate Log_observer subclass
      *                          to return.  We will attempt to dynamically
      *                          include the code for this subclass.
      * @param string $priority priority level of message

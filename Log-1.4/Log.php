@@ -1,6 +1,8 @@
 <?php
-// $Id: Log.php,v 1.9 2002/07/24 06:00:35 jon Exp $
+// $Id: Log.php,v 1.13 2002/09/27 19:22:54 jon Exp $
 // $Horde: horde/lib/Log.php,v 1.15 2000/06/29 23:39:45 jon Exp $
+
+require_once 'PEAR.php';
 
 define('PEAR_LOG_EMERG',    0);                                                
 define('PEAR_LOG_ALERT',    1);                                                
@@ -16,12 +18,12 @@ define('PEAR_LOG_DEBUG',    7);
  * mechanisms and the Subject end of a Subject-Observer pattern.
  *
  * @author  Chuck Hagenbuch <chuck@horde.org>
- * @author  Jon Parise <jon@horde.org>
- * @version $Revision: 1.9 $
+ * @author  Jon Parise <jon@php.net>
+ * @version $Revision: 1.13 $
  * @since   Horde 1.3
  * @package Log
  */
-class Log {
+class Log extends PEAR {
 
     /**
      * Indicates whether or not the log can been opened / connected.
@@ -80,7 +82,7 @@ class Log {
      *                          false on an error.
      * @access public
      */
-    function factory($type, $name = '', $ident = '', $conf = array(),
+    function &factory($type, $name = '', $ident = '', $conf = array(),
                      $maxLevel = PEAR_LOG_DEBUG)
     {
         $type = strtolower($type);
@@ -136,11 +138,27 @@ class Log {
         
         $signature = md5($type . '][' . $name . '][' . $ident . '][' . implode('][', $conf) . '][' . $maxLevel);
         if (!isset($instances[$signature])) {
-            $instances[$signature] = Log::factory($type, $name, $ident, $conf,
+            $instances[$signature] = &Log::factory($type, $name, $ident, $conf,
                 $maxLevel);
         }
 
         return $instances[$signature];
+    }
+
+    /**
+     * Abstract implementation of the close() method.
+     */
+    function close()
+    {
+        return false;
+    }
+
+    /**
+     * Abstract implementation of the log() method.
+     */
+    function log($message, $priority = LOG_INFO)
+    {
+        return false;
     }
 
     /**

@@ -1,5 +1,5 @@
 <?php
-// $Id: syslog.php,v 1.5 2002/07/24 06:00:37 jon Exp $
+// $Id: syslog.php,v 1.7 2002/09/22 22:59:15 jon Exp $
 // $Horde: horde/lib/Log/syslog.php,v 1.6 2000/06/28 21:36:13 jon Exp $
 
 /**
@@ -8,7 +8,7 @@
  * (PHP emulates this with the Event Log on Windows machines).
  * 
  * @author  Chuck Hagenbuch <chuck@horde.org>
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.7 $
  * @since   Horde 1.3
  * @package Log 
  */
@@ -18,7 +18,7 @@ class Log_syslog extends Log {
     * Integer holding the log facility to use. 
     * @var string
     */
-    var $name = LOG_SYSLOG;
+    var $_name = LOG_SYSLOG;
 
     
     /**
@@ -33,11 +33,7 @@ class Log_syslog extends Log {
     function Log_syslog($name, $ident = '', $conf = array(),
                         $maxLevel = LOG_DEBUG)
     {    
-        // bc compatibilty
-        if( 0 == count( $conf )) {
-            $conf = false ;
-        }    
-        $this->name = $name;
+        $this->_name = $name;
         $this->_ident = $ident;
         $this->_maxLevel = $maxLevel;
     }
@@ -50,7 +46,7 @@ class Log_syslog extends Log {
     function open()
     {
         if (!$this->_opened) {
-            openlog($this->_ident, LOG_PID, $this->name);
+            openlog($this->_ident, LOG_PID, $this->_name);
             $this->_opened = true;
         }
     }

@@ -1,5 +1,5 @@
 <?php
-// $Id: sql.php,v 1.5 2002/07/15 10:52:16 cox Exp $
+// $Id: sql.php,v 1.10 2002/09/26 22:59:47 jon Exp $
 // $Horde: horde/lib/Log/sql.php,v 1.12 2000/08/16 20:27:34 chuck Exp $
 
 require_once 'DB.php';
@@ -12,15 +12,15 @@ require_once 'DB.php';
  * This implementation uses PHP's PEAR database abstraction layer.
  *
  * CREATE TABLE log_table (
- *  unixtime    int NOT NULL,
+ *  logtime     TIMESTAMP NOT NULL,
  *  ident       char(16) NOT NULL,
  *  priority    int,
  *  message     varchar(200),
- *  primary key (unixtime, ident)
+ *  primary key (logtime, ident)
  * );
  *
- * @author  Jon Parise <jon@horde.org>
- * @version $Revision: 1.5 $
+ * @author  Jon Parise <jon@php.net>
+ * @version $Revision: 1.10 $
  * @since   Horde 1.3
  * @package Log 
  */
@@ -30,19 +30,19 @@ class Log_sql extends Log {
     * Array containing the dsn information. 
     * @var string
     */
-    var $dsn = '';
+    var $_dsn = '';
 
     /** 
     * Object holding the database handle. 
     * @var string
     */
-    var $db = '';
+    var $_db = '';
 
     /** 
     * String holding the database table to use. 
     * @var string
     */
-    var $table = 'log_table';
+    var $_table = 'log_table';
 
 
     /**
@@ -56,10 +56,17 @@ class Log_sql extends Log {
      */
     function Log_sql($name, $ident = '', $conf = array(), $maxLevel = LOG_DEBUG)
     {
-        $this->table = $name;
+        $this->_table = $name;
         $this->_ident = $ident;
         $this->_maxLevel = $maxLevel;
-        $this->dsn = $conf['dsn'];
+
+        /* If an existing database connection was provided, use it. */
+        if (isset($conf['db'])) {
+            $this->_db = &$conf['db'];
+            $this->_opened = true;
+        } else {
+            $this->_dsn = $conf['dsn'];
+        }
     }
 
     /**
@@ -72,8 +79,8 @@ class Log_sql extends Log {
     function open()
     {
         if (!$this->_opened) {
-            $this->db = &DB::connect($this->dsn, true);
-            if (DB::isError($this->db)) {
+            $this->_db = &DB::connect($this->_dsn, true);
+            if (DB::isError($this->_db)) {
                 return false;
             }
             $this->_opened = true;
@@ -92,7 +99,7 @@ class Log_sql extends Log {
     {
         if ($this->_opened) {
             $this->_opened = false;
-            return $this->db->disconnect();
+            return $this->_db->disconnect();
         }
 
         return true;
@@ -119,10 +126,13 @@ class Log_sql extends Log {
             $this->open();
         }
 
-        $timestamp = time();
-        $q = "insert into $this->table
-              values($timestamp, '$this->_ident', $priority, '$message')";
-        $this->db->query($q);
+        /* Build the SQL query for this log entry insertion. */
+        $q = sprintf("insert into %s values(NOW(), %s, %d, %s)",
+            $this->_table, $this->_db->quote($this->_ident),
+            $priority, $this->_db->quote($message));
+
+        $this->_db->query($q);
+
         $this->notifyAll(array('priority' => $priority, 'message' => $message));
     }
 }
