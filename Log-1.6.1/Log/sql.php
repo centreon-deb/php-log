@@ -1,5 +1,5 @@
 <?php
-// $Id: sql.php,v 1.17 2003/02/17 21:17:24 jon Exp $
+// $Id: sql.php,v 1.19 2003/02/17 21:38:54 jon Exp $
 // $Horde: horde/lib/Log/sql.php,v 1.12 2000/08/16 20:27:34 chuck Exp $
 
 require_once 'DB.php';
@@ -21,7 +21,7 @@ require_once 'DB.php';
  * );
  *
  * @author  Jon Parise <jon@php.net>
- * @version $Revision: 1.17 $
+ * @version $Revision: 1.19 $
  * @since   Horde 1.3
  * @package Log 
  */
@@ -35,9 +35,9 @@ class Log_sql extends Log {
 
     /** 
      * Object holding the database handle. 
-     * @var string
+     * @var object
      */
-    var $_db = '';
+    var $_db = null;
 
     /**
      * Flag indicating that we're using an existing database connection.

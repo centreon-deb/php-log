@@ -1,5 +1,5 @@
 <?php
-// $Id: Log.php,v 1.16 2003/01/02 04:41:38 jon Exp $
+// $Id: Log.php,v 1.17 2003/04/01 08:13:29 jon Exp $
 // $Horde: horde/lib/Log.php,v 1.15 2000/06/29 23:39:45 jon Exp $
 
 require_once 'PEAR.php';
@@ -19,7 +19,7 @@ define('PEAR_LOG_DEBUG',    7);
  *
  * @author  Chuck Hagenbuch <chuck@horde.org>
  * @author  Jon Parise <jon@php.net>
- * @version $Revision: 1.16 $
+ * @version $Revision: 1.17 $
  * @since   Horde 1.3
  * @package Log
  */
@@ -231,7 +231,7 @@ class Log extends PEAR {
     {
         reset($this->_listeners);
         foreach ($this->_listeners as $listener) {
-            if ($msgObj['priority'] <= $listener->priority) {
+            if ($msgObj['priority'] <= $listener->_priority) {
                 $listener->notify($msgObj);
             }
         }
