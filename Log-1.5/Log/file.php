@@ -30,9 +30,10 @@
 // |                                                                       |
 // +-----------------------------------------------------------------------+
 // | Author: Richard Heyes <richard@phpguru.org>                           |
+// |         Jon Parise <jon@php.net>                                      |
 // +-----------------------------------------------------------------------+
 //
-// $Id: file.php,v 1.11 2002/09/27 19:24:30 jon Exp $
+// $Id: file.php,v 1.12 2002/10/14 03:27:50 jon Exp $
 
 /**
 * The Log_file class is a concrete implementation of the Log::
@@ -40,7 +41,7 @@
 * on the previous Log_file class by Jon Parise.
 * 
 * @author  Richard Heyes <richard@php.net>
-* @version $Revision: 1.11 $
+* @version $Revision: 1.12 $
 * @package Log
 */
 class Log_file extends Log
@@ -70,6 +71,12 @@ class Log_file extends Log
     var $_fp;
 
     /**
+    * Integer (in octal) containing the logfile's permissions mode.
+    * @var integer
+    */
+    var $_mode = 0644;
+
+    /**
     * Array holding the lines to log
     * @var array
     */
@@ -92,9 +99,16 @@ class Log_file extends Log
     */
     function Log_File($name, $ident = '', $conf = array(), $maxLevel = LOG_DEBUG)
     {
+        /* If a file mode has been provided, use it. */
+        if (!empty($conf['mode'])) {
+            $this->_mode = $conf['mode'];
+        }
+
         if (!file_exists($name)) {
             touch($name);
+            chmod($name, $this->_mode);
         }
+
         $this->_filename = realpath($name);
         $this->_ident    = $ident;
         $this->_maxLevel = $maxLevel;
@@ -188,7 +202,13 @@ class Log_file extends Log
     */
     function _openLogfile()
     {
-        return (bool)($this->_fp = @fopen($this->_filename, 'a'));
+        if (($this->_fp = @fopen($this->_filename, 'a')) == false) {
+            return false;
+        }
+
+        chmod($this->_filename, $this->_mode);
+
+        return true;
     }
     
     /**

@@ -1,5 +1,5 @@
 <?php
-// $Id: sql.php,v 1.10 2002/09/26 22:59:47 jon Exp $
+// $Id: sql.php,v 1.11 2002/10/22 00:13:47 jon Exp $
 // $Horde: horde/lib/Log/sql.php,v 1.12 2000/08/16 20:27:34 chuck Exp $
 
 require_once 'DB.php';
@@ -20,7 +20,7 @@ require_once 'DB.php';
  * );
  *
  * @author  Jon Parise <jon@php.net>
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  * @since   Horde 1.3
  * @package Log 
  */
@@ -54,7 +54,8 @@ class Log_sql extends Log {
      * @param int $maxLevel        Maximum level at which to log.
      * @access public     
      */
-    function Log_sql($name, $ident = '', $conf = array(), $maxLevel = LOG_DEBUG)
+    function Log_sql($name, $ident = '', $conf = array(),
+                     $maxLevel = PEAR_LOG_DEBUG)
     {
         $this->_table = $name;
         $this->_ident = $ident;
@@ -112,12 +113,13 @@ class Log_sql extends Log {
      *
      * @param string $message  The textual message to be logged.
      * @param string $priority The priority of the message.  Valid
-     *                  values are: LOG_EMERG, LOG_ALERT, LOG_CRIT,
-     *                  LOG_ERR, * LOG_WARNING, LOG_NOTICE, LOG_INFO,
-     *                  and LOG_DEBUG. The default is LOG_INFO.
+     *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT,
+     *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
+     *                  PEAR_LOG_NOTICE, PEAR_LOG_INFO, and PEAR_LOG_DEBUG.
+     *                  The default is PEAR_LOG_INFO.
      * @access public     
      */
-    function log($message, $priority = LOG_INFO)
+    function log($message, $priority = PEAR_LOG_INFO)
     {
         /* Abort early if the priority is above the maximum logging level. */
         if ($priority > $this->_maxLevel) return;
