@@ -1,5 +1,5 @@
 <?php
-// $Id: syslog.php,v 1.8 2002/10/22 00:13:47 jon Exp $
+// $Id: syslog.php,v 1.9 2002/10/25 23:03:13 jon Exp $
 // $Horde: horde/lib/Log/syslog.php,v 1.6 2000/06/28 21:36:13 jon Exp $
 
 /**
@@ -8,7 +8,7 @@
  * (PHP emulates this with the Event Log on Windows machines).
  * 
  * @author  Chuck Hagenbuch <chuck@horde.org>
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  * @since   Horde 1.3
  * @package Log 
  */
@@ -33,6 +33,11 @@ class Log_syslog extends Log {
     function Log_syslog($name, $ident = '', $conf = array(),
                         $maxLevel = PEAR_LOG_DEBUG)
     {    
+        /* Ensure we have a valid integer value for $name. */
+        if (empty($name) || !is_int($name)) {
+            $name = LOG_SYSLOG;
+        }
+
         $this->_name = $name;
         $this->_ident = $ident;
         $this->_maxLevel = $maxLevel;
