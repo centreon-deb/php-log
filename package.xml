@@ -14,12 +14,11 @@
   </maintainer>
   </maintainers>
  <release>
-  <version>1.9.1</version>
-  <date>2005-10-24</date>
+  <version>1.9.2</version>
+  <date>2005-10-25</date>
   <license>PHP License</license>
   <state>stable</state>
-  <notes>The SQL handler failed to prepare the SQL statement when an existing database connection was provided. (Bug 5702)
-The SQL handler now supports user-provided SQL insertion statements via the &apos;sql&apos; configuration parameter. (Request 5703)
+  <notes>Fixing a syntax error in the SQL handler that occured when a custom SQL statement was not provided. (Bug 5777)
   </notes>
   <deps>
    <dep type="pkg" rel="ge" version="1.3" optional="yes">DB</dep>
@@ -139,7 +138,7 @@ The SQL handler now supports user-provided SQL insertion statements via the &apo
    <file role="php" baseinstalldir="/" md5sum="ffa99f16288b6c5dba3e1fd11c7ef961" name="Log/mdb2.php"/>
    <file role="php" baseinstalldir="/" md5sum="7b713a15647ee6714704e280e62f6f47" name="Log/null.php"/>
    <file role="php" baseinstalldir="/" md5sum="d6f68d9c62915f091195cb36e9eeab58" name="Log/observer.php"/>
-   <file role="php" baseinstalldir="/" md5sum="9c6e25cb4dcbf2d044afd744b15cacd2" name="Log/sql.php"/>
+   <file role="php" baseinstalldir="/" md5sum="5c8b88c397e4a23614efb2f351eb0d17" name="Log/sql.php"/>
    <file role="php" baseinstalldir="/" md5sum="2c473a639e4afa28b07bdc8a7a9529bd" name="Log/sqlite.php"/>
    <file role="php" baseinstalldir="/" md5sum="4c0b2348621d7bda3aa2a15d2e5f0cd0" name="Log/syslog.php"/>
    <file role="php" baseinstalldir="/" md5sum="b75046a960b5a3bc28cfb057ecd4c4c1" name="Log/win.php"/>
@@ -161,6 +160,14 @@ The SQL handler now supports user-provided SQL insertion statements via the &apo
   </filelist>
  </release>
  <changelog>
+   <release>
+    <version>1.9.2</version>
+    <date>2005-10-25</date>
+    <license>PHP License</license>
+    <state>stable</state>
+    <notes>Fixing a syntax error in the SQL handler that occured when a custom SQL statement was not provided. (Bug 5777)
+    </notes>
+   </release>
    <release>
     <version>1.9.1</version>
     <date>2005-10-24</date>
