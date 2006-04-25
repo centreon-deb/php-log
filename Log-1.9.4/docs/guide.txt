@@ -8,8 +8,8 @@
 
 :Author:        Jon Parise
 :Contact:       jon@php.net
-:Date:          $Date: 2005/10/24 05:21:02 $
-:Revision:      $Revision: 1.23 $
+:Date:          $Date: 2006/04/21 05:25:09 $
+:Revision:      $Revision: 1.25 $
 
 .. contents:: Contents
 .. section-numbering::
@@ -208,10 +208,15 @@ mask, use the static ``Log::MASK()`` method::
 
     $mask = Log::MASK(PEAR_LOG_INFO);
 
-To compute the mask for all priorities up to a certain level, use the
-``Log::UPTO()`` method::
+To compute the mask for all priorities up to, and including, a certain level,
+use the ``Log::MAX()`` static method::
 
-    $mask = Log::UPTO(PEAR_LOG_INFO);
+    $mask = Log::MAX(PEAR_LOG_INFO);
+
+To compute the mask for all priorities greater than or equal to a certain
+level, use the ``Log::MIN()`` static method::
+
+    $mask = Log::MIN(PEAR_LOG_INFO);
 
 The apply the mask, use the ``setMask()`` method::
 
@@ -481,6 +486,12 @@ Configuration
 |                   |           | Log message`` | ``Subject:`` header.      |
 +-------------------+-----------+---------------+---------------------------+
 | ``preamble``      | String    | `` `(empty)`  | Preamble for the message. |
++-------------------+-----------+---------------+---------------------------+
+| ``lineFormat``    | String    | ``%1$s %2$s   | Log line format           |
+|                   |           | [%3$s] %4$s`` | specification.            |
++-------------------+-----------+---------------+---------------------------+
+| ``timeFormat``    | String    | ``%b %d       | Time stamp format         |
+|                   |           | %H:%M:%S``    | (for strftime_).          |
 +-------------------+-----------+---------------+---------------------------+
 
 .. _mail(): http://www.php.net/mail
