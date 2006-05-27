@@ -10,10 +10,10 @@
   <email>jon@php.net</email>
   <active>yes</active>
  </lead>
- <date>2006-04-30</date>
- <time>15:00:15</time>
+ <date>2006-05-27</date>
+ <time>17:40:24</time>
  <version>
-  <release>1.9.5</release>
+  <release>1.9.6</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -21,7 +21,8 @@
   <api>stable</api>
  </stability>
  <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
- <notes>Correcting the sqlite dependency.  It is now optional. (Bug 7523)</notes>
+ <notes>_getBacktraceVars() now works with composite handlers. (Bug 7602)
+Instances of strftime(&apos;%T&apos;) have been replaced with &apos;%H:%M:%S&apos;. (Bug 7629)</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <file baseinstalldir="/" md5sum="f0fe92c4693f85b5d23dd7fb787311cb" name="docs/examples/composite.php" role="doc" />
@@ -53,7 +54,7 @@
    <file baseinstalldir="/" md5sum="33ef94bdf5d88b5b90e2c547cd1a5cfd" name="Log/sql.php" role="php" />
    <file baseinstalldir="/" md5sum="2ca909721294df0f6f8a18caa61caa60" name="Log/sqlite.php" role="php" />
    <file baseinstalldir="/" md5sum="4c0b2348621d7bda3aa2a15d2e5f0cd0" name="Log/syslog.php" role="php" />
-   <file baseinstalldir="/" md5sum="d5f106340741287f8b13db7e176aa67f" name="Log/win.php" role="php" />
+   <file baseinstalldir="/" md5sum="95b9f47ed8be9312178d77a791319325" name="Log/win.php" role="php" />
    <file baseinstalldir="/" md5sum="31fe86b8baa2105d651272a00acf56ab" name="misc/log.sql" role="data" />
    <file baseinstalldir="/" md5sum="064448fdd799d3b3e966aefa3c191bda" name="tests/composite.phpt" role="test" />
    <file baseinstalldir="/" md5sum="e1f5e53b83ad63460f447d9b870e6ba6" name="tests/console.phpt" role="test" />
@@ -69,7 +70,7 @@
    <file baseinstalldir="/" md5sum="bcc4391efd7490b4d89ae8f6684fb346" name="tests/singleton.phpt" role="test" />
    <file baseinstalldir="/" md5sum="e936dc6e3024f779b9f280ade47d1dc9" name="tests/sqlite.phpt" role="test" />
    <file baseinstalldir="/" md5sum="8cc54af41244d541614f96e122e93ba6" name="tests/sql_ident.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="ace5530edb1a56511ed6ee85c83b9da4" name="Log.php" role="php" />
+   <file baseinstalldir="/" md5sum="7066f500aa7907c33d1b79f602128851" name="Log.php" role="php" />
   </dir>
  </contents>
  <dependencies>
@@ -99,6 +100,20 @@
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.9.6</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2006-05-27</date>
+   <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
+   <notes>_getBacktraceVars() now works with composite handlers. (Bug 7602)
+Instances of strftime(&apos;%T&apos;) have been replaced with &apos;%H:%M:%S&apos;. (Bug 7629)</notes>
+  </release>
   <release>
    <version>
     <release>1.9.5</release>
