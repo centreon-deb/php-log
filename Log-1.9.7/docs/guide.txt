@@ -8,8 +8,8 @@
 
 :Author:        Jon Parise
 :Contact:       jon@php.net
-:Date:          $Date: 2006/04/21 05:25:09 $
-:Revision:      $Revision: 1.25 $
+:Date:          $Date: 2006/06/30 03:41:22 $
+:Revision:      $Revision: 1.26 $
 
 .. contents:: Contents
 .. section-numbering::
@@ -914,6 +914,47 @@ time.
     trigger_error('This is an information log message.', E_USER_NOTICE);
 
 .. _set_error_handler(): http://www.php.net/set_error_handler
+
+Logging PHP Assertions
+----------------------
+PHP allows user-defined `assert()`_ callback handlers.  The assertion callback
+is configured using the `assert_options()`_ function.
+
+::
+
+    function assertCallback($file, $line, $message)
+    {
+        global $logger;
+
+        $logger->log($message . ' in ' . $file . ' at line ' . $line,
+                     PEAR_LOG_ALERT);
+    }
+
+    assert_options(ASSERT_CALLBACK, 'assertCallback');
+    assert(false);
+
+.. _assert(): http://www.php.net/assert
+.. _assert_options(): http://www.php.net/assert_options
+
+Logging PHP Exceptions
+----------------------
+PHP 5 and later support the concept of `exceptions`_.  A custom exception
+handler can be assigned using the `set_exception_handler()`_ function.
+
+::
+
+    function exceptionHandler($exception)
+    {
+        global $logger;
+
+        $logger->log($exception->getMessage(), PEAR_LOG_ALERT);
+    }
+
+    set_exception_handler('exceptionHandler');
+    throw new Exception('Uncaught Exception');
+
+.. _exceptions: http://www.php.net/exceptions
+.. _set_exception_handler(): http://www.php.net/set_exception_handler
 
 Logging PEAR Errors
 -------------------

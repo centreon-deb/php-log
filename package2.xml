@@ -10,10 +10,10 @@
   <email>jon@php.net</email>
   <active>yes</active>
  </lead>
- <date>2006-05-27</date>
- <time>17:40:24</time>
+ <date>2006-07-07</date>
+ <time>20:07:01</time>
  <version>
-  <release>1.9.6</release>
+  <release>1.9.7</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -21,8 +21,10 @@
   <api>stable</api>
  </stability>
  <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
- <notes>_getBacktraceVars() now works with composite handlers. (Bug 7602)
-Instances of strftime(&apos;%T&apos;) have been replaced with &apos;%H:%M:%S&apos;. (Bug 7629)</notes>
+ <notes>Provided documentation on logging PHP assertions and exceptions.
+All stock handlers now provide stubbed open() and close() method.
+The composite handler now tracks the success of its child handlers&apos; operations.
+The composite handler&apos;s log() method now opens its child handlers if they&apos;re not already open.</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <file baseinstalldir="/" md5sum="f0fe92c4693f85b5d23dd7fb787311cb" name="docs/examples/composite.php" role="doc" />
@@ -39,23 +41,23 @@ Instances of strftime(&apos;%T&apos;) have been replaced with &apos;%H:%M:%S&apo
    <file baseinstalldir="/" md5sum="c9903b0996ad2e2fa13545684ec279df" name="docs/examples/sqlite.php" role="doc" />
    <file baseinstalldir="/" md5sum="73963c2e2ed53f6349e0bcd6d3955bc8" name="docs/examples/syslog.php" role="doc" />
    <file baseinstalldir="/" md5sum="6a758092ffb2a6a3a80f9d3dd5539ebf" name="docs/examples/win.php" role="doc" />
-   <file baseinstalldir="/" md5sum="41354e7f610f531bb6a5acc9501ba1da" name="docs/guide.txt" role="doc" />
-   <file baseinstalldir="/" md5sum="4b608d1bf4d82d72bed79888517dbf28" name="Log/composite.php" role="php" />
-   <file baseinstalldir="/" md5sum="8123377b8c63810d9b275ed4a13be8e4" name="Log/console.php" role="php" />
+   <file baseinstalldir="/" md5sum="b7bd72e3d0077a96a3be9dee58d89445" name="docs/guide.txt" role="doc" />
+   <file baseinstalldir="/" md5sum="3061507b200469a1958049c30c8f79b4" name="Log/composite.php" role="php" />
+   <file baseinstalldir="/" md5sum="69da0f3998e91658bbe4d24c6fb295ad" name="Log/console.php" role="php" />
    <file baseinstalldir="/" md5sum="60c28c3da38912dbaec95ad0dfa041a6" name="Log/daemon.php" role="php" />
-   <file baseinstalldir="/" md5sum="e60ee32e74b9482238ddb91a7cd7ee5a" name="Log/display.php" role="php" />
-   <file baseinstalldir="/" md5sum="ca070bf4b1d9a1304254a150355b7002" name="Log/error_log.php" role="php" />
+   <file baseinstalldir="/" md5sum="9ab5526b6c9b9eace7b50cf1d05c8025" name="Log/display.php" role="php" />
+   <file baseinstalldir="/" md5sum="be9004a09ebfd539981551c5e67659c0" name="Log/error_log.php" role="php" />
    <file baseinstalldir="/" md5sum="69cdc7860933302b4764f731b96a0c53" name="Log/file.php" role="php" />
    <file baseinstalldir="/" md5sum="855c8e2499f46860e03307f2310d4f15" name="Log/mail.php" role="php" />
    <file baseinstalldir="/" md5sum="704d7a2b98c1b6c33ea16063263c2f94" name="Log/mcal.php" role="php" />
    <file baseinstalldir="/" md5sum="b0edf4c6b4a808f84fc50e6368e5a9b1" name="Log/mdb2.php" role="php" />
-   <file baseinstalldir="/" md5sum="7b713a15647ee6714704e280e62f6f47" name="Log/null.php" role="php" />
+   <file baseinstalldir="/" md5sum="0795cb13c85fd1f1aa9e1b49c3af3dff" name="Log/null.php" role="php" />
    <file baseinstalldir="/" md5sum="7659914c598ccd252f954681fdaaa096" name="Log/observer.php" role="php" />
    <file baseinstalldir="/" md5sum="33ef94bdf5d88b5b90e2c547cd1a5cfd" name="Log/sql.php" role="php" />
    <file baseinstalldir="/" md5sum="2ca909721294df0f6f8a18caa61caa60" name="Log/sqlite.php" role="php" />
    <file baseinstalldir="/" md5sum="4c0b2348621d7bda3aa2a15d2e5f0cd0" name="Log/syslog.php" role="php" />
    <file baseinstalldir="/" md5sum="95b9f47ed8be9312178d77a791319325" name="Log/win.php" role="php" />
-   <file baseinstalldir="/" md5sum="31fe86b8baa2105d651272a00acf56ab" name="misc/log.sql" role="data" />
+   <file baseinstalldir="/" md5sum="88b57f2062dfce10f30eb3d292abba2d" name="misc/log.sql" role="data" />
    <file baseinstalldir="/" md5sum="064448fdd799d3b3e966aefa3c191bda" name="tests/composite.phpt" role="test" />
    <file baseinstalldir="/" md5sum="e1f5e53b83ad63460f447d9b870e6ba6" name="tests/console.phpt" role="test" />
    <file baseinstalldir="/" md5sum="a1ac12f56913e50c2960cbdbcbd43df9" name="tests/display.phpt" role="test" />
@@ -102,6 +104,22 @@ Instances of strftime(&apos;%T&apos;) have been replaced with &apos;%H:%M:%S&apo
  <changelog>
   <release>
    <version>
+    <release>1.9.7</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2006-07-07</date>
+   <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
+   <notes>Provided documentation on logging PHP assertions and exceptions.
+All stock handlers now provide stubbed open() and close() method.
+The composite handler now tracks the success of its child handlers&apos; operations.
+The composite handler&apos;s log() method now opens its child handlers if they&apos;re not already open.</notes>
+  </release>
+  <release>
+   <version>
     <release>1.9.6</release>
     <api>1.0.0</api>
    </version>
@@ -109,10 +127,11 @@ Instances of strftime(&apos;%T&apos;) have been replaced with &apos;%H:%M:%S&apo
     <release>stable</release>
     <api>stable</api>
    </stability>
-   <date>2006-05-27</date>
+   <date>2006-07-07</date>
    <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
    <notes>_getBacktraceVars() now works with composite handlers. (Bug 7602)
-Instances of strftime(&apos;%T&apos;) have been replaced with &apos;%H:%M:%S&apos;. (Bug 7629)</notes>
+Instances of strftime(&apos;%T&apos;) have been replaced with &apos;%H:%M:%S&apos;. (Bug 7629)
+Provided documentation on logging PHP assertions and exceptions.</notes>
   </release>
   <release>
    <version>
