@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.4.9" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.4.10" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
  <name>Log</name>
  <channel>pear.php.net</channel>
  <summary>Logging utilities</summary>
@@ -10,10 +10,10 @@
   <email>jon@php.net</email>
   <active>yes</active>
  </lead>
- <date>2006-07-07</date>
- <time>20:07:01</time>
+ <date>2006-07-31</date>
+ <time>22:10:50</time>
  <version>
-  <release>1.9.7</release>
+  <release>1.9.8</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -21,10 +21,7 @@
   <api>stable</api>
  </stability>
  <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
- <notes>Provided documentation on logging PHP assertions and exceptions.
-All stock handlers now provide stubbed open() and close() method.
-The composite handler now tracks the success of its child handlers&apos; operations.
-The composite handler&apos;s log() method now opens its child handlers if they&apos;re not already open.</notes>
+ <notes>The window handler now allows the entire CSS style to be set instead of just the text color.</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <file baseinstalldir="/" md5sum="f0fe92c4693f85b5d23dd7fb787311cb" name="docs/examples/composite.php" role="doc" />
@@ -41,7 +38,7 @@ The composite handler&apos;s log() method now opens its child handlers if they&a
    <file baseinstalldir="/" md5sum="c9903b0996ad2e2fa13545684ec279df" name="docs/examples/sqlite.php" role="doc" />
    <file baseinstalldir="/" md5sum="73963c2e2ed53f6349e0bcd6d3955bc8" name="docs/examples/syslog.php" role="doc" />
    <file baseinstalldir="/" md5sum="6a758092ffb2a6a3a80f9d3dd5539ebf" name="docs/examples/win.php" role="doc" />
-   <file baseinstalldir="/" md5sum="b7bd72e3d0077a96a3be9dee58d89445" name="docs/guide.txt" role="doc" />
+   <file baseinstalldir="/" md5sum="62d18f3acfc70d5ef6dffca56022c637" name="docs/guide.txt" role="doc" />
    <file baseinstalldir="/" md5sum="3061507b200469a1958049c30c8f79b4" name="Log/composite.php" role="php" />
    <file baseinstalldir="/" md5sum="69da0f3998e91658bbe4d24c6fb295ad" name="Log/console.php" role="php" />
    <file baseinstalldir="/" md5sum="60c28c3da38912dbaec95ad0dfa041a6" name="Log/daemon.php" role="php" />
@@ -56,7 +53,7 @@ The composite handler&apos;s log() method now opens its child handlers if they&a
    <file baseinstalldir="/" md5sum="33ef94bdf5d88b5b90e2c547cd1a5cfd" name="Log/sql.php" role="php" />
    <file baseinstalldir="/" md5sum="2ca909721294df0f6f8a18caa61caa60" name="Log/sqlite.php" role="php" />
    <file baseinstalldir="/" md5sum="4c0b2348621d7bda3aa2a15d2e5f0cd0" name="Log/syslog.php" role="php" />
-   <file baseinstalldir="/" md5sum="95b9f47ed8be9312178d77a791319325" name="Log/win.php" role="php" />
+   <file baseinstalldir="/" md5sum="f534a89c4a601d439b1cb4dfdc29e48b" name="Log/win.php" role="php" />
    <file baseinstalldir="/" md5sum="88b57f2062dfce10f30eb3d292abba2d" name="misc/log.sql" role="data" />
    <file baseinstalldir="/" md5sum="064448fdd799d3b3e966aefa3c191bda" name="tests/composite.phpt" role="test" />
    <file baseinstalldir="/" md5sum="e1f5e53b83ad63460f447d9b870e6ba6" name="tests/console.phpt" role="test" />
@@ -102,6 +99,19 @@ The composite handler&apos;s log() method now opens its child handlers if they&a
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.9.8</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2006-07-31</date>
+   <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
+   <notes>The window handler now allows the entire CSS style to be set instead of just the text color.</notes>
+  </release>
   <release>
    <version>
     <release>1.9.7</release>
