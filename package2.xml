@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.4.10" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.4.11" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
  <name>Log</name>
  <channel>pear.php.net</channel>
  <summary>Logging utilities</summary>
@@ -10,10 +10,16 @@
   <email>jon@php.net</email>
   <active>yes</active>
  </lead>
- <date>2006-07-31</date>
- <time>22:10:50</time>
+ <lead>
+  <name>Jan Schneider</name>
+  <user>yunosh</user>
+  <email>jan@horde.org</email>
+  <active>yes</active>
+ </lead>
+ <date>2006-10-11</date>
+ <time>23:28:44</time>
  <version>
-  <release>1.9.8</release>
+  <release>1.9.9</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -21,7 +27,7 @@
   <api>stable</api>
  </stability>
  <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
- <notes>The window handler now allows the entire CSS style to be set instead of just the text color.</notes>
+ <notes>Improving the performance of line format parsing. (Bug 8766)</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <file baseinstalldir="/" md5sum="f0fe92c4693f85b5d23dd7fb787311cb" name="docs/examples/composite.php" role="doc" />
@@ -69,7 +75,7 @@
    <file baseinstalldir="/" md5sum="bcc4391efd7490b4d89ae8f6684fb346" name="tests/singleton.phpt" role="test" />
    <file baseinstalldir="/" md5sum="e936dc6e3024f779b9f280ade47d1dc9" name="tests/sqlite.phpt" role="test" />
    <file baseinstalldir="/" md5sum="8cc54af41244d541614f96e122e93ba6" name="tests/sql_ident.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="7066f500aa7907c33d1b79f602128851" name="Log.php" role="php" />
+   <file baseinstalldir="/" md5sum="ba6a5b61b428212626872e7c6c4bbac9" name="Log.php" role="php" />
   </dir>
  </contents>
  <dependencies>
@@ -99,6 +105,19 @@
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.9.9</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2006-10-11</date>
+   <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
+   <notes>Improving the performance of line format parsing. (Bug 8766)</notes>
+  </release>
   <release>
    <version>
     <release>1.9.8</release>
