@@ -8,8 +8,8 @@
 
 :Author:        Jon Parise
 :Contact:       jon@php.net
-:Date:          $Date: 2006/07/30 21:02:19 $
-:Revision:      $Revision: 1.28 $
+:Date:          $Date: 2007/01/29 05:04:41 $
+:Revision:      $Revision: 1.30 $
 
 .. contents:: Contents
 .. section-numbering::
@@ -474,6 +474,9 @@ The Mail Handler
 The Mail handler aggregates a session's log events and sends them in the body
 of an email message using PHP's `mail()`_ function.
 
+Multiple recipients can be specified by separating their email addresses with
+commas in the ``$name`` construction parameter.
+
 Configuration
 ~~~~~~~~~~~~~
 +-------------------+-----------+---------------+---------------------------+
@@ -737,6 +740,17 @@ The Syslog handler sends log events to the system logging service (syslog on
 Unix-like environments or the Event Log on Windows systems).  The events are
 sent using PHP's `syslog()`_ function.
 
+Configuration
+~~~~~~~~~~~~~
++-------------------+-----------+---------------+---------------------------+
+| Parameter         | Type      | Default       | Description               |
++===================+===========+===============+===========================+
+| ``inherit``       | Boolean   | false         | Inherit the current syslog|
+|                   |           |               | connection for this       |
+|                   |           |               | process, or start a new   |
+|                   |           |               | one via `openlog()`_?     |
++-------------------+-----------+---------------+---------------------------+
+
 Facilities
 ~~~~~~~~~~
 +-------------------+-------------------------------------------------------+
@@ -770,6 +784,7 @@ Facilities
 +-------------------+-------------------------------------------------------+
 
 .. _syslog(): http://www.php.net/syslog
+.. _openlog(): http://www.php.net/openlog
 
 Example
 ~~~~~~~
