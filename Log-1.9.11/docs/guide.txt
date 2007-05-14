@@ -8,8 +8,8 @@
 
 :Author:        Jon Parise
 :Contact:       jon@php.net
-:Date:          $Date: 2007/01/29 05:04:41 $
-:Revision:      $Revision: 1.30 $
+:Date:          $Date: 2007/02/09 05:32:48 $
+:Revision:      $Revision: 1.32 $
 
 .. contents:: Contents
 .. section-numbering::
@@ -464,6 +464,39 @@ Example
 
     $conf = array('mode' => 0600, 'timeFormat' => '%X %x');
     $logger = &Log::singleton('file', 'out.log', 'ident', $conf);
+    for ($i = 0; $i < 10; $i++) {
+        $logger->log("Log entry $i");
+    }
+
+
+The Firebug Handler
+-------------------
+The Firebug handler outputs log events to the Firebug_ console. It supports
+output buffering and configurable string formats.
+
+Configuration
+~~~~~~~~~~~~~
++-------------------+-----------+---------------+---------------------------+
+| Parameter         | Type      | Default       | Description               |
++===================+===========+===============+===========================+
+| ``buffering``     | Boolean   | False         | Should the output be      |
+|                   |           |               | buffered until shutdown?  |
++-------------------+-----------+---------------+---------------------------+
+| ``lineFormat``    | String    | ``%2$s [%3$s] | Log line format           |
+|                   |           | %4$s``        | specification.            |
++-------------------+-----------+---------------+---------------------------+
+| ``timeFormat``    | String    | ``%b %d       | Time stamp format         |
+|                   |           | %H:%M:%S``    | (for strftime_).          |
++-------------------+-----------+---------------+---------------------------+
+
+.. _Firebug: http://www.getfirebug.com/
+.. _strftime: http://www.php.net/strftime
+
+Example
+~~~~~~~
+::
+
+    $logger = &Log::singleton('firebug', '', 'ident');
     for ($i = 0; $i < 10; $i++) {
         $logger->log("Log entry $i");
     }
