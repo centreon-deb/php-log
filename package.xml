@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.5.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.6.2" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
  <name>Log</name>
  <channel>pear.php.net</channel>
- <summary>Logging utilities</summary>
- <description>The Log framework provides an abstracted logging system. It supports logging to console, file, syslog, SQL, Sqlite, mail, and mcal targets. It also provides a subject - observer mechanism.</description>
+ <summary>Logging Framework</summary>
+ <description>The Log framework provides an abstracted logging system. It supports logging to console, file, Firebug, syslog, SQL, Sqlite, mail, mcal, and window targets. It also provides composite and subject - observer mechanisms.</description>
  <lead>
   <name>Jon Parise</name>
   <user>jon</user>
@@ -22,10 +22,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2007-05-13</date>
- <time>23:45:59</time>
+ <date>2007-12-11</date>
+ <time>23:12:41</time>
  <version>
-  <release>1.9.11</release>
+  <release>1.9.12</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -33,7 +33,8 @@
   <api>stable</api>
  </stability>
  <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
- <notes>A Firebug log handler has been added.</notes>
+ <notes>- The Firebug handler no longer generates Javascript errors in IE. (Bug 12607)
+- The users guide has been updated with information on writing custom handlers.</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <file baseinstalldir="/" md5sum="f0fe92c4693f85b5d23dd7fb787311cb" name="docs/examples/composite.php" role="doc" />
@@ -51,14 +52,14 @@
    <file baseinstalldir="/" md5sum="c9903b0996ad2e2fa13545684ec279df" name="docs/examples/sqlite.php" role="doc" />
    <file baseinstalldir="/" md5sum="73963c2e2ed53f6349e0bcd6d3955bc8" name="docs/examples/syslog.php" role="doc" />
    <file baseinstalldir="/" md5sum="6a758092ffb2a6a3a80f9d3dd5539ebf" name="docs/examples/win.php" role="doc" />
-   <file baseinstalldir="/" md5sum="6406c854f92550eaf294f9e1ee6e4c31" name="docs/guide.txt" role="doc" />
+   <file baseinstalldir="/" md5sum="7ec69c2d847b013a6faf7b3bba57e13c" name="docs/guide.txt" role="doc" />
    <file baseinstalldir="/" md5sum="3061507b200469a1958049c30c8f79b4" name="Log/composite.php" role="php" />
    <file baseinstalldir="/" md5sum="caf426cf332a5fdd883a678512803115" name="Log/console.php" role="php" />
    <file baseinstalldir="/" md5sum="60c28c3da38912dbaec95ad0dfa041a6" name="Log/daemon.php" role="php" />
    <file baseinstalldir="/" md5sum="9ab5526b6c9b9eace7b50cf1d05c8025" name="Log/display.php" role="php" />
    <file baseinstalldir="/" md5sum="be9004a09ebfd539981551c5e67659c0" name="Log/error_log.php" role="php" />
    <file baseinstalldir="/" md5sum="0a76bba11f370a5aa20c1ed215ddd364" name="Log/file.php" role="php" />
-   <file baseinstalldir="/" md5sum="6063f41db043372554547a700f5bc27a" name="Log/firebug.php" role="php" />
+   <file baseinstalldir="/" md5sum="59d0a531c0b55f8d3d34ca522e2bfa33" name="Log/firebug.php" role="php" />
    <file baseinstalldir="/" md5sum="9ecfe8706ca192d48d1eef9a78ab6a41" name="Log/mail.php" role="php" />
    <file baseinstalldir="/" md5sum="704d7a2b98c1b6c33ea16063263c2f94" name="Log/mcal.php" role="php" />
    <file baseinstalldir="/" md5sum="b0edf4c6b4a808f84fc50e6368e5a9b1" name="Log/mdb2.php" role="php" />
@@ -85,7 +86,7 @@
    <file baseinstalldir="/" md5sum="bcc4391efd7490b4d89ae8f6684fb346" name="tests/singleton.phpt" role="test" />
    <file baseinstalldir="/" md5sum="e936dc6e3024f779b9f280ade47d1dc9" name="tests/sqlite.phpt" role="test" />
    <file baseinstalldir="/" md5sum="8cc54af41244d541614f96e122e93ba6" name="tests/sql_ident.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="ba6a5b61b428212626872e7c6c4bbac9" name="Log.php" role="php" />
+   <file baseinstalldir="/" md5sum="99db7f1a83cfff87913633f4a1680cae" name="Log.php" role="php" />
   </dir>
  </contents>
  <dependencies>
@@ -115,6 +116,20 @@
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.9.12</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2007-12-11</date>
+   <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
+   <notes>- The Firebug handler no longer generates Javascript errors in IE. (Bug 12607)
+- The users guide has been updated with information on writing custom handlers.</notes>
+  </release>
   <release>
    <version>
     <release>1.9.11</release>
