@@ -22,10 +22,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2007-12-11</date>
- <time>23:12:41</time>
+ <date>2007-12-12</date>
+ <time>22:47:09</time>
  <version>
-  <release>1.9.12</release>
+  <release>1.9.13</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -33,8 +33,8 @@
   <api>stable</api>
  </stability>
  <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
- <notes>- The Firebug handler no longer generates Javascript errors in IE. (Bug 12607)
-- The users guide has been updated with information on writing custom handlers.</notes>
+ <notes>- The Firebug handler&apos;s unit test now passes. (Bug 12674)
+- Fixed a PHP4 compatibility problem involving class_exists(). (Bug 12675)</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <file baseinstalldir="/" md5sum="f0fe92c4693f85b5d23dd7fb787311cb" name="docs/examples/composite.php" role="doc" />
@@ -79,14 +79,14 @@
    <file baseinstalldir="/" md5sum="ce2b0b1e02fdbb266fe6c4da89ba15ec" name="tests/extract-zend2.2.phpt" role="test" />
    <file baseinstalldir="/" md5sum="924c49af7c248ed71a334fbc3edef9ac" name="tests/factory.phpt" role="test" />
    <file baseinstalldir="/" md5sum="620e4064dbe579220a5e8fc15a821cfd" name="tests/file.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="2e56ab1dc9abd9f0450e8c144f261a18" name="tests/firebug.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="39b013e292d803cfe86e2e70ea3afd28" name="tests/firebug.phpt" role="test" />
    <file baseinstalldir="/" md5sum="033f602c94762cfeb80e615665923eeb" name="tests/levels.phpt" role="test" />
    <file baseinstalldir="/" md5sum="35e55d19fa72989bcf92d58223398893" name="tests/null.phpt" role="test" />
    <file baseinstalldir="/" md5sum="e64c62248258b94b0dfd1dd01c972840" name="tests/priority.phpt" role="test" />
    <file baseinstalldir="/" md5sum="bcc4391efd7490b4d89ae8f6684fb346" name="tests/singleton.phpt" role="test" />
    <file baseinstalldir="/" md5sum="e936dc6e3024f779b9f280ade47d1dc9" name="tests/sqlite.phpt" role="test" />
    <file baseinstalldir="/" md5sum="8cc54af41244d541614f96e122e93ba6" name="tests/sql_ident.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="99db7f1a83cfff87913633f4a1680cae" name="Log.php" role="php" />
+   <file baseinstalldir="/" md5sum="f364137c56055059da8705bc2ad31e88" name="Log.php" role="php" />
   </dir>
  </contents>
  <dependencies>
@@ -116,6 +116,20 @@
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.9.13</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2007-12-12</date>
+   <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
+   <notes>- The Firebug handler&apos;s unit test now passes. (Bug 12674)
+- Fixed a PHP4 compatibility problem involving class_exists(). (Bug 12675)</notes>
+  </release>
   <release>
    <version>
     <release>1.9.12</release>
