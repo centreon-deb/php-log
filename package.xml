@@ -3,7 +3,7 @@
  <name>Log</name>
  <channel>pear.php.net</channel>
  <summary>Logging Framework</summary>
- <description>The Log framework provides an abstracted logging system. It supports logging to console, file, Firebug, syslog, SQL, Sqlite, mail, mcal, and window targets. It also provides composite and subject - observer mechanisms.</description>
+ <description>The Log package provides an abstracted logging framework.  It includes output handlers for log files, databases, syslog, email, Firebug, and the console.  It also provides composite and subject-observer logging mechanisms.</description>
  <lead>
   <name>Jon Parise</name>
   <user>jon</user>
@@ -22,10 +22,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2007-12-12</date>
- <time>22:47:09</time>
+ <date>2008-01-01</date>
+ <time>16:44:13</time>
  <version>
-  <release>1.9.13</release>
+  <release>1.9.14</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -33,8 +33,8 @@
   <api>stable</api>
  </stability>
  <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
- <notes>- The Firebug handler&apos;s unit test now passes. (Bug 12674)
-- Fixed a PHP4 compatibility problem involving class_exists(). (Bug 12675)</notes>
+ <notes>- The sql handler wasn&apos;t honoring custom SQL insertion statements. (Bug 12734)
+- The display handler now has a configurable line format. (Request 12781)</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <file baseinstalldir="/" md5sum="f0fe92c4693f85b5d23dd7fb787311cb" name="docs/examples/composite.php" role="doc" />
@@ -52,11 +52,11 @@
    <file baseinstalldir="/" md5sum="c9903b0996ad2e2fa13545684ec279df" name="docs/examples/sqlite.php" role="doc" />
    <file baseinstalldir="/" md5sum="73963c2e2ed53f6349e0bcd6d3955bc8" name="docs/examples/syslog.php" role="doc" />
    <file baseinstalldir="/" md5sum="6a758092ffb2a6a3a80f9d3dd5539ebf" name="docs/examples/win.php" role="doc" />
-   <file baseinstalldir="/" md5sum="7ec69c2d847b013a6faf7b3bba57e13c" name="docs/guide.txt" role="doc" />
+   <file baseinstalldir="/" md5sum="49f25769b1531aa5ef325257ca32ee9c" name="docs/guide.txt" role="doc" />
    <file baseinstalldir="/" md5sum="3061507b200469a1958049c30c8f79b4" name="Log/composite.php" role="php" />
    <file baseinstalldir="/" md5sum="caf426cf332a5fdd883a678512803115" name="Log/console.php" role="php" />
    <file baseinstalldir="/" md5sum="60c28c3da38912dbaec95ad0dfa041a6" name="Log/daemon.php" role="php" />
-   <file baseinstalldir="/" md5sum="9ab5526b6c9b9eace7b50cf1d05c8025" name="Log/display.php" role="php" />
+   <file baseinstalldir="/" md5sum="b657aafd62c2724404a7008382706993" name="Log/display.php" role="php" />
    <file baseinstalldir="/" md5sum="be9004a09ebfd539981551c5e67659c0" name="Log/error_log.php" role="php" />
    <file baseinstalldir="/" md5sum="0a76bba11f370a5aa20c1ed215ddd364" name="Log/file.php" role="php" />
    <file baseinstalldir="/" md5sum="59d0a531c0b55f8d3d34ca522e2bfa33" name="Log/firebug.php" role="php" />
@@ -65,14 +65,14 @@
    <file baseinstalldir="/" md5sum="b0edf4c6b4a808f84fc50e6368e5a9b1" name="Log/mdb2.php" role="php" />
    <file baseinstalldir="/" md5sum="0795cb13c85fd1f1aa9e1b49c3af3dff" name="Log/null.php" role="php" />
    <file baseinstalldir="/" md5sum="7659914c598ccd252f954681fdaaa096" name="Log/observer.php" role="php" />
-   <file baseinstalldir="/" md5sum="33ef94bdf5d88b5b90e2c547cd1a5cfd" name="Log/sql.php" role="php" />
+   <file baseinstalldir="/" md5sum="22bf7f6883e066be3996fe4bbd7246d0" name="Log/sql.php" role="php" />
    <file baseinstalldir="/" md5sum="2ca909721294df0f6f8a18caa61caa60" name="Log/sqlite.php" role="php" />
    <file baseinstalldir="/" md5sum="74a14fc07827309f220acfd47d0ea5de" name="Log/syslog.php" role="php" />
    <file baseinstalldir="/" md5sum="f534a89c4a601d439b1cb4dfdc29e48b" name="Log/win.php" role="php" />
    <file baseinstalldir="/" md5sum="88b57f2062dfce10f30eb3d292abba2d" name="misc/log.sql" role="data" />
    <file baseinstalldir="/" md5sum="064448fdd799d3b3e966aefa3c191bda" name="tests/composite.phpt" role="test" />
    <file baseinstalldir="/" md5sum="e1f5e53b83ad63460f447d9b870e6ba6" name="tests/console.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="a1ac12f56913e50c2960cbdbcbd43df9" name="tests/display.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="a7c8279544f1ecbe79e50311c8b52011" name="tests/display.phpt" role="test" />
    <file baseinstalldir="/" md5sum="0653d9cbdfda4de5488b71800b07fb51" name="tests/error_log.phpt" role="test" />
    <file baseinstalldir="/" md5sum="21510e64282691dc6b04423e760a1b68" name="tests/extract-zend1.phpt" role="test" />
    <file baseinstalldir="/" md5sum="49e771ffc01d64ae1fa41851ac79dda5" name="tests/extract-zend2.0.phpt" role="test" />
@@ -116,6 +116,20 @@
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.9.14</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2008-01-01</date>
+   <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
+   <notes>- The sql handler wasn&apos;t honoring custom SQL insertion statements. (Bug 12734)
+- The display handler now has a configurable line format. (Request 12781)</notes>
+  </release>
   <release>
    <version>
     <release>1.9.13</release>
