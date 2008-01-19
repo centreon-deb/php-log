@@ -1,29 +1,29 @@
 <?php
 /**
- * $Header: /repository/pear/Log/Log.php,v 1.67 2007/12/13 06:46:30 jon Exp $
+ * $Header: /repository/pear/Log/Log.php,v 1.69 2008/01/19 22:20:55 jon Exp $
  * $Horde: horde/lib/Log.php,v 1.15 2000/06/29 23:39:45 jon Exp $
  *
- * @version $Revision: 1.67 $
+ * @version $Revision: 1.69 $
  * @package Log
  */
 
-define('PEAR_LOG_EMERG',    0);     /** System is unusable */
-define('PEAR_LOG_ALERT',    1);     /** Immediate action required */
-define('PEAR_LOG_CRIT',     2);     /** Critical conditions */
-define('PEAR_LOG_ERR',      3);     /** Error conditions */
-define('PEAR_LOG_WARNING',  4);     /** Warning conditions */
-define('PEAR_LOG_NOTICE',   5);     /** Normal but significant */
-define('PEAR_LOG_INFO',     6);     /** Informational */
-define('PEAR_LOG_DEBUG',    7);     /** Debug-level messages */
+define('PEAR_LOG_EMERG',    0);     /* System is unusable */
+define('PEAR_LOG_ALERT',    1);     /* Immediate action required */
+define('PEAR_LOG_CRIT',     2);     /* Critical conditions */
+define('PEAR_LOG_ERR',      3);     /* Error conditions */
+define('PEAR_LOG_WARNING',  4);     /* Warning conditions */
+define('PEAR_LOG_NOTICE',   5);     /* Normal but significant */
+define('PEAR_LOG_INFO',     6);     /* Informational */
+define('PEAR_LOG_DEBUG',    7);     /* Debug-level messages */
 
-define('PEAR_LOG_ALL',      bindec('11111111'));  /** All messages */
-define('PEAR_LOG_NONE',     bindec('00000000'));  /** No message */
+define('PEAR_LOG_ALL',      0xffffffff);    /* All messages */
+define('PEAR_LOG_NONE',     0x00000000);    /* No message */
 
 /* Log types for PHP's native error_log() function. */
-define('PEAR_LOG_TYPE_SYSTEM',  0); /** Use PHP's system logger */
-define('PEAR_LOG_TYPE_MAIL',    1); /** Use PHP's mail() function */
-define('PEAR_LOG_TYPE_DEBUG',   2); /** Use PHP's debugging connection */
-define('PEAR_LOG_TYPE_FILE',    3); /** Append to a file */
+define('PEAR_LOG_TYPE_SYSTEM',  0); /* Use PHP's system logger */
+define('PEAR_LOG_TYPE_MAIL',    1); /* Use PHP's mail() function */
+define('PEAR_LOG_TYPE_DEBUG',   2); /* Use PHP's debugging connection */
+define('PEAR_LOG_TYPE_FILE',    3); /* Append to a file */
 
 /**
  * The Log:: class implements both an abstraction for various logging

@@ -1,13 +1,13 @@
 <?php
 /**
- * $Header: /repository/pear/Log/Log/sql.php,v 1.41 2007/12/23 20:30:23 jon Exp $
+ * $Header: /repository/pear/Log/Log/sql.php,v 1.42 2008/01/19 22:12:16 jon Exp $
  * $Horde: horde/lib/Log/sql.php,v 1.12 2000/08/16 20:27:34 chuck Exp $
  *
- * @version $Revision: 1.41 $
+ * @version $Revision: 1.42 $
  * @package Log
  */
 
-/*
+/**
  * We require the PEAR DB class.  This is generally defined in the DB.php file,
  * but it's possible that the caller may have provided the DB class, or a
  * compatible wrapper (such as the one shipped with MDB2), so we first check

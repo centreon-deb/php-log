@@ -1,8 +1,8 @@
 <?php
 /**
- * $Header: /repository/pear/Log/Log/firebug.php,v 1.5 2008/01/08 16:22:20 jon Exp $
+ * $Header: /repository/pear/Log/Log/firebug.php,v 1.6 2008/01/19 21:56:16 jon Exp $
  *
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * @package Log
  */
 
@@ -13,7 +13,7 @@
  * http://www.getfirebug.com/
  *
  * @author  Mika Tuupola <tuupola@appelsiini.net>
- * @since   Log 1.x.x
+ * @since   Log 1.9.11
  * @package Log
  *
  * @example firebug.php     Using the firebug handler.
