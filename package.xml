@@ -22,10 +22,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2008-01-01</date>
- <time>16:44:13</time>
+ <date>2008-01-19</date>
+ <time>13:47:29</time>
  <version>
-  <release>1.9.14</release>
+  <release>1.9.15</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -33,8 +33,7 @@
   <api>stable</api>
  </stability>
  <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
- <notes>- The sql handler wasn&apos;t honoring custom SQL insertion statements. (Bug 12734)
-- The display handler now has a configurable line format. (Request 12781)</notes>
+ <notes>- The Firebug handler now avoids more Javascript errors in IE. (Bug 12810)</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <file baseinstalldir="/" md5sum="f0fe92c4693f85b5d23dd7fb787311cb" name="docs/examples/composite.php" role="doc" />
@@ -52,14 +51,14 @@
    <file baseinstalldir="/" md5sum="c9903b0996ad2e2fa13545684ec279df" name="docs/examples/sqlite.php" role="doc" />
    <file baseinstalldir="/" md5sum="73963c2e2ed53f6349e0bcd6d3955bc8" name="docs/examples/syslog.php" role="doc" />
    <file baseinstalldir="/" md5sum="6a758092ffb2a6a3a80f9d3dd5539ebf" name="docs/examples/win.php" role="doc" />
-   <file baseinstalldir="/" md5sum="49f25769b1531aa5ef325257ca32ee9c" name="docs/guide.txt" role="doc" />
+   <file baseinstalldir="/" md5sum="d06be52220114eaf26d360f0ad5f96d5" name="docs/guide.txt" role="doc" />
    <file baseinstalldir="/" md5sum="3061507b200469a1958049c30c8f79b4" name="Log/composite.php" role="php" />
    <file baseinstalldir="/" md5sum="caf426cf332a5fdd883a678512803115" name="Log/console.php" role="php" />
    <file baseinstalldir="/" md5sum="60c28c3da38912dbaec95ad0dfa041a6" name="Log/daemon.php" role="php" />
    <file baseinstalldir="/" md5sum="b657aafd62c2724404a7008382706993" name="Log/display.php" role="php" />
    <file baseinstalldir="/" md5sum="be9004a09ebfd539981551c5e67659c0" name="Log/error_log.php" role="php" />
    <file baseinstalldir="/" md5sum="0a76bba11f370a5aa20c1ed215ddd364" name="Log/file.php" role="php" />
-   <file baseinstalldir="/" md5sum="59d0a531c0b55f8d3d34ca522e2bfa33" name="Log/firebug.php" role="php" />
+   <file baseinstalldir="/" md5sum="48d41e12de0b25630d9e0d3af94e9039" name="Log/firebug.php" role="php" />
    <file baseinstalldir="/" md5sum="9ecfe8706ca192d48d1eef9a78ab6a41" name="Log/mail.php" role="php" />
    <file baseinstalldir="/" md5sum="704d7a2b98c1b6c33ea16063263c2f94" name="Log/mcal.php" role="php" />
    <file baseinstalldir="/" md5sum="b0edf4c6b4a808f84fc50e6368e5a9b1" name="Log/mdb2.php" role="php" />
@@ -116,6 +115,19 @@
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.9.15</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2008-01-19</date>
+   <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
+   <notes>- The Firebug handler now avoids more Javascript errors in IE. (Bug 12810)</notes>
+  </release>
   <release>
    <version>
     <release>1.9.14</release>

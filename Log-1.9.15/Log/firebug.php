@@ -1,8 +1,8 @@
 <?php
 /**
- * $Header: /repository/pear/Log/Log/firebug.php,v 1.4 2007/06/03 17:14:29 tuupola Exp $
+ * $Header: /repository/pear/Log/Log/firebug.php,v 1.5 2008/01/08 16:22:20 jon Exp $
  *
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * @package Log
  */
 
@@ -142,7 +142,7 @@ class Log_firebug extends Log
     function flush() {
         if (count($this->_buffer)) {
             print '<script type="text/javascript">';
-            print "\nif (('console' in window) || ('firebug' in console)) {\n";
+            print "\nif (('console' in window) && ('firebug' in console)) {\n";
             foreach ($this->_buffer as $line) {
                 print "  $line\n";
             }
@@ -199,7 +199,7 @@ class Log_firebug extends Log
             $this->_buffer[] = sprintf('console.%s("%s");', $method, $line);
         } else {
             print '<script type="text/javascript">';
-            print "\nif (('console' in window) || ('firebug' in console)) {\n";
+            print "\nif (('console' in window) && ('firebug' in console)) {\n";
             /* Build and output the complete log line. */
             printf('  console.%s("%s");', $method, $line);
             print "\n}\n";
