@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.6.2" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.7.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
  <name>Log</name>
  <channel>pear.php.net</channel>
  <summary>Logging Framework</summary>
@@ -22,10 +22,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2008-01-19</date>
- <time>14:31:09</time>
+ <date>2008-02-10</date>
+ <time>14:54:41</time>
  <version>
-  <release>1.9.16</release>
+  <release>1.10.0</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -33,13 +33,11 @@
   <api>stable</api>
  </stability>
  <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
- <notes>- Corrected some PHPDoc syntax problems.
-- Correcting some spelling errors in the users guide.
-- Fixed the firebug unit test.
-- Simplified the PEAR_LOG_ALL and PEAR_LOG_NONE constants.</notes>
+ <notes>- The level masking test now passed on 64-bit platforms. (Bug 12933)
+- The mail handler can now optionally use the PEAR Mail package. (Request 12839)</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
-   <file baseinstalldir="/" md5sum="d06be52220114eaf26d360f0ad5f96d5" name="docs/guide.txt" role="doc" />
+   <file baseinstalldir="/" md5sum="8fdf75ee2f2a106d7c52310a29930bb8" name="docs/guide.txt" role="doc" />
    <file baseinstalldir="/" md5sum="f0fe92c4693f85b5d23dd7fb787311cb" name="examples/composite.php" role="doc" />
    <file baseinstalldir="/" md5sum="19e0f5e8f0bb9d2e31a09b5b4ae86a73" name="examples/console.php" role="doc" />
    <file baseinstalldir="/" md5sum="ece4e33eabcd56ae45013155bd623d5c" name="examples/display.php" role="doc" />
@@ -62,7 +60,7 @@
    <file baseinstalldir="/" md5sum="be9004a09ebfd539981551c5e67659c0" name="Log/error_log.php" role="php" />
    <file baseinstalldir="/" md5sum="0a76bba11f370a5aa20c1ed215ddd364" name="Log/file.php" role="php" />
    <file baseinstalldir="/" md5sum="5374941dcf5ab99359a7f560d99524fe" name="Log/firebug.php" role="php" />
-   <file baseinstalldir="/" md5sum="9ecfe8706ca192d48d1eef9a78ab6a41" name="Log/mail.php" role="php" />
+   <file baseinstalldir="/" md5sum="6c07acf4393734c384bc8468b800bd57" name="Log/mail.php" role="php" />
    <file baseinstalldir="/" md5sum="704d7a2b98c1b6c33ea16063263c2f94" name="Log/mcal.php" role="php" />
    <file baseinstalldir="/" md5sum="b0edf4c6b4a808f84fc50e6368e5a9b1" name="Log/mdb2.php" role="php" />
    <file baseinstalldir="/" md5sum="0795cb13c85fd1f1aa9e1b49c3af3dff" name="Log/null.php" role="php" />
@@ -82,7 +80,7 @@
    <file baseinstalldir="/" md5sum="924c49af7c248ed71a334fbc3edef9ac" name="tests/factory.phpt" role="test" />
    <file baseinstalldir="/" md5sum="620e4064dbe579220a5e8fc15a821cfd" name="tests/file.phpt" role="test" />
    <file baseinstalldir="/" md5sum="436dd76504d8b1add73d6ea75ac443f2" name="tests/firebug.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="573534d0db736f07ee92bbae995bcba5" name="tests/levels.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="f8cfde78ca60e82518ccad9766859ee8" name="tests/levels.phpt" role="test" />
    <file baseinstalldir="/" md5sum="35e55d19fa72989bcf92d58223398893" name="tests/null.phpt" role="test" />
    <file baseinstalldir="/" md5sum="e64c62248258b94b0dfd1dd01c972840" name="tests/priority.phpt" role="test" />
    <file baseinstalldir="/" md5sum="bcc4391efd7490b4d89ae8f6684fb346" name="tests/singleton.phpt" role="test" />
@@ -111,6 +109,10 @@
     <channel>pear.php.net</channel>
     <min>2.0.0RC1</min>
    </package>
+   <package>
+    <name>Mail</name>
+    <channel>pear.php.net</channel>
+   </package>
    <extension>
     <name>sqlite</name>
    </extension>
@@ -118,6 +120,20 @@
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.10.0</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2008-02-10</date>
+   <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
+   <notes>- The level masking test now passed on 64-bit platforms. (Bug 12933)
+- The mail handler can now optionally use the PEAR Mail package. (Request 12839)</notes>
+  </release>
   <release>
    <version>
     <release>1.9.16</release>
