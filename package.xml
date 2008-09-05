@@ -22,10 +22,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2008-08-05</date>
- <time>22:19:53</time>
+ <date>2008-09-04</date>
+ <time>22:01:28</time>
  <version>
-  <release>1.11.1</release>
+  <release>1.11.2</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -33,8 +33,7 @@
   <api>stable</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
- <notes>- Log::_getBacktraceVars() no longer produces notices. (Bug 14398)
-- Log::_extractMessage() now uses var_export() instead of print_r(). (Bug 14430)</notes>
+ <notes>- Correcting some breakage in Log::_getBacktraceVars(). (Bug 14595)</notes>
  <contents>
   <dir baseinstalldir="/" name="/">
    <file baseinstalldir="/" md5sum="8fdf75ee2f2a106d7c52310a29930bb8" name="docs/guide.txt" role="doc" />
@@ -70,6 +69,7 @@
    <file baseinstalldir="/" md5sum="74a14fc07827309f220acfd47d0ea5de" name="Log/syslog.php" role="php" />
    <file baseinstalldir="/" md5sum="f534a89c4a601d439b1cb4dfdc29e48b" name="Log/win.php" role="php" />
    <file baseinstalldir="/" md5sum="88b57f2062dfce10f30eb3d292abba2d" name="misc/log.sql" role="data" />
+   <file baseinstalldir="/" md5sum="d5d98d1096df042bb459b5e725224482" name="tests/backtrace.phpt" role="test" />
    <file baseinstalldir="/" md5sum="064448fdd799d3b3e966aefa3c191bda" name="tests/composite.phpt" role="test" />
    <file baseinstalldir="/" md5sum="e1f5e53b83ad63460f447d9b870e6ba6" name="tests/console.phpt" role="test" />
    <file baseinstalldir="/" md5sum="482e44a257dccd4689e7678383825718" name="tests/display.phpt" role="test" />
@@ -86,7 +86,7 @@
    <file baseinstalldir="/" md5sum="bcc4391efd7490b4d89ae8f6684fb346" name="tests/singleton.phpt" role="test" />
    <file baseinstalldir="/" md5sum="e936dc6e3024f779b9f280ade47d1dc9" name="tests/sqlite.phpt" role="test" />
    <file baseinstalldir="/" md5sum="8cc54af41244d541614f96e122e93ba6" name="tests/sql_ident.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="2a7549abc634b98bf4afeec09e98007d" name="Log.php" role="php" />
+   <file baseinstalldir="/" md5sum="d404ab461cf402c4ff9d5bc7a70783ef" name="Log.php" role="php" />
   </dir>
  </contents>
  <dependencies>
@@ -120,6 +120,19 @@
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.11.2</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2008-09-04</date>
+   <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
+   <notes>- Correcting some breakage in Log::_getBacktraceVars(). (Bug 14595)</notes>
+  </release>
   <release>
    <version>
     <release>1.11.1</release>

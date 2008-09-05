@@ -1,9 +1,9 @@
 <?php
 /**
- * $Header: /repository/pear/Log/Log.php,v 1.71 2008/08/06 05:19:12 jon Exp $
+ * $Header: /repository/pear/Log/Log.php,v 1.72 2008/09/05 05:00:39 jon Exp $
  * $Horde: horde/lib/Log.php,v 1.15 2000/06/29 23:39:45 jon Exp $
  *
- * @version $Revision: 1.71 $
+ * @version $Revision: 1.72 $
  * @package Log
  */
 
@@ -472,7 +472,7 @@ class Log
          * If we were ultimately invoked by the composite handler, we need to
          * increase our depth one additional level to compensate.
          */
-        $class = isset($bt[$depth + 1]) ? $bt[$depth + 1] : null;
+        $class = isset($bt[$depth+1]['class']) ? $bt[$depth+1]['class'] : null;
         if ($class !== null && strcasecmp($class, 'Log_composite') == 0) {
             $depth++;
         }
