@@ -1,9 +1,9 @@
 <?php
 /**
- * $Header: /repository/pear/Log/Log.php,v 1.72 2008/09/05 05:00:39 jon Exp $
+ * $Header: /repository/pear/Log/Log.php,v 1.74 2008/11/19 04:14:38 jon Exp $
  * $Horde: horde/lib/Log.php,v 1.15 2000/06/29 23:39:45 jon Exp $
  *
- * @version $Revision: 1.72 $
+ * @version $Revision: 1.74 $
  * @package Log
  */
 
@@ -98,6 +98,7 @@ class Log
                             '%{file}'       => '%5$s',
                             '%{line}'       => '%6$s',
                             '%{function}'   => '%7$s',
+                            '%{class}'      => '%8$s',
                             '%\{'           => '%%{');
 
     /**
@@ -438,7 +439,11 @@ class Log
             }
         } else if (is_array($message)) {
             if (isset($message['message'])) {
-                $message = $message['message'];
+                if (is_scalar($message['message'])) {
+                    $message = $message['message'];
+                } else {
+                    $message = var_export($message['message'], true);
+                }
             } else {
                 $message = var_export($message, true);
             }
@@ -457,8 +462,9 @@ class Log
      * @param   int     $depth  The initial number of frames we should step
      *                          back into the trace.
      *
-     * @return  array   Array containing three strings: the filename, the line,
-     *                  and the function name from which log() was called.
+     * @return  array   Array containing four strings: the filename, the line,
+     *                  the function name, and the class name from which log()
+     *                  was called.
      *
      * @access  private
      * @since   Log 1.9.4
@@ -475,6 +481,7 @@ class Log
         $class = isset($bt[$depth+1]['class']) ? $bt[$depth+1]['class'] : null;
         if ($class !== null && strcasecmp($class, 'Log_composite') == 0) {
             $depth++;
+            $class = isset($bt[$depth + 1]) ? $bt[$depth + 1]['class'] : null;
         }
 
         /*
@@ -507,8 +514,8 @@ class Log
             $func = '(none)';
         }
 
-        /* Return a 3-tuple containing (file, line, function). */
-        return array($file, $line, $func);
+        /* Return a 4-tuple containing (file, line, function, class). */
+        return array($file, $line, $func, $class);
     }
 
     /**
@@ -524,10 +531,10 @@ class Log
     {
         /*
          * If the format string references any of the backtrace-driven
-         * variables (%5, %6, %7), generate the backtrace and fetch them.
+         * variables (%5 %6,%7,%8), generate the backtrace and fetch them.
          */
-        if (strpos($format, '%5') || strpos($format, '%6') || strpos($format, '%7')) {
-            list($file, $line, $func) = $this->_getBacktraceVars(2);
+        if (preg_match('/%[5678]/', $format)) {
+            list($file, $line, $func, $class) = $this->_getBacktraceVars(2);
         }
 
         /*
@@ -542,7 +549,8 @@ class Log
                        $message,
                        isset($file) ? $file : '',
                        isset($line) ? $line : '',
-                       isset($func) ? $func : '');
+                       isset($func) ? $func : '',
+                       isset($class) ? $class : '');
     }
 
     /**
