@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.7.2" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.8.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
  <name>Log</name>
  <channel>pear.php.net</channel>
  <summary>Logging Framework</summary>
@@ -22,10 +22,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2009-03-29</date>
- <time>17:54:53</time>
+ <date>2009-07-23</date>
+ <time>19:45:19</time>
  <version>
-  <release>1.11.4</release>
+  <release>1.11.5</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -33,11 +33,12 @@
   <api>stable</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
- <notes>- The window handler now works when output buffering is enabled. (Bug 15379)
-- The window handler will now scroll to the bottom when clicked. (Kevin Wood)</notes>
+ <notes>
+- The class name is now reported correctly when the shortcut functions are used. (Bug #16452)
+ </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
-   <file baseinstalldir="/" md5sum="a7639430902ae1c883efa9167365d8fc" name="docs/guide.txt" role="doc" />
+   <file baseinstalldir="/" md5sum="34108b4affba379122cec6fb1502b414" name="docs/guide.txt" role="doc" />
    <file baseinstalldir="/" md5sum="f0fe92c4693f85b5d23dd7fb787311cb" name="examples/composite.php" role="doc" />
    <file baseinstalldir="/" md5sum="19e0f5e8f0bb9d2e31a09b5b4ae86a73" name="examples/console.php" role="doc" />
    <file baseinstalldir="/" md5sum="ece4e33eabcd56ae45013155bd623d5c" name="examples/display.php" role="doc" />
@@ -53,24 +54,24 @@
    <file baseinstalldir="/" md5sum="c9903b0996ad2e2fa13545684ec279df" name="examples/sqlite.php" role="doc" />
    <file baseinstalldir="/" md5sum="73963c2e2ed53f6349e0bcd6d3955bc8" name="examples/syslog.php" role="doc" />
    <file baseinstalldir="/" md5sum="6a758092ffb2a6a3a80f9d3dd5539ebf" name="examples/win.php" role="doc" />
-   <file baseinstalldir="/" md5sum="3061507b200469a1958049c30c8f79b4" name="Log/composite.php" role="php" />
-   <file baseinstalldir="/" md5sum="caf426cf332a5fdd883a678512803115" name="Log/console.php" role="php" />
-   <file baseinstalldir="/" md5sum="9f5685a43205f2780031f320fd9f0eae" name="Log/daemon.php" role="php" />
-   <file baseinstalldir="/" md5sum="9544926ed9052689c8bc118c5f6317a5" name="Log/display.php" role="php" />
-   <file baseinstalldir="/" md5sum="371cb70380286d1b060e591486b5c5c9" name="Log/error_log.php" role="php" />
-   <file baseinstalldir="/" md5sum="0a76bba11f370a5aa20c1ed215ddd364" name="Log/file.php" role="php" />
-   <file baseinstalldir="/" md5sum="5374941dcf5ab99359a7f560d99524fe" name="Log/firebug.php" role="php" />
-   <file baseinstalldir="/" md5sum="6951122dc2cc2e799e81fc9e2bb42a43" name="Log/mail.php" role="php" />
-   <file baseinstalldir="/" md5sum="704d7a2b98c1b6c33ea16063263c2f94" name="Log/mcal.php" role="php" />
-   <file baseinstalldir="/" md5sum="b0edf4c6b4a808f84fc50e6368e5a9b1" name="Log/mdb2.php" role="php" />
-   <file baseinstalldir="/" md5sum="0795cb13c85fd1f1aa9e1b49c3af3dff" name="Log/null.php" role="php" />
-   <file baseinstalldir="/" md5sum="7659914c598ccd252f954681fdaaa096" name="Log/observer.php" role="php" />
-   <file baseinstalldir="/" md5sum="4884b6f0b93aa22a38e982cd407bf682" name="Log/sql.php" role="php" />
-   <file baseinstalldir="/" md5sum="2ca909721294df0f6f8a18caa61caa60" name="Log/sqlite.php" role="php" />
-   <file baseinstalldir="/" md5sum="74a14fc07827309f220acfd47d0ea5de" name="Log/syslog.php" role="php" />
-   <file baseinstalldir="/" md5sum="76ba554562ae9713c47a3f25eadcae06" name="Log/win.php" role="php" />
-   <file baseinstalldir="/" md5sum="88b57f2062dfce10f30eb3d292abba2d" name="misc/log.sql" role="data" />
-   <file baseinstalldir="/" md5sum="de23feebf87e4d4a0bbcc4d7382f5595" name="tests/backtrace.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="b95eeeab8b2021e2fc8e5b05607de5f7" name="Log/composite.php" role="php" />
+   <file baseinstalldir="/" md5sum="932d7b9d76e8a3323689e6ef1a70ca6c" name="Log/console.php" role="php" />
+   <file baseinstalldir="/" md5sum="e99cf77ce79b5b9a6b8ecb47f8af28f2" name="Log/daemon.php" role="php" />
+   <file baseinstalldir="/" md5sum="44a92d40fdc84d2398ca57be3b4a8009" name="Log/display.php" role="php" />
+   <file baseinstalldir="/" md5sum="bef70a2bcf9279e7157f5802662af24f" name="Log/error_log.php" role="php" />
+   <file baseinstalldir="/" md5sum="8873b27d0740b43de4d57bcd9e739073" name="Log/file.php" role="php" />
+   <file baseinstalldir="/" md5sum="45330534133be7f69fb0b5dbe8d06766" name="Log/firebug.php" role="php" />
+   <file baseinstalldir="/" md5sum="bf4a4ce2eace366f8731c147a1587470" name="Log/mail.php" role="php" />
+   <file baseinstalldir="/" md5sum="30b898efd18648605e0290585c4d6de8" name="Log/mcal.php" role="php" />
+   <file baseinstalldir="/" md5sum="a5266778c990bf09af65fc258105dca8" name="Log/mdb2.php" role="php" />
+   <file baseinstalldir="/" md5sum="8ffa723031f626089ddb91e72ac44922" name="Log/null.php" role="php" />
+   <file baseinstalldir="/" md5sum="b468d3eece530656055249bade5a1430" name="Log/observer.php" role="php" />
+   <file baseinstalldir="/" md5sum="e6399a8ac0482ddeb49ed037ea2fd1ec" name="Log/sql.php" role="php" />
+   <file baseinstalldir="/" md5sum="09845004e57edcc5d71144b43216095e" name="Log/sqlite.php" role="php" />
+   <file baseinstalldir="/" md5sum="5ce319a1eef48086232a492f1025c264" name="Log/syslog.php" role="php" />
+   <file baseinstalldir="/" md5sum="14a96d809a3a7645e5bafa408abdb536" name="Log/win.php" role="php" />
+   <file baseinstalldir="/" md5sum="dfc2d45f52d5fd6337b20290ff6bfa3a" name="misc/log.sql" role="data" />
+   <file baseinstalldir="/" md5sum="e8fcfea2f3d2658e85bcac48be2ecee8" name="tests/backtrace.phpt" role="test" />
    <file baseinstalldir="/" md5sum="064448fdd799d3b3e966aefa3c191bda" name="tests/composite.phpt" role="test" />
    <file baseinstalldir="/" md5sum="e1f5e53b83ad63460f447d9b870e6ba6" name="tests/console.phpt" role="test" />
    <file baseinstalldir="/" md5sum="482e44a257dccd4689e7678383825718" name="tests/display.phpt" role="test" />
@@ -91,7 +92,7 @@
    <file baseinstalldir="/" md5sum="8cc54af41244d541614f96e122e93ba6" name="tests/sql_ident.phpt" role="test" />
    <file baseinstalldir="/" md5sum="4370dff62b515f66eca2cbadb4ea2e95" name="tests/win-ob.phpt" role="test" />
    <file baseinstalldir="/" md5sum="bdd6acfd06ff6d1dbd1b8ae17e76aafd" name="tests/win.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="34f104ce281b9591101585e70bfe7a85" name="Log.php" role="php" />
+   <file baseinstalldir="/" md5sum="912716aa40254bb6fa93213b0fa6fdf3" name="Log.php" role="php" />
   </dir>
  </contents>
  <dependencies>
@@ -127,6 +128,21 @@
  <changelog>
   <release>
    <version>
+    <release>1.11.5</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2009-07-23</date>
+   <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
+   <notes>
+- The class name is now reported correctly when the shortcut functions are used. (Bug #16452)
+   </notes>
+  </release>
+  <release>
+   <version>
     <release>1.11.4</release>
     <api>1.0.0</api>
    </version>
@@ -136,8 +152,10 @@
    </stability>
    <date>2009-03-29</date>
    <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
-   <notes>- The window handler now works when output buffering is enabled. (Bug 15379)
-- The window handler will now scroll to the bottom when clicked. (Kevin Wood)</notes>
+   <notes>
+- The window handler now works when output buffering is enabled. (Bug 15379)
+- The window handler will now scroll to the bottom when clicked. (Kevin Wood)
+   </notes>
   </release>
   <release>
    <version>
@@ -150,10 +168,12 @@
    </stability>
    <date>2008-11-18</date>
    <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
-   <notes>- It is now possible to configure the error_log handler&apos;s line and timestamp formats. (Bug #14655)
+   <notes>
+- It is now possible to configure the error_log handler&apos;s line and timestamp formats. (Bug #14655)
 - Added _extractMessage() support for non-scalar array(&apos;message&apos; =&gt; ...) values.
 - Spaces in &apos;win&apos; handler window names are now replaced with underscores.
-- Added a class name format token: %8$s</notes>
+- Added a class name format token: %8$s
+   </notes>
   </release>
   <release>
    <version>
@@ -166,7 +186,9 @@
    </stability>
    <date>2008-09-04</date>
    <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
-   <notes>- Correcting some breakage in Log::_getBacktraceVars(). (Bug 14595)</notes>
+   <notes>
+- Correcting some breakage in Log::_getBacktraceVars(). (Bug 14595)
+   </notes>
   </release>
   <release>
    <version>
@@ -179,8 +201,10 @@
    </stability>
    <date>2008-08-05</date>
    <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
-   <notes>- Log::_getBacktraceVars() no longer produces notices. (Bug 14398)
-- Log::_extractMessage() now uses var_export() instead of print_r(). (Bug 14430)</notes>
+   <notes>
+- Log::_getBacktraceVars() no longer produces notices. (Bug 14398)
+- Log::_extractMessage() now uses var_export() instead of print_r(). (Bug 14430)
+   </notes>
   </release>
   <release>
    <version>
@@ -193,7 +217,9 @@
    </stability>
    <date>2008-06-14</date>
    <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
-   <notes>Relicensing the Log package under the MIT license.</notes>
+   <notes>
+Relicensing the Log package under the MIT license.
+   </notes>
   </release>
   <release>
    <version>
@@ -206,7 +232,9 @@
    </stability>
    <date>2008-05-03</date>
    <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
-   <notes>- The default value for the display handler&apos;s lineBreak configuration value wasn&apos;t being applied. (Bug 13436)</notes>
+   <notes>
+- The default value for the display handler&apos;s lineBreak configuration value wasn&apos;t being applied. (Bug 13436)
+   </notes>
   </release>
   <release>
    <version>
@@ -219,8 +247,10 @@
    </stability>
    <date>2008-02-10</date>
    <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
-   <notes>- The level masking test now passed on 64-bit platforms. (Bug 12933)
-- The mail handler can now optionally use the PEAR Mail package. (Request 12839)</notes>
+   <notes>
+- The level masking test now passed on 64-bit platforms. (Bug 12933)
+- The mail handler can now optionally use the PEAR Mail package. (Request 12839)
+   </notes>
   </release>
   <release>
    <version>
@@ -233,10 +263,12 @@
    </stability>
    <date>2008-01-19</date>
    <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
-   <notes>- Corrected some PHPDoc syntax problems.
+   <notes>
+- Corrected some PHPDoc syntax problems.
 - Correcting some spelling errors in the users guide.
 - Fixed the firebug unit test.
-- Simplified the PEAR_LOG_ALL and PEAR_LOG_NONE constants.</notes>
+- Simplified the PEAR_LOG_ALL and PEAR_LOG_NONE constants.
+   </notes>
   </release>
   <release>
    <version>
@@ -249,7 +281,9 @@
    </stability>
    <date>2008-01-19</date>
    <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
-   <notes>- The Firebug handler now avoids more Javascript errors in IE. (Bug 12810)</notes>
+   <notes>
+- The Firebug handler now avoids more Javascript errors in IE. (Bug 12810)
+   </notes>
   </release>
   <release>
    <version>
@@ -262,8 +296,10 @@
    </stability>
    <date>2008-01-01</date>
    <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
-   <notes>- The sql handler wasn&apos;t honoring custom SQL insertion statements. (Bug 12734)
-- The display handler now has a configurable line format. (Request 12781)</notes>
+   <notes>
+- The sql handler wasn&apos;t honoring custom SQL insertion statements. (Bug 12734)
+- The display handler now has a configurable line format. (Request 12781)
+   </notes>
   </release>
   <release>
    <version>
@@ -276,8 +312,10 @@
    </stability>
    <date>2007-12-12</date>
    <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
-   <notes>- The Firebug handler&apos;s unit test now passes. (Bug 12674)
-- Fixed a PHP4 compatibility problem involving class_exists(). (Bug 12675)</notes>
+   <notes>
+- The Firebug handler&apos;s unit test now passes. (Bug 12674)
+- Fixed a PHP4 compatibility problem involving class_exists(). (Bug 12675)
+   </notes>
   </release>
   <release>
    <version>
@@ -290,8 +328,10 @@
    </stability>
    <date>2007-12-11</date>
    <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
-   <notes>- The Firebug handler no longer generates Javascript errors in IE. (Bug 12607)
-- The users guide has been updated with information on writing custom handlers.</notes>
+   <notes>
+- The Firebug handler no longer generates Javascript errors in IE. (Bug 12607)
+- The users guide has been updated with information on writing custom handlers.
+   </notes>
   </release>
   <release>
    <version>
@@ -304,7 +344,9 @@
    </stability>
    <date>2007-05-13</date>
    <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
-   <notes>A Firebug log handler has been added.</notes>
+   <notes>
+A Firebug log handler has been added.
+   </notes>
   </release>
   <release>
    <version>
@@ -317,9 +359,11 @@
    </stability>
    <date>2007-02-04</date>
    <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
-   <notes>The syslog handler now has an &apos;inherit&apos; configuration parameter which controls whether or openlog() is called to create a new syslog environment. (Bug 9822)
+   <notes>
+The syslog handler now has an &apos;inherit&apos; configuration parameter which controls whether or openlog() is called to create a new syslog environment. (Bug 9822)
 fflush() is now always called with a valid resource. (Bug 9388)
-The mail handler, when composited, no longer sends empty messages. (Bug 8865)</notes>
+The mail handler, when composited, no longer sends empty messages. (Bug 8865)
+   </notes>
   </release>
  </changelog>
 </package>

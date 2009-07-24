@@ -1,66 +1,41 @@
 <?php
 /**
- * $Header: /repository/pear/Log/Log/daemon.php,v 1.3 2008/01/19 22:12:16 jon Exp $
+ * $Header$
+ * $Horde: horde/lib/Log/syslog.php,v 1.6 2000/06/28 21:36:13 jon Exp $
  *
- * @version $Revision: 1.3 $
+ * @version $Revision: 228384 $
  * @package Log
  */
 
 /**
- * The Log_daemon class is a concrete implementation of the Log::
- * abstract class which sends messages to syslog daemon on UNIX-like machines.
- * This class uses the syslog protocol: http://www.ietf.org/rfc/rfc3164.txt
+ * The Log_syslog class is a concrete implementation of the Log::
+ * abstract class which sends messages to syslog on UNIX-like machines
+ * (PHP emulates this with the Event Log on Windows machines).
  *
- * @author  Bart van der Schans <schans@dds.nl>
- * @version $Revision: 1.3 $
+ * @author  Chuck Hagenbuch <chuck@horde.org>
+ * @author  Jon Parise <jon@php.net>
+ * @since   Horde 1.3
+ * @since   Log 1.0
  * @package Log
+ *
+ * @example syslog.php      Using the syslog handler.
  */
-class Log_daemon extends Log
+class Log_syslog extends Log
 {
     /**
      * Integer holding the log facility to use.
-     * @var string
+     * @var integer
+     * @access private
      */
-    var $_name = LOG_DAEMON;
+    var $_name = LOG_SYSLOG;
 
     /**
-     * Var holding the resource pointer to the socket
-     * @var resource
+     * Should we inherit the current syslog connection for this process, or
+     * should we call openlog() to start a new syslog connection?
+     * @var boolean
+     * @access private
      */
-    var $_socket;
-
-    /**
-     * The ip address or servername
-     * @see http://www.php.net/manual/en/transports.php
-     * @var string
-     */
-    var $_ip = '127.0.0.1';
-
-    /**
-     * Protocol to use (tcp, udp, etc.)
-     * @see http://www.php.net/manual/en/transports.php
-     * @var string
-     */
-    var $_proto = 'udp';
-
-    /**
-     * Port to connect to
-     * @var int
-     */
-    var $_port = 514;
-
-    /**
-     * Maximum message length in bytes
-     * @var int
-     */
-    var $_maxsize = 4096;
-
-    /**
-     * Socket timeout in seconds
-     * @var int
-     */
-    var $_timeout = 1;
-
+    var $_inherit = false;
 
     /**
      * Constructs a new syslog object.
@@ -68,10 +43,10 @@ class Log_daemon extends Log
      * @param string $name     The syslog facility.
      * @param string $ident    The identity string.
      * @param array  $conf     The configuration array.
-     * @param int    $maxLevel Maximum level at which to log.
+     * @param int    $level    Log messages up to and including this level.
      * @access public
      */
-    function Log_daemon($name, $ident = '', $conf = array(),
+    function Log_syslog($name, $ident = '', $conf = array(),
                         $level = PEAR_LOG_DEBUG)
     {
         /* Ensure we have a valid integer value for $name. */
@@ -79,39 +54,15 @@ class Log_daemon extends Log
             $name = LOG_SYSLOG;
         }
 
+        if (isset($conf['inherit'])) {
+            $this->_inherit = $conf['inherit'];
+            $this->_opened = $this->_inherit;
+        }
+
         $this->_id = md5(microtime());
         $this->_name = $name;
         $this->_ident = $ident;
         $this->_mask = Log::UPTO($level);
-
-        if (isset($conf['ip'])) {
-            $this->_ip = $conf['ip'];
-        }
-        if (isset($conf['proto'])) {
-            $this->_proto = $conf['proto'];
-        }
-        if (isset($conf['port'])) {
-            $this->_port = $conf['port'];
-        }
-        if (isset($conf['maxsize'])) {
-            $this->_maxsize = $conf['maxsize'];
-        }
-        if (isset($conf['timeout'])) {
-            $this->_timeout = $conf['timeout'];
-        }
-        $this->_proto = $this->_proto . '://';
-
-        register_shutdown_function(array(&$this, '_Log_daemon'));
-    }
-
-    /**
-     * Destructor.
-     *
-     * @access private
-     */
-    function _Log_daemon()
-    {
-        $this->close();
     }
 
     /**
@@ -122,13 +73,9 @@ class Log_daemon extends Log
     function open()
     {
         if (!$this->_opened) {
-            $this->_opened = (bool)($this->_socket = @fsockopen(
-                                                $this->_proto . $this->_ip,
-                                                $this->_port,
-                                                $errno,
-                                                $errstr,
-                                                $this->_timeout));
+            $this->_opened = openlog($this->_ident, LOG_PID, $this->_name);
         }
+
         return $this->_opened;
     }
 
@@ -138,10 +85,11 @@ class Log_daemon extends Log
      */
     function close()
     {
-        if ($this->_opened) {
+        if ($this->_opened && !$this->_inherit) {
+            closelog();
             $this->_opened = false;
-            return fclose($this->_socket);
         }
+
         return true;
     }
 
@@ -150,11 +98,12 @@ class Log_daemon extends Log
      * open() if necessary. Also passes the message along to any Log_observer
      * instances that are observing this Log.
      *
-     * @param string $message  The textual message to be logged.
+     * @param mixed $message String or object containing the message to log.
      * @param int $priority (optional) The priority of the message.  Valid
-     *                  values are: LOG_EMERG, LOG_ALERT, LOG_CRIT,
-     *                  LOG_ERR, LOG_WARNING, LOG_NOTICE, LOG_INFO,
-     *                  and LOG_DEBUG.  The default is LOG_INFO.
+     *                  values are: PEAR_LOG_EMERG, PEAR_LOG_ALERT,
+     *                  PEAR_LOG_CRIT, PEAR_LOG_ERR, PEAR_LOG_WARNING,
+     *                  PEAR_LOG_NOTICE, PEAR_LOG_INFO, and PEAR_LOG_DEBUG.
+     * @return boolean  True on success or false on failure.
      * @access public
      */
     function log($message, $priority = null)
@@ -177,24 +126,19 @@ class Log_daemon extends Log
         /* Extract the string representation of the message. */
         $message = $this->_extractMessage($message);
 
-        /* Set the facility level. */
-        $facility_level = intval($this->_name) +
-                          intval($this->_toSyslog($priority));
-
-        /* Prepend ident info. */
-        if (!empty($this->_ident)) {
-            $message = $this->_ident . ' ' . $message;
+        /* Build a syslog priority value based on our current configuration. */
+        $priority = $this->_toSyslog($priority);
+        if ($this->_inherit) {
+            $priority |= $this->_name;
         }
 
-        /* Check for message length. */
-        if (strlen($message) > $this->_maxsize) {
-            $message = substr($message, 0, ($this->_maxsize) - 10) . ' [...]';
+        if (!syslog($priority, $message)) {
+            return false;
         }
-
-        /* Write to socket. */
-        fwrite($this->_socket, '<' . $facility_level . '>' . $message . "\n");
 
         $this->_announce(array('priority' => $priority, 'message' => $message));
+
+        return true;
     }
 
     /**
