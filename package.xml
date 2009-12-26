@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.8.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.9.0" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
  <name>Log</name>
  <channel>pear.php.net</channel>
  <summary>Logging Framework</summary>
@@ -22,10 +22,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2009-07-23</date>
- <time>19:45:19</time>
+ <date>2009-12-26</date>
+ <time>09:02:27</time>
  <version>
-  <release>1.11.5</release>
+  <release>1.11.6</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -34,11 +34,11 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
  <notes>
-- The class name is now reported correctly when the shortcut functions are used. (Bug #16452)
+The syslog handler&apos;s maximum message length is now configurable via a new &apos;maxLength&apos; configuration variable.  If the handler receives a message longer than this length limit, it will be split into multiple syslog() calls.
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
-   <file baseinstalldir="/" md5sum="34108b4affba379122cec6fb1502b414" name="docs/guide.txt" role="doc" />
+   <file baseinstalldir="/" md5sum="2e9a69108210205490582fa6900648d5" name="docs/guide.txt" role="doc" />
    <file baseinstalldir="/" md5sum="f0fe92c4693f85b5d23dd7fb787311cb" name="examples/composite.php" role="doc" />
    <file baseinstalldir="/" md5sum="19e0f5e8f0bb9d2e31a09b5b4ae86a73" name="examples/console.php" role="doc" />
    <file baseinstalldir="/" md5sum="ece4e33eabcd56ae45013155bd623d5c" name="examples/display.php" role="doc" />
@@ -68,7 +68,7 @@
    <file baseinstalldir="/" md5sum="b468d3eece530656055249bade5a1430" name="Log/observer.php" role="php" />
    <file baseinstalldir="/" md5sum="e6399a8ac0482ddeb49ed037ea2fd1ec" name="Log/sql.php" role="php" />
    <file baseinstalldir="/" md5sum="09845004e57edcc5d71144b43216095e" name="Log/sqlite.php" role="php" />
-   <file baseinstalldir="/" md5sum="5ce319a1eef48086232a492f1025c264" name="Log/syslog.php" role="php" />
+   <file baseinstalldir="/" md5sum="22fa7d229a0743803bd7ab1fca479374" name="Log/syslog.php" role="php" />
    <file baseinstalldir="/" md5sum="14a96d809a3a7645e5bafa408abdb536" name="Log/win.php" role="php" />
    <file baseinstalldir="/" md5sum="dfc2d45f52d5fd6337b20290ff6bfa3a" name="misc/log.sql" role="data" />
    <file baseinstalldir="/" md5sum="e8fcfea2f3d2658e85bcac48be2ecee8" name="tests/backtrace.phpt" role="test" />
@@ -126,6 +126,21 @@
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.11.6</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2009-12-26</date>
+   <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
+   <notes>
+The syslog handler&apos;s maximum message length is now configurable via a new &apos;maxLength&apos; configuration variable.  If the handler receives a message longer than this length limit, it will be split into multiple syslog() calls.
+   </notes>
+  </release>
   <release>
    <version>
     <release>1.11.5</release>
