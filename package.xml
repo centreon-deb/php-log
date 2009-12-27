@@ -22,19 +22,23 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2009-12-26</date>
- <time>09:02:27</time>
+ <date>2009-12-27</date>
+ <time>10:55:09</time>
  <version>
-  <release>1.11.6</release>
+  <release>1.12.0RC1</release>
   <api>1.0.0</api>
  </version>
  <stability>
-  <release>stable</release>
+  <release>beta</release>
   <api>stable</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
  <notes>
-The syslog handler&apos;s maximum message length is now configurable via a new &apos;maxLength&apos; configuration variable.  If the handler receives a message longer than this length limit, it will be split into multiple syslog() calls.
+This release drops PHP4 compatibility (enforced by the package dependencies).  
+
+There is unfortunately no way to support both PHP4 and PHP5 in the same code base when running under E_ALL.  Because it appears that the majority of Log package users have moved to PHP5, the Log package now targets that audience.
+
+Given the fact that the Log package is now largely in maintenance mode, existing PHP4 users shouldn&apos;t feel adandoned.  If necessary, important fixes, etc. can be merged back into the 1.11.* release line, which will retain PHP4 compatibility.
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -76,7 +80,6 @@ The syslog handler&apos;s maximum message length is now configurable via a new &
    <file baseinstalldir="/" md5sum="e1f5e53b83ad63460f447d9b870e6ba6" name="tests/console.phpt" role="test" />
    <file baseinstalldir="/" md5sum="482e44a257dccd4689e7678383825718" name="tests/display.phpt" role="test" />
    <file baseinstalldir="/" md5sum="8b88e2e086777551447bee374d9b3695" name="tests/error_log.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="900943b26732772b2bcec3bb75e5b210" name="tests/extract-zend1.phpt" role="test" />
    <file baseinstalldir="/" md5sum="7ecf47f757a2d4374e9d81d8eb15e3b1" name="tests/extract-zend2.0.phpt" role="test" />
    <file baseinstalldir="/" md5sum="c26464baac14ca06b2606e43c2cc62dc" name="tests/extract-zend2.2.phpt" role="test" />
    <file baseinstalldir="/" md5sum="924c49af7c248ed71a334fbc3edef9ac" name="tests/factory.phpt" role="test" />
@@ -92,13 +95,13 @@ The syslog handler&apos;s maximum message length is now configurable via a new &
    <file baseinstalldir="/" md5sum="8cc54af41244d541614f96e122e93ba6" name="tests/sql_ident.phpt" role="test" />
    <file baseinstalldir="/" md5sum="4370dff62b515f66eca2cbadb4ea2e95" name="tests/win-ob.phpt" role="test" />
    <file baseinstalldir="/" md5sum="bdd6acfd06ff6d1dbd1b8ae17e76aafd" name="tests/win.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="912716aa40254bb6fa93213b0fa6fdf3" name="Log.php" role="php" />
+   <file baseinstalldir="/" md5sum="1a31937f6b77a734402a19b2ccd9c2a1" name="Log.php" role="php" />
   </dir>
  </contents>
  <dependencies>
   <required>
    <php>
-    <min>4.3.0</min>
+    <min>5.0.0</min>
    </php>
    <pearinstaller>
     <min>1.4.3</min>
@@ -126,6 +129,25 @@ The syslog handler&apos;s maximum message length is now configurable via a new &
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.12.0RC1</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>beta</release>
+    <api>stable</api>
+   </stability>
+   <date>2009-12-27</date>
+   <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
+   <notes>
+This release drops PHP4 compatibility (enforced by the package dependencies).  
+
+There is unfortunately no way to support both PHP4 and PHP5 in the same code base when running under E_ALL.  Because it appears that the majority of Log package users have moved to PHP5, the Log package now targets that audience.
+
+Given the fact that the Log package is now largely in maintenance mode, existing PHP4 users shouldn&apos;t feel adandoned.  If necessary, important fixes, etc. can be merged back into the 1.11.* release line, which will retain PHP4 compatibility.
+   </notes>
+  </release>
   <release>
    <version>
     <release>1.11.6</release>
