@@ -8,8 +8,8 @@
 
 :Author:        Jon Parise
 :Contact:       jon@php.net
-:Date:          $Date: 2009-12-06 13:03:55 -0800 (Sun, 06 Dec 2009) $
-:Revision:      $Revision: 291780 $
+:Date:          $Date: 2010-01-24 11:40:27 -0800 (Sun, 24 Jan 2010) $
+:Revision:      $Revision: 293929 $
 
 .. contents:: Contents
 .. section-numbering::
@@ -436,6 +436,9 @@ parameter.
 +---------------------------+-----------------------------------------------+
 | ``PEAR_LOG_TYPE_FILE``    | Log events will be appended to the file named |
 |                           | by the ``destination`` value.                 |
++---------------------------+-----------------------------------------------+
+| ``PEAR_LOG_TYPE_SAPI``    | Log events will be sent directly to the SAPI  |
+|                           | logging handler.                              |
 +---------------------------+-----------------------------------------------+
 
 .. _error_log(): http://www.php.net/error_log

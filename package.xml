@@ -22,14 +22,14 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2009-12-27</date>
- <time>10:55:09</time>
+ <date>2010-01-24</date>
+ <time>11:49:23</time>
  <version>
-  <release>1.12.0RC1</release>
+  <release>1.12.0</release>
   <api>1.0.0</api>
  </version>
  <stability>
-  <release>beta</release>
+  <release>stable</release>
   <api>stable</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
@@ -39,10 +39,13 @@ This release drops PHP4 compatibility (enforced by the package dependencies).
 There is unfortunately no way to support both PHP4 and PHP5 in the same code base when running under E_ALL.  Because it appears that the majority of Log package users have moved to PHP5, the Log package now targets that audience.
 
 Given the fact that the Log package is now largely in maintenance mode, existing PHP4 users shouldn&apos;t feel adandoned.  If necessary, important fixes, etc. can be merged back into the 1.11.* release line, which will retain PHP4 compatibility.
+
+Also:
+- Added a PEAR_LOG_TYPE_SAPI constant for use by with error_log handler.
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
-   <file baseinstalldir="/" md5sum="2e9a69108210205490582fa6900648d5" name="docs/guide.txt" role="doc" />
+   <file baseinstalldir="/" md5sum="573b0da759f19e9604194832cb5968c9" name="docs/guide.txt" role="doc" />
    <file baseinstalldir="/" md5sum="f0fe92c4693f85b5d23dd7fb787311cb" name="examples/composite.php" role="doc" />
    <file baseinstalldir="/" md5sum="19e0f5e8f0bb9d2e31a09b5b4ae86a73" name="examples/console.php" role="doc" />
    <file baseinstalldir="/" md5sum="ece4e33eabcd56ae45013155bd623d5c" name="examples/display.php" role="doc" />
@@ -62,7 +65,7 @@ Given the fact that the Log package is now largely in maintenance mode, existing
    <file baseinstalldir="/" md5sum="932d7b9d76e8a3323689e6ef1a70ca6c" name="Log/console.php" role="php" />
    <file baseinstalldir="/" md5sum="e99cf77ce79b5b9a6b8ecb47f8af28f2" name="Log/daemon.php" role="php" />
    <file baseinstalldir="/" md5sum="44a92d40fdc84d2398ca57be3b4a8009" name="Log/display.php" role="php" />
-   <file baseinstalldir="/" md5sum="bef70a2bcf9279e7157f5802662af24f" name="Log/error_log.php" role="php" />
+   <file baseinstalldir="/" md5sum="868236a4150c15fa69989c2ca1c55a65" name="Log/error_log.php" role="php" />
    <file baseinstalldir="/" md5sum="8873b27d0740b43de4d57bcd9e739073" name="Log/file.php" role="php" />
    <file baseinstalldir="/" md5sum="45330534133be7f69fb0b5dbe8d06766" name="Log/firebug.php" role="php" />
    <file baseinstalldir="/" md5sum="bf4a4ce2eace366f8731c147a1587470" name="Log/mail.php" role="php" />
@@ -95,7 +98,7 @@ Given the fact that the Log package is now largely in maintenance mode, existing
    <file baseinstalldir="/" md5sum="8cc54af41244d541614f96e122e93ba6" name="tests/sql_ident.phpt" role="test" />
    <file baseinstalldir="/" md5sum="4370dff62b515f66eca2cbadb4ea2e95" name="tests/win-ob.phpt" role="test" />
    <file baseinstalldir="/" md5sum="bdd6acfd06ff6d1dbd1b8ae17e76aafd" name="tests/win.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="1a31937f6b77a734402a19b2ccd9c2a1" name="Log.php" role="php" />
+   <file baseinstalldir="/" md5sum="0c5ac3138f9e3964c867eaa30fb631f6" name="Log.php" role="php" />
   </dir>
  </contents>
  <dependencies>
@@ -129,6 +132,28 @@ Given the fact that the Log package is now largely in maintenance mode, existing
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.12.0</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2010-01-24</date>
+   <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
+   <notes>
+This release drops PHP4 compatibility (enforced by the package dependencies).  
+
+There is unfortunately no way to support both PHP4 and PHP5 in the same code base when running under E_ALL.  Because it appears that the majority of Log package users have moved to PHP5, the Log package now targets that audience.
+
+Given the fact that the Log package is now largely in maintenance mode, existing PHP4 users shouldn&apos;t feel adandoned.  If necessary, important fixes, etc. can be merged back into the 1.11.* release line, which will retain PHP4 compatibility.
+
+Also:
+- Added a PEAR_LOG_TYPE_SAPI constant for use by with error_log handler.
+   </notes>
+  </release>
   <release>
    <version>
     <release>1.12.0RC1</release>
