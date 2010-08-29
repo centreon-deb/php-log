@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.9.0" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.9.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
  <name>Log</name>
  <channel>pear.php.net</channel>
  <summary>Logging Framework</summary>
@@ -22,10 +22,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2010-05-28</date>
- <time>09:58:46</time>
+ <date>2010-08-28</date>
+ <time>19:29:40</time>
  <version>
-  <release>1.12.1</release>
+  <release>1.12.2</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -34,11 +34,13 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
  <notes>
-Fixing a rare notice when extracting the class name from a backtrace involving the composite handler. (Bug 17356)
+- Use PHP5-specific static method notation to avoid strict warnings. (Bug: 17509)
+- Fixing some potential undefined backtrace references. (Bug: 17738)
+- Adding `lineFormat` and `timeFormat` configuration variables to the syslog handler. (Request: 17753)
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
-   <file baseinstalldir="/" md5sum="573b0da759f19e9604194832cb5968c9" name="docs/guide.txt" role="doc" />
+   <file baseinstalldir="/" md5sum="8bfbbbc88b1058baeb3f6ccd5937e292" name="docs/guide.txt" role="doc" />
    <file baseinstalldir="/" md5sum="f0fe92c4693f85b5d23dd7fb787311cb" name="examples/composite.php" role="doc" />
    <file baseinstalldir="/" md5sum="19e0f5e8f0bb9d2e31a09b5b4ae86a73" name="examples/console.php" role="doc" />
    <file baseinstalldir="/" md5sum="ece4e33eabcd56ae45013155bd623d5c" name="examples/display.php" role="doc" />
@@ -68,30 +70,31 @@ Fixing a rare notice when extracting the class name from a backtrace involving t
    <file baseinstalldir="/" md5sum="b468d3eece530656055249bade5a1430" name="Log/observer.php" role="php" />
    <file baseinstalldir="/" md5sum="e6399a8ac0482ddeb49ed037ea2fd1ec" name="Log/sql.php" role="php" />
    <file baseinstalldir="/" md5sum="09845004e57edcc5d71144b43216095e" name="Log/sqlite.php" role="php" />
-   <file baseinstalldir="/" md5sum="22fa7d229a0743803bd7ab1fca479374" name="Log/syslog.php" role="php" />
+   <file baseinstalldir="/" md5sum="2534d750cabdddee89b3ed15eca69a1a" name="Log/syslog.php" role="php" />
    <file baseinstalldir="/" md5sum="14a96d809a3a7645e5bafa408abdb536" name="Log/win.php" role="php" />
    <file baseinstalldir="/" md5sum="dfc2d45f52d5fd6337b20290ff6bfa3a" name="misc/log.sql" role="data" />
-   <file baseinstalldir="/" md5sum="e8fcfea2f3d2658e85bcac48be2ecee8" name="tests/backtrace.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="064448fdd799d3b3e966aefa3c191bda" name="tests/composite.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="e1f5e53b83ad63460f447d9b870e6ba6" name="tests/console.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="482e44a257dccd4689e7678383825718" name="tests/display.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="8b88e2e086777551447bee374d9b3695" name="tests/error_log.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="7ecf47f757a2d4374e9d81d8eb15e3b1" name="tests/extract-zend2.0.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="c26464baac14ca06b2606e43c2cc62dc" name="tests/extract-zend2.2.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="924c49af7c248ed71a334fbc3edef9ac" name="tests/factory.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="620e4064dbe579220a5e8fc15a821cfd" name="tests/file.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="436dd76504d8b1add73d6ea75ac443f2" name="tests/firebug.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="8dc2f0a6df4d07d32c0b5a4a3f39a12a" name="tests/format.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="592172e7cc4e6e11134cb6fd3f6ad229" name="tests/backtrace.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="8207c5a58b4f933a8fbfd450ab2cd9c1" name="tests/composite.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="a3b8a81da3dbe89cd93b60fa7213d94d" name="tests/console.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="7258e8e2b00afbb5a34dcdadf5386cf1" name="tests/display.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="3b8f9363a13c9d3908aa7bceb897daa8" name="tests/error_log.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="bf9ecc3847a7c436e413ec263f095861" name="tests/extract-zend2.0.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="ac9b00ec41ebe53d3041847119715f14" name="tests/extract-zend2.2.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="9163797d3fbeaa197cdfd4b883bc51fa" name="tests/factory.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="21d6af117f11ab09b8069ed184c36cfe" name="tests/file.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="6ad7bb55688d952266193a1a25623a57" name="tests/firebug.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="72afce0451124f6e725f4e57eb2a7f12" name="tests/format.phpt" role="test" />
    <file baseinstalldir="/" md5sum="f8cfde78ca60e82518ccad9766859ee8" name="tests/levels.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="86a7106a7595d088f0badbd2e7782856" name="tests/masks.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="35e55d19fa72989bcf92d58223398893" name="tests/null.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="e64c62248258b94b0dfd1dd01c972840" name="tests/priority.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="bcc4391efd7490b4d89ae8f6684fb346" name="tests/singleton.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="e936dc6e3024f779b9f280ade47d1dc9" name="tests/sqlite.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="8cc54af41244d541614f96e122e93ba6" name="tests/sql_ident.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="4370dff62b515f66eca2cbadb4ea2e95" name="tests/win-ob.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="bdd6acfd06ff6d1dbd1b8ae17e76aafd" name="tests/win.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="3556875318b972996e14704df36c55e9" name="Log.php" role="php" />
+   <file baseinstalldir="/" md5sum="713c6979902fd0a2d4ef9965c4fe94d7" name="tests/masks.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="dd59efb681536c66b4ae54d7dceb8563" name="tests/null.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="b0ed22e018526f3a87cf80dceea79168" name="tests/priority.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="e1af9845d92c5d91deac703987355b93" name="tests/singleton.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="0ba9e0c63a9cc55a59914323c4c1132e" name="tests/sqlite.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="b39883a1c1c3cd379883385f7f37918d" name="tests/sql_ident.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="4192de0aad38bd93cda2a9475138bcd6" name="tests/syslog.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="20a9614f02c8faba1fab0aee173a9f40" name="tests/win-ob.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="8f0bd5e6a6f681bae0b991503369c360" name="tests/win.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="7b6c754b20dada0fd0000f573db82cef" name="Log.php" role="php" />
   </dir>
  </contents>
  <dependencies>
@@ -125,6 +128,23 @@ Fixing a rare notice when extracting the class name from a backtrace involving t
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.12.2</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2010-08-28</date>
+   <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
+   <notes>
+- Use PHP5-specific static method notation to avoid strict warnings. (Bug: 17509)
+- Fixing some potential undefined backtrace references. (Bug: 17738)
+- Adding `lineFormat` and `timeFormat` configuration variables to the syslog handler. (Request: 17753)
+   </notes>
+  </release>
   <release>
    <version>
     <release>1.12.1</release>
