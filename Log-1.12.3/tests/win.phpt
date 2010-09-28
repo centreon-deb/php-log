@@ -1,7 +1,7 @@
 --TEST--
-Log: Window Handler (Output Buffering)
+Log: Window Handler
 --INI--
-output_buffering=on
+date.timezone=UTC
 --FILE--
 <?php
 

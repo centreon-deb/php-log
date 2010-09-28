@@ -1,10 +1,9 @@
 --TEST--
-Log: _extractMessage() [Zend Engine 2.0]
+Log: _extractMessage() [Zend Engine 2.2]
 --SKIPIF--
-<?php
-if (version_compare(zend_version(), "2.0.0", "<") ||
-    version_compare(zend_version(), "2.2.0", ">=")) die('skip');
-?>
+<?php if (version_compare(zend_version(), "2.2.0", "<")) die('skip'); ?>
+--INI--
+date.timezone=UTC
 --FILE--
 <?php
 
@@ -52,13 +51,13 @@ ident [info] BareObject::__set_state(array(
 ))
 ident [info] getMessage
 ident [info] toString
-ident [info] Object id #2
+ident [info] __toString
 ident [info] PEAR_Error object
 ident [info] array (
   0 => 1,
   1 => 2,
   'three' => 3,
-
+)
 ident [info] Message Key
 ident [info] 50
 ident [info] array (
