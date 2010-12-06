@@ -22,10 +22,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2010-09-27</date>
- <time>21:14:16</time>
+ <date>2010-12-05</date>
+ <time>20:51:58</time>
  <version>
-  <release>1.12.3</release>
+  <release>1.12.4</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -34,12 +34,12 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
  <notes>
-- The unit tests now set the timezone. (Bug 17830)
-- The composite handler now opens child handlers lazily (on demand). (Bug 17785)
+- The display handler now has a &apos;rawText&apos; configuration option that disables HTML-safe message text conversion.
+- Improved the way that the composite handler stores references its children.
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
-   <file baseinstalldir="/" md5sum="8bfbbbc88b1058baeb3f6ccd5937e292" name="docs/guide.txt" role="doc" />
+   <file baseinstalldir="/" md5sum="4eacdf647298c168b918c61f8ed237ac" name="docs/guide.txt" role="doc" />
    <file baseinstalldir="/" md5sum="f0fe92c4693f85b5d23dd7fb787311cb" name="examples/composite.php" role="doc" />
    <file baseinstalldir="/" md5sum="19e0f5e8f0bb9d2e31a09b5b4ae86a73" name="examples/console.php" role="doc" />
    <file baseinstalldir="/" md5sum="ece4e33eabcd56ae45013155bd623d5c" name="examples/display.php" role="doc" />
@@ -55,10 +55,10 @@
    <file baseinstalldir="/" md5sum="c9903b0996ad2e2fa13545684ec279df" name="examples/sqlite.php" role="doc" />
    <file baseinstalldir="/" md5sum="73963c2e2ed53f6349e0bcd6d3955bc8" name="examples/syslog.php" role="doc" />
    <file baseinstalldir="/" md5sum="6a758092ffb2a6a3a80f9d3dd5539ebf" name="examples/win.php" role="doc" />
-   <file baseinstalldir="/" md5sum="616c3454562a9db13252fd483436b637" name="Log/composite.php" role="php" />
+   <file baseinstalldir="/" md5sum="5abf2a9e3da3b19df27f22a4b0e67875" name="Log/composite.php" role="php" />
    <file baseinstalldir="/" md5sum="932d7b9d76e8a3323689e6ef1a70ca6c" name="Log/console.php" role="php" />
    <file baseinstalldir="/" md5sum="e99cf77ce79b5b9a6b8ecb47f8af28f2" name="Log/daemon.php" role="php" />
-   <file baseinstalldir="/" md5sum="44a92d40fdc84d2398ca57be3b4a8009" name="Log/display.php" role="php" />
+   <file baseinstalldir="/" md5sum="e275fe716477058a97f439b0af18215d" name="Log/display.php" role="php" />
    <file baseinstalldir="/" md5sum="868236a4150c15fa69989c2ca1c55a65" name="Log/error_log.php" role="php" />
    <file baseinstalldir="/" md5sum="8873b27d0740b43de4d57bcd9e739073" name="Log/file.php" role="php" />
    <file baseinstalldir="/" md5sum="45330534133be7f69fb0b5dbe8d06766" name="Log/firebug.php" role="php" />
@@ -127,6 +127,22 @@
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.12.4</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2010-12-05</date>
+   <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
+   <notes>
+- The display handler now has a &apos;rawText&apos; configuration option that disables HTML-safe message text conversion.
+- Improved the way that the composite handler stores references its children.
+   </notes>
+  </release>
   <release>
    <version>
     <release>1.12.3</release>

@@ -8,8 +8,8 @@
 
 :Author:        Jon Parise
 :Contact:       jon@php.net
-:Date:          $Date: 2010-08-26 00:30:33 -0700 (Thu, 26 Aug 2010) $
-:Revision:      $Revision: 302789 $
+:Date:          $Date: 2010-11-11 23:53:10 -0800 (Thu, 11 Nov 2010) $
+:Revision:      $Revision: 305290 $
 
 .. contents:: Contents
 .. section-numbering::
@@ -367,6 +367,12 @@ Configuration
 +-------------------+-----------+---------------+---------------------------+
 | ``linebreak``     | String    | ``<br />\n``  | This string is used to    |
 |                   |           |               | represent a line break.   |
++-------------------+-----------+---------------+---------------------------+
+| ``rawText``       | Boolean   | False         | Should message text be    |
+|                   |           |               | passed directly to the log|
+|                   |           |               | system?  Otherwise, it    |
+|                   |           |               | will be converted to an   |
+|                   |           |               | HTML-safe representation. |
 +-------------------+-----------+---------------+---------------------------+
 
 .. _error handling values: http://www.php.net/errorfunc
