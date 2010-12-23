@@ -22,10 +22,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2010-12-05</date>
- <time>20:51:58</time>
+ <date>2010-12-22</date>
+ <time>20:34:56</time>
  <version>
-  <release>1.12.4</release>
+  <release>1.12.5</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -34,8 +34,8 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
  <notes>
-- The display handler now has a &apos;rawText&apos; configuration option that disables HTML-safe message text conversion.
-- Improved the way that the composite handler stores references its children.
+- Corrected the &quot;levels&quot; unit test on 32-bit systems. (Bug 18099)
+- Corrected quote handling in Firebug console output. (Bug 18141)
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -61,7 +61,7 @@
    <file baseinstalldir="/" md5sum="e275fe716477058a97f439b0af18215d" name="Log/display.php" role="php" />
    <file baseinstalldir="/" md5sum="868236a4150c15fa69989c2ca1c55a65" name="Log/error_log.php" role="php" />
    <file baseinstalldir="/" md5sum="8873b27d0740b43de4d57bcd9e739073" name="Log/file.php" role="php" />
-   <file baseinstalldir="/" md5sum="45330534133be7f69fb0b5dbe8d06766" name="Log/firebug.php" role="php" />
+   <file baseinstalldir="/" md5sum="6fb505a633562cf517c04e0e4afe0c8f" name="Log/firebug.php" role="php" />
    <file baseinstalldir="/" md5sum="bf4a4ce2eace366f8731c147a1587470" name="Log/mail.php" role="php" />
    <file baseinstalldir="/" md5sum="30b898efd18648605e0290585c4d6de8" name="Log/mcal.php" role="php" />
    <file baseinstalldir="/" md5sum="a5266778c990bf09af65fc258105dca8" name="Log/mdb2.php" role="php" />
@@ -83,7 +83,7 @@
    <file baseinstalldir="/" md5sum="13a01c3f3ad8a8e79672ca79997b42d6" name="tests/file.phpt" role="test" />
    <file baseinstalldir="/" md5sum="da25d83c6b2c9362fbac05e7bbfe23aa" name="tests/firebug.phpt" role="test" />
    <file baseinstalldir="/" md5sum="5da21a3b46effc0ee040f29a651d9861" name="tests/format.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="d6324964e1ebc9378e4837256ae0f555" name="tests/levels.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="0c08eb61de4e4c946eb6c84158744bb9" name="tests/levels.phpt" role="test" />
    <file baseinstalldir="/" md5sum="a27488d90c6ac00534d6822470275b5c" name="tests/masks.phpt" role="test" />
    <file baseinstalldir="/" md5sum="4feed87c21e16c6dd9e03e55bd7f70e4" name="tests/null.phpt" role="test" />
    <file baseinstalldir="/" md5sum="34471afa65421f3433426132f94fb8ca" name="tests/priority.phpt" role="test" />
@@ -127,6 +127,22 @@
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.12.5</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2010-12-22</date>
+   <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
+   <notes>
+- Corrected the &quot;levels&quot; unit test on 32-bit systems. (Bug 18099)
+- Corrected quote handling in Firebug console output. (Bug 18141)
+   </notes>
+  </release>
   <release>
    <version>
     <release>1.12.4</release>
