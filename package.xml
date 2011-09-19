@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.9.2" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.9.4" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
  <name>Log</name>
  <channel>pear.php.net</channel>
  <summary>Logging Framework</summary>
@@ -22,10 +22,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2011-05-25</date>
- <time>21:27:03</time>
+ <date>2011-09-19</date>
+ <time>00:51:23</time>
  <version>
-  <release>1.12.6</release>
+  <release>1.12.7</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -34,9 +34,8 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
  <notes>
-- Improved the console handler&apos;s stream handling. (Bug 17874)
-- Added a &apos;reopen&apos; configuration parameter to the syslog handler. (Request 18185)
-- The backtrace depth is now configurable via setBacktraceDepth(). (Request 18423)
+- The &apos;firebug&apos; handler is now usable with Chrome, as well. (Request 18617)
+- The &apos;observer&apos; code now longer generates deprecated return value reference notices. (Bug 18830)
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -62,12 +61,12 @@
    <file baseinstalldir="/" md5sum="e275fe716477058a97f439b0af18215d" name="Log/display.php" role="php" />
    <file baseinstalldir="/" md5sum="868236a4150c15fa69989c2ca1c55a65" name="Log/error_log.php" role="php" />
    <file baseinstalldir="/" md5sum="8873b27d0740b43de4d57bcd9e739073" name="Log/file.php" role="php" />
-   <file baseinstalldir="/" md5sum="6fb505a633562cf517c04e0e4afe0c8f" name="Log/firebug.php" role="php" />
+   <file baseinstalldir="/" md5sum="9db4a604d1df3afdbfef04ebd8845971" name="Log/firebug.php" role="php" />
    <file baseinstalldir="/" md5sum="bf4a4ce2eace366f8731c147a1587470" name="Log/mail.php" role="php" />
    <file baseinstalldir="/" md5sum="30b898efd18648605e0290585c4d6de8" name="Log/mcal.php" role="php" />
    <file baseinstalldir="/" md5sum="a5266778c990bf09af65fc258105dca8" name="Log/mdb2.php" role="php" />
    <file baseinstalldir="/" md5sum="8ffa723031f626089ddb91e72ac44922" name="Log/null.php" role="php" />
-   <file baseinstalldir="/" md5sum="b468d3eece530656055249bade5a1430" name="Log/observer.php" role="php" />
+   <file baseinstalldir="/" md5sum="dc9b968a48252cb2e108784e90e606a4" name="Log/observer.php" role="php" />
    <file baseinstalldir="/" md5sum="e6399a8ac0482ddeb49ed037ea2fd1ec" name="Log/sql.php" role="php" />
    <file baseinstalldir="/" md5sum="09845004e57edcc5d71144b43216095e" name="Log/sqlite.php" role="php" />
    <file baseinstalldir="/" md5sum="f1e8312d6de059efd955ffcc68b4cc8c" name="Log/syslog.php" role="php" />
@@ -82,7 +81,7 @@
    <file baseinstalldir="/" md5sum="2648bccdb0b25f89d2d99256cbb7041b" name="tests/extract-zend2.2.phpt" role="test" />
    <file baseinstalldir="/" md5sum="9163797d3fbeaa197cdfd4b883bc51fa" name="tests/factory.phpt" role="test" />
    <file baseinstalldir="/" md5sum="13a01c3f3ad8a8e79672ca79997b42d6" name="tests/file.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="da25d83c6b2c9362fbac05e7bbfe23aa" name="tests/firebug.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="60a8b234e1f147efdd32d66b89d9ecb0" name="tests/firebug.phpt" role="test" />
    <file baseinstalldir="/" md5sum="5da21a3b46effc0ee040f29a651d9861" name="tests/format.phpt" role="test" />
    <file baseinstalldir="/" md5sum="0c08eb61de4e4c946eb6c84158744bb9" name="tests/levels.phpt" role="test" />
    <file baseinstalldir="/" md5sum="a27488d90c6ac00534d6822470275b5c" name="tests/masks.phpt" role="test" />
@@ -90,7 +89,7 @@
    <file baseinstalldir="/" md5sum="34471afa65421f3433426132f94fb8ca" name="tests/priority.phpt" role="test" />
    <file baseinstalldir="/" md5sum="7a2a90c576435699d3a3466b2563567e" name="tests/singleton.phpt" role="test" />
    <file baseinstalldir="/" md5sum="16e28587a776038b1c9dbb54cf5008d8" name="tests/sqlite.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="91925b39e144d00807b02010a766a3fa" name="tests/sql_ident.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="f26b2b255f8557e8dc0de384d8bb059f" name="tests/sql_ident.phpt" role="test" />
    <file baseinstalldir="/" md5sum="4a8828c16e8de602c74a3b84f6a42d47" name="tests/syslog.phpt" role="test" />
    <file baseinstalldir="/" md5sum="dc7a818ce41c1a64c8e8e6bd70bec901" name="tests/win-ob.phpt" role="test" />
    <file baseinstalldir="/" md5sum="0c534a411f4624490924f7c4bdab7a8c" name="tests/win.phpt" role="test" />
@@ -130,6 +129,22 @@
  <changelog>
   <release>
    <version>
+    <release>1.12.7</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2011-09-18</date>
+   <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
+   <notes>
+- The &apos;firebug&apos; handler is now usable with Chrome, as well. (Request 18617)
+- The &apos;observer&apos; code now longer generates deprecated return value reference notices. (Bug 18830)
+   </notes>
+  </release>
+  <release>
+   <version>
     <release>1.12.6</release>
     <api>1.0.0</api>
    </version>
@@ -142,21 +157,6 @@
    <notes>
 - Improved the console handler&apos;s stream handling. (Bug 17874)
 - Added a &apos;reopen&apos; configuration parameter to the syslog handler. (Request 18185)
-- The backtrace depth is now configurable via setBacktraceDepth(). (Request 18423)
-   </notes>
-  </release>
-  <release>
-   <version>
-    <release>1.12.7</release>
-    <api>1.0.0</api>
-   </version>
-   <stability>
-    <release>stable</release>
-    <api>stable</api>
-   </stability>
-   <date>2011-04-15</date>
-   <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
-   <notes>
 - The backtrace depth is now configurable via setBacktraceDepth(). (Request 18423)
    </notes>
   </release>
