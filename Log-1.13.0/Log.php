@@ -111,6 +111,10 @@ class Log
                             '%{class}'      => '%8$s',
                             '%\{'           => '%%{');
 
+    public function __construct()
+    {
+    }
+
     /**
      * Attempts to return a concrete Log instance of type $handler.
      *
@@ -712,7 +716,7 @@ class Log
     /**
      * Returns the current level mask.
      *
-     * @return interger         The current level mask.
+     * @return integer         The current level mask.
      *
      * @access  public
      * @since   Log 1.7.0

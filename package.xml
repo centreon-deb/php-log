@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.9.5" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
+<package packagerversion="1.10.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
  <name>Log</name>
  <channel>pear.php.net</channel>
  <summary>Logging Framework</summary>
@@ -22,10 +22,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2015-06-14</date>
- <time>21:19:01</time>
+ <date>2016-04-03</date>
+ <time>03:28:56</time>
  <version>
-  <release>1.12.9</release>
+  <release>1.13.0</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -34,11 +34,11 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
  <notes>
-Updating the pear/pear_exception dependency to a stable release.
+Deprecate PHP4-style constructors.
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
-   <file baseinstalldir="/" md5sum="b093d167711fe5434711f31cf548f912" name="docs/guide.txt" role="doc" />
+   <file baseinstalldir="/" md5sum="e0212f68a68d5e502b3f5d90fd7ede59" name="docs/guide.txt" role="doc" />
    <file baseinstalldir="/" md5sum="f0fe92c4693f85b5d23dd7fb787311cb" name="examples/composite.php" role="doc" />
    <file baseinstalldir="/" md5sum="19e0f5e8f0bb9d2e31a09b5b4ae86a73" name="examples/console.php" role="doc" />
    <file baseinstalldir="/" md5sum="ece4e33eabcd56ae45013155bd623d5c" name="examples/display.php" role="doc" />
@@ -54,22 +54,22 @@ Updating the pear/pear_exception dependency to a stable release.
    <file baseinstalldir="/" md5sum="c9903b0996ad2e2fa13545684ec279df" name="examples/sqlite.php" role="doc" />
    <file baseinstalldir="/" md5sum="73963c2e2ed53f6349e0bcd6d3955bc8" name="examples/syslog.php" role="doc" />
    <file baseinstalldir="/" md5sum="6a758092ffb2a6a3a80f9d3dd5539ebf" name="examples/win.php" role="doc" />
-   <file baseinstalldir="/" md5sum="b4a69bb5d07cc6c1274789e835482ef0" name="Log/composite.php" role="php" />
-   <file baseinstalldir="/" md5sum="bffc36e6061b8fb9d62085f6d371977c" name="Log/console.php" role="php" />
-   <file baseinstalldir="/" md5sum="5b7fea9431cece5776f41d1d6baa2b69" name="Log/daemon.php" role="php" />
-   <file baseinstalldir="/" md5sum="7f190f53d14072c6b69cffcaffafd290" name="Log/display.php" role="php" />
-   <file baseinstalldir="/" md5sum="3a95b32b27c7431553a6a55de411ee79" name="Log/error_log.php" role="php" />
-   <file baseinstalldir="/" md5sum="ee3ecf8b86958a3dd410140b92c47aae" name="Log/file.php" role="php" />
-   <file baseinstalldir="/" md5sum="b7c6a346d4e99306fea23efc697d851c" name="Log/firebug.php" role="php" />
-   <file baseinstalldir="/" md5sum="3de9e40b38d3879f07469fad9a250436" name="Log/mail.php" role="php" />
-   <file baseinstalldir="/" md5sum="b286073de7ab40f86b4a6ae0f3428a65" name="Log/mcal.php" role="php" />
-   <file baseinstalldir="/" md5sum="416d3ec5f1874bb72671cf194146cc32" name="Log/mdb2.php" role="php" />
-   <file baseinstalldir="/" md5sum="580a8594422f64fab7a55ec31386b9f4" name="Log/null.php" role="php" />
-   <file baseinstalldir="/" md5sum="1de382406ecf239a565b1ae343e0aa8d" name="Log/observer.php" role="php" />
-   <file baseinstalldir="/" md5sum="3956403b78f0afcc13feab5c25cb7a1d" name="Log/sql.php" role="php" />
-   <file baseinstalldir="/" md5sum="20ce71de23aefbbab4fdaae0aa911726" name="Log/sqlite.php" role="php" />
-   <file baseinstalldir="/" md5sum="9c263a6ac29bed49d800a598cb6c6d40" name="Log/syslog.php" role="php" />
-   <file baseinstalldir="/" md5sum="0cfbb973975f41a5334cabc233e93f8b" name="Log/win.php" role="php" />
+   <file baseinstalldir="/" md5sum="41987e638291d645aea42ec6dae3be3a" name="Log/composite.php" role="php" />
+   <file baseinstalldir="/" md5sum="cfae553c07c54b89519e03f388ef35ac" name="Log/console.php" role="php" />
+   <file baseinstalldir="/" md5sum="d283a4e7014616d9cc4a663a1fb8c782" name="Log/daemon.php" role="php" />
+   <file baseinstalldir="/" md5sum="00912ddb10e91f26b5e5f7d2f2ec06b2" name="Log/display.php" role="php" />
+   <file baseinstalldir="/" md5sum="7488a6d959b3dc510e3d3601ba977674" name="Log/error_log.php" role="php" />
+   <file baseinstalldir="/" md5sum="4d67bc2b8ea7d9a5c2fe6e277d076fef" name="Log/file.php" role="php" />
+   <file baseinstalldir="/" md5sum="fd9b9b3a38285966623a36b0635a3b13" name="Log/firebug.php" role="php" />
+   <file baseinstalldir="/" md5sum="aa8ca4fde4bb6dbd28fc136dbf283398" name="Log/mail.php" role="php" />
+   <file baseinstalldir="/" md5sum="9ac2401f0132f9c6794a8766fcbb33c3" name="Log/mcal.php" role="php" />
+   <file baseinstalldir="/" md5sum="6bb7629ca67f3173e376b47796e2c29f" name="Log/mdb2.php" role="php" />
+   <file baseinstalldir="/" md5sum="a56da0d02eccef76797a3134dd57efe6" name="Log/null.php" role="php" />
+   <file baseinstalldir="/" md5sum="89b010512928348c097b374da8ab21ff" name="Log/observer.php" role="php" />
+   <file baseinstalldir="/" md5sum="8729023a79d033fbc12a3a35fe1a19ed" name="Log/sql.php" role="php" />
+   <file baseinstalldir="/" md5sum="5d1690e945fa8d47fa74a7cceaeea221" name="Log/sqlite.php" role="php" />
+   <file baseinstalldir="/" md5sum="8e8119f5118b51bf3375211551ec1971" name="Log/syslog.php" role="php" />
+   <file baseinstalldir="/" md5sum="db3128feda2aef1e7eea18a4f55a7a92" name="Log/win.php" role="php" />
    <file baseinstalldir="/" md5sum="d9291b0b742a61ff6238756f8e1374d0" name="misc/log.sql" role="data" />
    <file baseinstalldir="/" md5sum="e42ea187536cd7eaa4c893484344faf9" name="tests/backtrace.phpt" role="test" />
    <file baseinstalldir="/" md5sum="b620772bd3daa8a9140c4c0cf7520572" name="tests/composite.phpt" role="test" />
@@ -92,7 +92,7 @@ Updating the pear/pear_exception dependency to a stable release.
    <file baseinstalldir="/" md5sum="4a8828c16e8de602c74a3b84f6a42d47" name="tests/syslog.phpt" role="test" />
    <file baseinstalldir="/" md5sum="dc7a818ce41c1a64c8e8e6bd70bec901" name="tests/win-ob.phpt" role="test" />
    <file baseinstalldir="/" md5sum="0c534a411f4624490924f7c4bdab7a8c" name="tests/win.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="179cd3b0fc5177a06795e677fc7d5bd2" name="Log.php" role="php" />
+   <file baseinstalldir="/" md5sum="acc3cafa408c765855bf7484474344fd" name="Log.php" role="php" />
   </dir>
  </contents>
  <dependencies>
@@ -126,6 +126,21 @@ Updating the pear/pear_exception dependency to a stable release.
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.12.9</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2015-06-14</date>
+   <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
+   <notes>
+Updating the pear/pear_exception dependency to a stable release.
+   </notes>
+  </release>
   <release>
    <version>
     <release>1.12.8</release>
