@@ -38,8 +38,8 @@ class Log_display extends Log
     var $_timeFormat = '%b %d %H:%M:%S';
 
     /**
-     * Flag indicating whether raw message text should be passed directly to 
-     * the log system.  Otherwise, the text will be converted to an HTML-safe 
+     * Flag indicating whether raw message text should be passed directly to
+     * the log system.  Otherwise, the text will be converted to an HTML-safe
      * representation.
      * @var boolean
      * @access private
@@ -58,7 +58,7 @@ class Log_display extends Log
     public function __construct($name = '', $ident = '', $conf = array(),
                                 $level = PEAR_LOG_DEBUG)
     {
-        $this->_id = md5(microtime());
+        $this->_id = md5(microtime().rand());
         $this->_ident = $ident;
         $this->_mask = Log::UPTO($level);
 
@@ -160,7 +160,7 @@ class Log_display extends Log
         /* Extract the string representation of the message. */
         $message = $this->_extractMessage($message);
 
-        /* Convert the message to an HTML-friendly represention unless raw 
+        /* Convert the message to an HTML-friendly represention unless raw
          * text has been requested. */
         if ($this->_rawText === false) {
             $message = nl2br(htmlspecialchars($message));

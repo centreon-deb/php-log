@@ -22,10 +22,10 @@
   <email>jan@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2016-04-03</date>
- <time>03:28:56</time>
+ <date>2016-04-16</date>
+ <time>00:49:48</time>
  <version>
-  <release>1.13.0</release>
+  <release>1.13.1</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -34,11 +34,11 @@
  </stability>
  <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
  <notes>
-Deprecate PHP4-style constructors.
+Use rand() to make instance identifiers more unique than microtime()&apos;s resolution.
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
-   <file baseinstalldir="/" md5sum="e0212f68a68d5e502b3f5d90fd7ede59" name="docs/guide.txt" role="doc" />
+   <file baseinstalldir="/" md5sum="2f8bca0377122281c4c22968fdd32495" name="docs/guide.txt" role="doc" />
    <file baseinstalldir="/" md5sum="f0fe92c4693f85b5d23dd7fb787311cb" name="examples/composite.php" role="doc" />
    <file baseinstalldir="/" md5sum="19e0f5e8f0bb9d2e31a09b5b4ae86a73" name="examples/console.php" role="doc" />
    <file baseinstalldir="/" md5sum="ece4e33eabcd56ae45013155bd623d5c" name="examples/display.php" role="doc" />
@@ -54,35 +54,35 @@ Deprecate PHP4-style constructors.
    <file baseinstalldir="/" md5sum="c9903b0996ad2e2fa13545684ec279df" name="examples/sqlite.php" role="doc" />
    <file baseinstalldir="/" md5sum="73963c2e2ed53f6349e0bcd6d3955bc8" name="examples/syslog.php" role="doc" />
    <file baseinstalldir="/" md5sum="6a758092ffb2a6a3a80f9d3dd5539ebf" name="examples/win.php" role="doc" />
-   <file baseinstalldir="/" md5sum="41987e638291d645aea42ec6dae3be3a" name="Log/composite.php" role="php" />
-   <file baseinstalldir="/" md5sum="cfae553c07c54b89519e03f388ef35ac" name="Log/console.php" role="php" />
-   <file baseinstalldir="/" md5sum="d283a4e7014616d9cc4a663a1fb8c782" name="Log/daemon.php" role="php" />
-   <file baseinstalldir="/" md5sum="00912ddb10e91f26b5e5f7d2f2ec06b2" name="Log/display.php" role="php" />
-   <file baseinstalldir="/" md5sum="7488a6d959b3dc510e3d3601ba977674" name="Log/error_log.php" role="php" />
-   <file baseinstalldir="/" md5sum="4d67bc2b8ea7d9a5c2fe6e277d076fef" name="Log/file.php" role="php" />
-   <file baseinstalldir="/" md5sum="fd9b9b3a38285966623a36b0635a3b13" name="Log/firebug.php" role="php" />
-   <file baseinstalldir="/" md5sum="aa8ca4fde4bb6dbd28fc136dbf283398" name="Log/mail.php" role="php" />
-   <file baseinstalldir="/" md5sum="9ac2401f0132f9c6794a8766fcbb33c3" name="Log/mcal.php" role="php" />
-   <file baseinstalldir="/" md5sum="6bb7629ca67f3173e376b47796e2c29f" name="Log/mdb2.php" role="php" />
-   <file baseinstalldir="/" md5sum="a56da0d02eccef76797a3134dd57efe6" name="Log/null.php" role="php" />
-   <file baseinstalldir="/" md5sum="89b010512928348c097b374da8ab21ff" name="Log/observer.php" role="php" />
-   <file baseinstalldir="/" md5sum="8729023a79d033fbc12a3a35fe1a19ed" name="Log/sql.php" role="php" />
-   <file baseinstalldir="/" md5sum="5d1690e945fa8d47fa74a7cceaeea221" name="Log/sqlite.php" role="php" />
-   <file baseinstalldir="/" md5sum="8e8119f5118b51bf3375211551ec1971" name="Log/syslog.php" role="php" />
-   <file baseinstalldir="/" md5sum="db3128feda2aef1e7eea18a4f55a7a92" name="Log/win.php" role="php" />
+   <file baseinstalldir="/" md5sum="041752adf47666564866ec0f389667ee" name="Log/composite.php" role="php" />
+   <file baseinstalldir="/" md5sum="b0d69b1f1282f633a6315e5fac3ed0aa" name="Log/console.php" role="php" />
+   <file baseinstalldir="/" md5sum="9c8ebd9cb30404b60ddf154d84a7ccc0" name="Log/daemon.php" role="php" />
+   <file baseinstalldir="/" md5sum="9e23b5e9f53c30d71ed52b4fef5176b4" name="Log/display.php" role="php" />
+   <file baseinstalldir="/" md5sum="9e888e6f69fb584305a0605ede02e41e" name="Log/error_log.php" role="php" />
+   <file baseinstalldir="/" md5sum="3e04acd3a099ec0ef90ad01150b60eeb" name="Log/file.php" role="php" />
+   <file baseinstalldir="/" md5sum="44fdf2d885cde9e60a1176745710e95f" name="Log/firebug.php" role="php" />
+   <file baseinstalldir="/" md5sum="06ecd6e5b6505268041c264369d77ac5" name="Log/mail.php" role="php" />
+   <file baseinstalldir="/" md5sum="dbd415bee0e81722ec8bf0f129955ef1" name="Log/mcal.php" role="php" />
+   <file baseinstalldir="/" md5sum="b542667e3f6d32a7335f38b019f73a24" name="Log/mdb2.php" role="php" />
+   <file baseinstalldir="/" md5sum="5506c96ed62093790ec7d3bece85ba8c" name="Log/null.php" role="php" />
+   <file baseinstalldir="/" md5sum="c91940583ec5f2b191e63c9b5230885a" name="Log/observer.php" role="php" />
+   <file baseinstalldir="/" md5sum="9fc8139f197e9f8b2ded773452f2329a" name="Log/sql.php" role="php" />
+   <file baseinstalldir="/" md5sum="f563c0a3431b7ea10dde4e1d38ed0f7a" name="Log/sqlite.php" role="php" />
+   <file baseinstalldir="/" md5sum="37c3f066161f3871f6961533e8a2e268" name="Log/syslog.php" role="php" />
+   <file baseinstalldir="/" md5sum="8494ba95284a8f3e33f0efcbcfe78223" name="Log/win.php" role="php" />
    <file baseinstalldir="/" md5sum="d9291b0b742a61ff6238756f8e1374d0" name="misc/log.sql" role="data" />
    <file baseinstalldir="/" md5sum="e42ea187536cd7eaa4c893484344faf9" name="tests/backtrace.phpt" role="test" />
    <file baseinstalldir="/" md5sum="b620772bd3daa8a9140c4c0cf7520572" name="tests/composite.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="732c4f0f261939f646e80f7f06e7755b" name="tests/console.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="d1433ce44c30828c363da5d037e5543a" name="tests/console.phpt" role="test" />
    <file baseinstalldir="/" md5sum="fe97c9ccb2456685db75460f8370185c" name="tests/display.phpt" role="test" />
    <file baseinstalldir="/" md5sum="4e43e67b4fa33c05f9fc3e4d4a6ca34b" name="tests/error_log.phpt" role="test" />
    <file baseinstalldir="/" md5sum="a4fe1060b9b9669466772094f9543ab3" name="tests/extract-zend2.0.phpt" role="test" />
    <file baseinstalldir="/" md5sum="2648bccdb0b25f89d2d99256cbb7041b" name="tests/extract-zend2.2.phpt" role="test" />
    <file baseinstalldir="/" md5sum="9163797d3fbeaa197cdfd4b883bc51fa" name="tests/factory.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="13a01c3f3ad8a8e79672ca79997b42d6" name="tests/file.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="5e6af16f03bd95cf978ddb6455444a1a" name="tests/file.phpt" role="test" />
    <file baseinstalldir="/" md5sum="60a8b234e1f147efdd32d66b89d9ecb0" name="tests/firebug.phpt" role="test" />
    <file baseinstalldir="/" md5sum="5da21a3b46effc0ee040f29a651d9861" name="tests/format.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="0c08eb61de4e4c946eb6c84158744bb9" name="tests/levels.phpt" role="test" />
+   <file baseinstalldir="/" md5sum="7e6c2651d65269ca8e65d7f209ec3605" name="tests/levels.phpt" role="test" />
    <file baseinstalldir="/" md5sum="a27488d90c6ac00534d6822470275b5c" name="tests/masks.phpt" role="test" />
    <file baseinstalldir="/" md5sum="4feed87c21e16c6dd9e03e55bd7f70e4" name="tests/null.phpt" role="test" />
    <file baseinstalldir="/" md5sum="34471afa65421f3433426132f94fb8ca" name="tests/priority.phpt" role="test" />
@@ -92,7 +92,7 @@ Deprecate PHP4-style constructors.
    <file baseinstalldir="/" md5sum="4a8828c16e8de602c74a3b84f6a42d47" name="tests/syslog.phpt" role="test" />
    <file baseinstalldir="/" md5sum="dc7a818ce41c1a64c8e8e6bd70bec901" name="tests/win-ob.phpt" role="test" />
    <file baseinstalldir="/" md5sum="0c534a411f4624490924f7c4bdab7a8c" name="tests/win.phpt" role="test" />
-   <file baseinstalldir="/" md5sum="acc3cafa408c765855bf7484474344fd" name="Log.php" role="php" />
+   <file baseinstalldir="/" md5sum="17efc45463a744ed3b1746e9462b29b7" name="Log.php" role="php" />
   </dir>
  </contents>
  <dependencies>
@@ -126,6 +126,21 @@ Deprecate PHP4-style constructors.
  </dependencies>
  <phprelease />
  <changelog>
+  <release>
+   <version>
+    <release>1.13.0</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2016-04-03</date>
+   <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
+   <notes>
+Deprecate PHP4-style constructors.
+   </notes>
+  </release>
   <release>
    <version>
     <release>1.12.9</release>
@@ -281,7 +296,7 @@ Fixing a rare notice when extracting the class name from a backtrace involving t
    <date>2010-01-24</date>
    <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
    <notes>
-This release drops PHP4 compatibility (enforced by the package dependencies).  
+This release drops PHP4 compatibility (enforced by the package dependencies).
 
 There is unfortunately no way to support both PHP4 and PHP5 in the same code base when running under E_ALL.  Because it appears that the majority of Log package users have moved to PHP5, the Log package now targets that audience.
 
@@ -303,7 +318,7 @@ Also:
    <date>2009-12-27</date>
    <license uri="http://www.opensource.org/licenses/mit-license.php">MIT License</license>
    <notes>
-This release drops PHP4 compatibility (enforced by the package dependencies).  
+This release drops PHP4 compatibility (enforced by the package dependencies).
 
 There is unfortunately no way to support both PHP4 and PHP5 in the same code base when running under E_ALL.  Because it appears that the majority of Log package users have moved to PHP5, the Log package now targets that audience.
 
